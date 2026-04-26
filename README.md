@@ -16,7 +16,7 @@ It combines the strongest patterns from several PPT-oriented skills:
 From this repository URL:
 
 ```bash
-npx skills add https://github.com/YOUR_NAME/ultimate-ppt-skill
+npx skills add https://github.com/lyt-1114/king-of-ppt
 ```
 
 Or copy the folder manually:
