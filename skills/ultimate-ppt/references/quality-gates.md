@@ -23,6 +23,10 @@ Run these checks before delivery.
 
 - [ ] Palette and typography are consistent.
 - [ ] Text fits inside slide boundaries.
+- [ ] Non-empty text boxes do not overlap unintentionally.
+- [ ] Footers, page numbers, logos, and source lines are not duplicated.
+- [ ] Slide density matches the chosen archetype; dense detail is moved to notes or appendix.
+- [ ] Each page has enough whitespace to read at thumbnail scale.
 - [ ] Visual assets are relevant to the subject.
 - [ ] No decorative clutter.
 - [ ] Charts/metrics are readable.
@@ -44,3 +48,10 @@ If a check fails:
 2. Fix the smallest necessary part.
 3. Re-run the relevant check.
 4. If the same gate fails twice, choose a different content or layout approach instead of tweaking the same solution.
+
+For PPTX layout failures:
+
+- Overlap usually means the slide is too dense; split the slide before shrinking fonts.
+- Duplicate footer warnings usually mean footer logic is scattered; centralize it.
+- High density means cut copy, convert detail to notes, or use an appendix.
+- Off-slide text means the layout was not built from stable bounds; use fixed boxes and shorter text.

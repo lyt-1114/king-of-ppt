@@ -15,6 +15,7 @@ Every serious deck must have:
 - a clear audience and decision goal
 - a narrative spine
 - a visual system
+- a density budget before layout
 - source-backed claims
 - speaker/readout notes when useful
 - verification before delivery
@@ -93,6 +94,14 @@ Create a visual system before making pages:
 - image style or prompt language
 - spacing and density rules
 
+Create an elegance lock before production:
+- one job per slide, one dominant message, one visual rhythm
+- no nested cards; use fewer, larger objects with visible whitespace
+- prefer 2-4 large units over 6-10 small cards
+- keep body copy short enough to read at presentation distance
+- reserve screenshot/detail pages for pages where inspection matters
+- choose fewer colors and repeat them consistently
+
 Avoid generic AI slide aesthetics:
 - purple-blue gradients by default
 - empty bento grids
@@ -123,6 +132,9 @@ For PPTX decks:
 - use real slide dimensions
 - keep text inside shapes
 - use reusable layouts
+- set stable x/y/w/h bounds for every recurring text box
+- avoid manual footer duplication; use one footer helper or one master pattern
+- after generation, run a layout audit for text overlap and off-slide text
 - keep footer/source requirements on the specified pages
 - generate speaker notes separately if the library cannot write notes reliably
 
@@ -139,6 +151,13 @@ Before delivery, verify:
 - exported/openable files exist
 - notes or run log explain key choices
 
+For PPTX outputs, also verify:
+- no non-empty text boxes overlap except intentional labels inside their own shape
+- no text box extends outside the slide canvas
+- no slide exceeds the density budget for its archetype
+- no page has duplicate footers, duplicate page numbers, or repeated source lines
+- the deck still reads clearly when slide thumbnails are viewed at small size
+
 If any gate fails, revise the deck. Do not claim completion without evidence.
 
 ## Required References
@@ -149,7 +168,7 @@ Load these only when needed:
 - `references/visual-system.md` for style selection and image prompt rules
 - `references/quality-gates.md` for verification checklist
 
-Use `scripts/audit_deck.py` when checking generated PPTX/HTML outputs.
+Use `scripts/audit_deck.py` when checking generated PPTX/HTML outputs. For PPTX files, treat layout warnings about overlap, off-slide text, duplicate footers, or high density as fix-before-delivery issues unless the user explicitly wants a rough draft.
 
 ## Common Mistakes
 
@@ -159,6 +178,9 @@ Use `scripts/audit_deck.py` when checking generated PPTX/HTML outputs.
 | Starting from page design before source reading | Build a source brief first |
 | Treating visual prompts as a full deck | Use prompt boards as upstream art direction |
 | Cramming too much into one slide | Split by job |
+| Making a deck "complete" by adding more text | Cut to the decision message, move detail to notes or appendix |
+| Using many small cards to look polished | Use fewer large units, clear hierarchy, and whitespace |
+| Trusting visual judgment without inspection | Run the PPTX audit and fix overlap/off-slide warnings |
 | Saying "done" without checking outputs | Run quality gates and report evidence |
 
 ## Completion Standard

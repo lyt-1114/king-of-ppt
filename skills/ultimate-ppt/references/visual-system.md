@@ -9,6 +9,21 @@ Before making slides, define:
 - components: metric card, quote page, timeline, comparison, diagram, CTA
 - imagery: screenshot, generated visual, diagram, logo, icon set
 - density: sparse keynote, medium pitch, dense consulting
+- whitespace budget: outer margins, gutters, and maximum number of blocks
+- text budget: maximum lines per title, subtitle, body block, and card
+
+## Elegance Rules
+
+Elegant decks usually come from restraint, not decoration.
+
+- Start with the sentence the slide must prove; delete anything that does not support it.
+- Use one visual hierarchy per slide: title, one main visual, one short support line.
+- Favor 2-4 large objects over many small cards.
+- Keep title blocks away from charts and screenshots; never let body text touch media.
+- Use generous gutters. If a layout needs tiny gutters to fit, split the slide.
+- Avoid nested cards and card-heavy pages unless comparing repeated items.
+- Do not use a screenshot as a background for text unless the screenshot is muted and the text has a dedicated clear area.
+- Keep page numbers, sources, logos, and footers in one consistent zone.
 
 ## Style Routes
 
@@ -52,8 +67,18 @@ teal-blue accents, no robot handshake, no purple sci-fi brain.
 ## Slide Density
 
 - Title: 1 headline, 1 subtitle, optional proof/CTA
-- Content: 1 main idea, 3-5 bullets or cards
+- Content: 1 main idea, 3-4 bullets or cards
 - Metric: 1-3 large metrics with context
 - Diagram: 1 flow or model, not multiple competing charts
 - Quote: 1 quote, 1 source/context line
 - CTA: one action
+
+## PPTX Layout Guardrails
+
+When creating PPTX programmatically:
+
+- Define reusable helpers for header, footer, cards, metrics, and diagrams.
+- Keep footer generation centralized. Do not add a default footer and then add a second page-specific footer.
+- Use stable dimensions rather than content-driven resizing for repeated components.
+- After writing the deck, run `scripts/audit_deck.py <output-folder>`.
+- If the audit flags overlap, off-slide text, duplicate footers, or high density, revise the layout before delivery.
