@@ -45,6 +45,13 @@ The skill will guide the agent to:
 
 ## Update Log
 
+### 2026-04-27
+
+- Added stage-ready polish rules for direct reporting decks: 3-second glance test, 18 pt body-copy floor, non-overlapping header/footer zones, and no density fixes by shrinking type.
+- Added case-spread guidance: split substantial examples into a narrative page and an evidence page so decks can feel fuller without becoming crowded.
+- Added source-informed presentation principles from Microsoft PowerPoint accessibility guidance, Duarte audience/message discipline, and Presentation Zen restraint/simplicity guidance.
+- Added visual-system guidance for more elegant page variety: claim, comparison, architecture, case story, case proof, scorecard, roadmap, and decision pages.
+
 ### 2026-04-26
 
 - Added PPTX layout audit checks for overlapping text boxes, off-slide text, repeated source/footer lines, and high density.

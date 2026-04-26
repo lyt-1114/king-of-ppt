@@ -111,9 +111,12 @@ Do not ship pages that only contain headings and tags. If a slide feels thin, en
 For live presentation decks, prioritize stage readability over page density:
 - split dense ideas into more slides instead of shrinking text
 - use a large claim headline and 1-3 support blocks
+- keep normal body copy at presentation scale, typically 18 pt or larger
+- pass the 3-second glance test in slide sorter before delivery
 - keep detailed evidence in speaker notes, backup, or appendix pages
 - avoid tiny labels that only work when zoomed in
 - make every slide understandable from thumbnail view
+- split substantial cases into a story slide and a proof slide instead of forcing all details into one bento layout
 
 ### 5. Visual System
 
@@ -142,6 +145,7 @@ Avoid generic AI slide aesthetics:
 - crowded text walls
 
 Use visual assets when the subject benefits from them: logos, website captures, product screenshots, generated imagery, diagrams, charts, and icons.
+If visual polish is the main complaint, vary page treatments deliberately: claim, comparison, architecture, case story, case proof, scorecard, roadmap, and decision pages should not all look like the same grid.
 
 ### 6. Execute in the Best Format
 

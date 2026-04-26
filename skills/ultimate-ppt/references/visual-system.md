@@ -24,6 +24,9 @@ Elegant decks usually come from restraint, not decoration.
 - Avoid nested cards and card-heavy pages unless comparing repeated items.
 - Do not use a screenshot as a background for text unless the screenshot is muted and the text has a dedicated clear area.
 - Keep page numbers, sources, logos, and footers in one consistent zone.
+- Make title, subtitle, body, and footer zones non-overlapping by construction; do not rely on visual alignment if the actual text boxes intersect.
+- Avoid abrupt size jumps. If a headline is 32 pt, nearby body text should usually sit around 18-22 pt rather than collapsing to 10-12 pt.
+- Use atmosphere at the edges and meaning in the center: backgrounds can set tone, but the central content must stay clean and readable.
 
 ## Style Routes
 
@@ -47,6 +50,8 @@ Use multiple page treatments, not multiple unrelated decks.
 - Let decorative motifs appear at low opacity and outside text-critical zones.
 - Use recurring symbols or small labels to connect sections.
 - Avoid changing corner radius, shadow style, and line weight from page to page.
+- Vary composition, not quality: alternate claim pages, comparison pages, case spreads, architecture diagrams, and decision pages while preserving the same margins, typography, and footer logic.
+- When a case needs more substance, use a two-slide spread instead of a dense bento grid: narrative first, evidence second.
 
 ## Chinese Ink-Tech Motif
 
@@ -104,6 +109,8 @@ When the deck is meant to be presented directly:
 - Keep labels at 12 pt or larger when they carry meaning.
 - Use footer/source text at 8-10 pt, but never rely on footer text for the story.
 - If a layout needs smaller text, split the slide or move detail to backup.
+- Keep line length comfortable. For Chinese body copy, aim for 18-32 characters per line in cards; for wider statement boxes, use one or two short lines.
+- Do not make important text compete with large decorative characters, watermarks, charts, or screenshots.
 
 ## PPTX Layout Guardrails
 
