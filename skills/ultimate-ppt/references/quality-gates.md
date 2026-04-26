@@ -32,6 +32,9 @@ Run these checks before delivery.
 - [ ] Slide density matches the chosen archetype; dense detail is moved to notes or appendix.
 - [ ] Each page has enough whitespace to read at thumbnail scale.
 - [ ] Visual assets are relevant to the subject.
+- [ ] Image-heavy slides preserve editable titles, claims, metrics, and source notes unless the user requested flattened poster slides.
+- [ ] Generated or conceptual images are not presented as factual screenshots or customer proof.
+- [ ] Important text does not sit on busy image areas without a contrast panel or safe zone.
 - [ ] No decorative clutter.
 - [ ] Charts/metrics are readable.
 - [ ] Mobile/browser HTML slides fit 100vh with no internal scrolling.

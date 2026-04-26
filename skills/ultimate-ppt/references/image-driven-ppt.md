@@ -1,0 +1,119 @@
+# Image-Driven PPT Guide
+
+Use this when a deck needs richer visual scenes, image-to-PPT style transfer, generated hero images, reference-PDF look matching, or case pages that feel more designed than text cards.
+
+## Core Principle
+
+Use images to carry atmosphere, scene, and memory; keep claims, metrics, charts, and key labels as editable PPT objects.
+
+Do not turn a serious business deck into a stack of flattened posters unless the user explicitly asks for non-editable image slides. The best default is hybrid:
+
+- bitmap image layer: cover scene, chapter atmosphere, product/case scene, screenshot frame, paper texture
+- editable PPT layer: title, subtitle, claim, metrics, evidence blocks, diagrams, sources
+- validation layer: overlap audit, font-size audit, contrast/readability check, asset relevance check
+
+## When To Use Image-Driven Layouts
+
+Choose this route when:
+
+- the user says the deck is ugly, plain, abrupt, not premium, or lacks case-showcase quality
+- the user provides a PDF, screenshot, poster, website, or PPT as a style reference
+- the topic benefits from visual storytelling: product vision, industry cases, architecture scenes, customer journeys
+- the deck needs cover, divider, case, or keynote pages with stronger emotional memory
+
+Avoid this route when:
+
+- the user needs dense editable tables or legal/financial documentation
+- exact brand/product screenshots are required but unavailable
+- image generation would create misleading evidence or fake UI/product claims
+
+## Image-To-PPT Style Transfer Workflow
+
+1. Inspect the reference image/PDF/PPT:
+   - palette and contrast
+   - type hierarchy
+   - page composition
+   - motif and texture
+   - card/grid rhythm
+   - image-to-text ratio
+   - what must stay editable
+2. Extract a design recipe:
+   - 2-3 palette colors plus 1 accent
+   - title/body/metadata sizes
+   - 3-5 reusable page archetypes
+   - image treatment: full-bleed, split image, framed screenshot, vignette, texture, or cutout
+3. Build a hybrid slide system:
+   - reserve stable text zones before placing images
+   - use images outside or behind non-critical zones
+   - keep contrast panels subtle but real when text overlays imagery
+   - add editable callouts and metrics on top of images
+4. Verify:
+   - text remains readable in slide sorter
+   - meaningful text remains editable
+   - images do not imply unsupported facts
+   - no text overlaps image-heavy decoration
+
+## Generated Image Prompt Pattern
+
+Use one prompt per asset. Do not ask a single image to solve the whole deck.
+
+```text
+Use case: productivity-visual
+Asset type: 16:9 presentation hero/case scene
+Subject: [specific business scene or workflow]
+Composition: clear empty space for title on [left/right/top], main visual focus on [area]
+Style: premium Chinese enterprise technology deck, soft paper texture, teal ink accents, calm consulting polish
+Lighting: clean, bright, high contrast for projected presentation
+Avoid: robot handshake, purple sci-fi brain, unreadable UI text, fake logos, cluttered bento grid, tiny captions
+```
+
+For WanFlow-style enterprise AI decks, useful image assets include:
+
+- enterprise AI operations control room where data streams, workflow nodes, human review gates, and agent tasks converge
+- finance review workflow scene with document intake, risk gate, evidence trail, and approval status
+- manufacturing exception command view with inventory nodes, dispatch route, and escalation path
+- retail operations review scene with campaign metrics, customer feedback, logistics status, and same-day recap
+- abstract execution-chain visual: data, process, agent, human gate, evaluation loop
+
+## Layout Patterns
+
+### Cover Hero
+
+- image occupies 45-60% of canvas
+- title area is clean and editable
+- one subtitle and one purpose line only
+- no dense cards on cover
+
+### Case Showcase
+
+- top: claim headline
+- center: one visual scene or workflow image
+- side or bottom: situation, intervention, result
+- proof goes on a second slide when metrics need room
+
+### Architecture Scene
+
+- use a generated or drawn background to imply system depth
+- keep the actual architecture labels editable
+- avoid tiny layer names inside the bitmap
+
+### Divider / Chapter
+
+- use full-bleed or half-bleed visual atmosphere
+- include one large chapter claim, not a list of contents
+
+### Evidence Page
+
+- image is secondary or absent
+- use large metrics, clean cards, and source notes
+- do not sacrifice readability for decoration
+
+## Guardrails
+
+- Never rely on generated in-image text for core content; it is often inaccurate and not editable.
+- Do not use fake screenshots as proof. If it is conceptual, label it as conceptual or keep it abstract.
+- Keep important text outside busy image areas.
+- Do not use more than one dominant image treatment on the same slide.
+- Use the same color grade across generated images so the deck feels like one system.
+- If file size matters, compress images after generation but before final PPTX delivery.
+- Final output can still be a single PPTX; temporary image assets should be embedded and cleaned up unless the user asks to keep them.

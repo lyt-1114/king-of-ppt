@@ -57,6 +57,7 @@ Choose one primary mode and optionally one secondary mode:
 | Technical report | AI platforms, product systems, research portfolios, architecture reports | ppt-master + guizang |
 | Browser-native interactive | animated single-file HTML, modern demos | frontend-slides |
 | Visual system / prompt board | art direction, image generation, brand slide assets | PPT-Design-Prompt |
+| Image-driven PPT | reference-image style transfer, generated hero/case visuals, premium case showcases | image-driven-ppt + PPT-Design-Prompt |
 | Training / course | teaching, workshops, internal enablement | html-ppt + frontend-slides |
 
 Use the route to shape content, not just visual style. Two different modes should not produce the same outline.
@@ -147,6 +148,12 @@ Avoid generic AI slide aesthetics:
 Use visual assets when the subject benefits from them: logos, website captures, product screenshots, generated imagery, diagrams, charts, and icons.
 If visual polish is the main complaint, vary page treatments deliberately: claim, comparison, architecture, case story, case proof, scorecard, roadmap, and decision pages should not all look like the same grid.
 
+For image-driven PPT work, keep the deck hybrid by default:
+- images carry atmosphere, product/case context, scene memory, and visual polish
+- titles, claims, metrics, diagrams, and sources remain editable PPT objects
+- generated images should avoid fake logos, fake UI proof, unreadable in-image text, and cluttered sci-fi AI cliches
+- substantial case pages can use a scene image plus editable situation/intervention/result blocks, followed by a proof page with large metrics
+
 ### 6. Execute in the Best Format
 
 Choose the production path that best matches the goal:
@@ -155,6 +162,7 @@ Choose the production path that best matches the goal:
 - HTML: use for polished browser presentation, animation, keyboard navigation, or single-file sharing.
 - Both: use when the user needs a business file plus a visual preview.
 - Visual prompt board: use when the task is really about image direction rather than full deck generation.
+- Image-driven PPTX: use when the user wants the final deliverable to remain a single editable PPTX but needs stronger hero images, case scenes, or reference-image style matching.
 
 For HTML decks:
 - keep every slide within `100vh`
@@ -201,6 +209,7 @@ Load these only when needed:
 - `references/workflow.md` for the full end-to-end process
 - `references/modes.md` for deck-type routing and outline patterns
 - `references/visual-system.md` for style selection and image prompt rules
+- `references/image-driven-ppt.md` when the user asks for image-to-PPT, image2PPT, reference-image/PDF style matching, generated presentation images, stronger case visuals, or a deck that feels more like a designed showcase
 - `references/presentation-readout.md` when the user needs a PPT that can be presented directly, projected, or read comfortably without zooming
 - `references/writing-style.md` when the deck needs richer Chinese copy, elegant wording, fuller slide content, or report-style readout language
 - `references/content-playbook.md` when a deck needs richer introductions, more cases, comparisons, evaluation pages, or a technical/report-style structure

@@ -12,6 +12,14 @@ Before making slides, define:
 - whitespace budget: outer margins, gutters, and maximum number of blocks
 - text budget: maximum lines per title, subtitle, body block, and card
 
+If the deck is image-driven, also define:
+
+- image role per slide: hero, atmosphere, case scene, screenshot, texture, or diagram support
+- editable overlay zones: title, claim, metric, source, callout
+- image crop rules and safe areas
+- contrast treatment for text over images
+- whether each image is factual evidence, conceptual illustration, or atmospheric support
+
 ## Elegance Rules
 
 Elegant decks usually come from restraint, not decoration.
@@ -80,6 +88,8 @@ human review gates and agent tasks converge into one calm execution map,
 Chinese B2B technology brand, clean consulting presentation image,
 teal-blue accents, no robot handshake, no purple sci-fi brain.
 ```
+
+For final PPTX output, place generated images as embedded bitmap layers and keep slide text editable unless the user explicitly requests flattened poster slides.
 
 ## Avoid
 

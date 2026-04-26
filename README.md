@@ -47,6 +47,7 @@ The skill will guide the agent to:
 
 ### 2026-04-27
 
+- Added image-driven PPT guidance: reference-image style transfer, generated hero/case visuals, hybrid bitmap + editable PPT layouts, and safeguards against fake screenshot proof.
 - Added stage-ready polish rules for direct reporting decks: 3-second glance test, 18 pt body-copy floor, non-overlapping header/footer zones, and no density fixes by shrinking type.
 - Added case-spread guidance: split substantial examples into a narrative page and an evidence page so decks can feel fuller without becoming crowded.
 - Added source-informed presentation principles from Microsoft PowerPoint accessibility guidance, Duarte audience/message discipline, and Presentation Zen restraint/simplicity guidance.
@@ -67,6 +68,7 @@ The skill will guide the agent to:
 skills/ultimate-ppt/SKILL.md
 skills/ultimate-ppt/references/
 skills/ultimate-ppt/references/content-playbook.md
+skills/ultimate-ppt/references/image-driven-ppt.md
 skills/ultimate-ppt/references/presentation-readout.md
 skills/ultimate-ppt/references/writing-style.md
 skills/ultimate-ppt/scripts/audit_deck.py
