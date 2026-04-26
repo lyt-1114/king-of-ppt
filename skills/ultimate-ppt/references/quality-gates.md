@@ -26,6 +26,7 @@ Run these checks before delivery.
 
 - [ ] Palette and typography are consistent.
 - [ ] Text fits inside slide boundaries.
+- [ ] Meaningful presentation text is not below 12 pt; live body text is generally 18 pt or larger.
 - [ ] Non-empty text boxes do not overlap unintentionally.
 - [ ] Footers, page numbers, logos, and source lines are not duplicated.
 - [ ] Slide density matches the chosen archetype; dense detail is moved to notes or appendix.

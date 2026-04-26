@@ -13,6 +13,7 @@ Do not start by writing slides. Start by reading sources and deciding what kind 
 
 Every serious deck must have:
 - a clear audience and decision goal
+- a delivery context: live presentation, readout document, sales conversation, classroom, or appendix
 - a narrative spine
 - enough context, cases, and proof for the audience to trust the story
 - polished slide copy with a clear point of view, not just labels
@@ -39,6 +40,7 @@ Create a short source brief with:
 - strongest proof points
 - risks, gaps, and assumptions
 - tone and writing style: executive, technical, editorial, sales, training, or cultural/ink-tech
+- readability target: live-presentation, readout, or appendix
 - required footer/source/brand constraints
 
 If the user gives enough information, proceed with reasonable defaults. Ask only when a missing choice would materially change the deck.
@@ -105,6 +107,13 @@ Before layout, write a copy layer:
 - speaker/readout notes when nuance would overcrowd the slide
 
 Do not ship pages that only contain headings and tags. If a slide feels thin, enrich the idea with context, mechanism, evidence, implication, or a concrete case detail before decorating it.
+
+For live presentation decks, prioritize stage readability over page density:
+- split dense ideas into more slides instead of shrinking text
+- use a large claim headline and 1-3 support blocks
+- keep detailed evidence in speaker notes, backup, or appendix pages
+- avoid tiny labels that only work when zoomed in
+- make every slide understandable from thumbnail view
 
 ### 5. Visual System
 
@@ -188,6 +197,7 @@ Load these only when needed:
 - `references/workflow.md` for the full end-to-end process
 - `references/modes.md` for deck-type routing and outline patterns
 - `references/visual-system.md` for style selection and image prompt rules
+- `references/presentation-readout.md` when the user needs a PPT that can be presented directly, projected, or read comfortably without zooming
 - `references/writing-style.md` when the deck needs richer Chinese copy, elegant wording, fuller slide content, or report-style readout language
 - `references/content-playbook.md` when a deck needs richer introductions, more cases, comparisons, evaluation pages, or a technical/report-style structure
 - `references/quality-gates.md` for verification checklist
@@ -204,6 +214,7 @@ Use `scripts/audit_deck.py` when checking generated PPTX/HTML outputs. For PPTX 
 | Cramming too much into one slide | Split by job |
 | Making a deck "complete" by adding more text | Cut to the decision message, move detail to notes or appendix |
 | Making pages too thin with only labels | Add a thesis sentence, mechanism, evidence, implication, or case detail |
+| Making pages "complete" by using tiny fonts | Split the story across more slides or move detail to notes/appendix |
 | Using many small cards to look polished | Use fewer large units, clear hierarchy, and whitespace |
 | Trusting visual judgment without inspection | Run the PPTX audit and fix overlap/off-slide warnings |
 | Saying "done" without checking outputs | Run quality gates and report evidence |

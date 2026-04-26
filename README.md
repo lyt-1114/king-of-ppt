@@ -52,6 +52,7 @@ The skill will guide the agent to:
 - Added richer content guidance for complete decks: background, pain analysis, solution comparison, architecture, core modules, cases, evaluation, roadmap, and future outlook.
 - Added multi-style guidance including technical-report pages and Chinese ink-tech presentation direction.
 - Added Chinese slide-writing guidance: thesis sentences, fuller case copy, elegant report language, metric explanations, and core-value lines.
+- Added live-presentation/readout guidance: larger typography, fewer support blocks per slide, anti-tiny-font checks, and direct-presenting page patterns.
 
 ## Repository Structure
 
@@ -59,6 +60,7 @@ The skill will guide the agent to:
 skills/ultimate-ppt/SKILL.md
 skills/ultimate-ppt/references/
 skills/ultimate-ppt/references/content-playbook.md
+skills/ultimate-ppt/references/presentation-readout.md
 skills/ultimate-ppt/references/writing-style.md
 skills/ultimate-ppt/scripts/audit_deck.py
 ```

@@ -95,6 +95,16 @@ teal-blue accents, no robot handshake, no purple sci-fi brain.
 - Quote: 1 quote, 1 source/context line
 - CTA: one action
 
+## Live Presentation Typography
+
+When the deck is meant to be presented directly:
+
+- Prefer title sizes around 28-36 pt and body text around 18-24 pt.
+- Keep card body text at 15 pt or larger.
+- Keep labels at 12 pt or larger when they carry meaning.
+- Use footer/source text at 8-10 pt, but never rely on footer text for the story.
+- If a layout needs smaller text, split the slide or move detail to backup.
+
 ## PPTX Layout Guardrails
 
 When creating PPTX programmatically:

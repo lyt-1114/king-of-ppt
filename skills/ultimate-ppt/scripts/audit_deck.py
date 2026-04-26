@@ -38,6 +38,17 @@ def shape_text(shape):
     return shape.text_frame.text.strip()
 
 
+def shape_font_sizes(shape):
+    if not getattr(shape, "has_text_frame", False):
+        return []
+    sizes = []
+    for paragraph in shape.text_frame.paragraphs:
+        for run in paragraph.runs:
+            if run.text.strip() and run.font.size is not None:
+                sizes.append(run.font.size.pt)
+    return sizes
+
+
 def intersection_ratio(a, b):
     ax1, ay1, ax2, ay2 = a
     bx1, by1, bx2, by2 = b
@@ -75,6 +86,14 @@ def audit_pptx_layout(pptx):
             text_shapes.append((bounds, txt))
             if shape.left < -margin or shape.top < -margin or shape.left + shape.width > slide_w + margin or shape.top + shape.height > slide_h + margin:
                 errors.append(f"{pptx.name} slide {slide_idx}: text shape extends outside slide bounds: {txt[:40]!r}.")
+
+            sizes = shape_font_sizes(shape)
+            if sizes:
+                min_size = min(sizes)
+                if content_units(txt) > 4 and min_size < 8:
+                    errors.append(f"{pptx.name} slide {slide_idx}: very small text ({min_size:.1f} pt): {txt[:40]!r}.")
+                elif content_units(txt) > 8 and min_size < 12:
+                    warnings.append(f"{pptx.name} slide {slide_idx}: small presentation text ({min_size:.1f} pt): {txt[:40]!r}.")
 
             area_in2 = max(0.1, (shape.width / EMU_PER_INCH) * (shape.height / EMU_PER_INCH))
             density = content_units(txt) / area_in2
