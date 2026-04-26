@@ -43,11 +43,21 @@ The skill will guide the agent to:
 5. produce PPTX, HTML, or prompt-board outputs
 6. verify the deck before delivery
 
+## Update Log
+
+### 2026-04-26
+
+- Added PPTX layout audit checks for overlapping text boxes, off-slide text, repeated source/footer lines, and high density.
+- Added elegance guardrails: density budgets, stable text bounds, centralized footers, and whitespace-first layouts.
+- Added richer content guidance for complete decks: background, pain analysis, solution comparison, architecture, core modules, cases, evaluation, roadmap, and future outlook.
+- Added multi-style guidance including technical-report pages and Chinese ink-tech presentation direction.
+
 ## Repository Structure
 
 ```text
 skills/ultimate-ppt/SKILL.md
 skills/ultimate-ppt/references/
+skills/ultimate-ppt/references/content-playbook.md
 skills/ultimate-ppt/scripts/audit_deck.py
 ```
 

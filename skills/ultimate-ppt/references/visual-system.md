@@ -33,8 +33,30 @@ Elegant decks usually come from restraint, not decoration.
 | Pitch | clean cards, bold section titles, strong CTA blocks |
 | Launch | warmer contrast, product moments, benefit blocks |
 | Editorial | serif display, large quotes, chapter rhythm, image spreads |
+| Technical report | paper background, technical diagrams, scorecards, case pages, section rhythm |
+| Chinese ink-tech | soft paper, teal ink accents, ghosted characters, restrained technical grids |
 | Browser-native | high-contrast interface, motion layers, geometric atmosphere |
 | Prompt board | dark or neutral boards, prompt cards, asset recipes |
+
+## Mixing Styles Without Losing Coherence
+
+Use multiple page treatments, not multiple unrelated decks.
+
+- Keep one palette, one footer system, and one type scale.
+- Vary page archetypes: thesis, divider, comparison, architecture, case, evaluation, roadmap.
+- Let decorative motifs appear at low opacity and outside text-critical zones.
+- Use recurring symbols or small labels to connect sections.
+- Avoid changing corner radius, shadow style, and line weight from page to page.
+
+## Chinese Ink-Tech Motif
+
+For elegant technology decks with Chinese cultural tone:
+
+- Use a warm paper background instead of pure white.
+- Use teal/emerald as the main accent, charcoal as text, and one warm accent for emphasis.
+- Add a subtle oversized character, brush texture, mountain line, or wave footer as atmosphere.
+- Keep content grids modern and precise so the deck feels technical, not antique.
+- Use the motif mainly on cover, divider, summary, and transition pages; keep dense evidence pages cleaner.
 
 ## Image Prompt Pattern
 

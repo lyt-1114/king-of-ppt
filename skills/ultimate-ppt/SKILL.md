@@ -14,6 +14,7 @@ Do not start by writing slides. Start by reading sources and deciding what kind 
 Every serious deck must have:
 - a clear audience and decision goal
 - a narrative spine
+- enough context, cases, and proof for the audience to trust the story
 - a visual system
 - a density budget before layout
 - source-backed claims
@@ -49,6 +50,7 @@ Choose one primary mode and optionally one secondary mode:
 | Executive consulting | board, enterprise sales, strategy, procurement | ppt-master |
 | Pitch / product launch | fundraising, sales, product story, demo day | html-ppt |
 | Editorial keynote | memorable talks, founder vision, thought leadership | guizang |
+| Technical report | AI platforms, product systems, research portfolios, architecture reports | ppt-master + guizang |
 | Browser-native interactive | animated single-file HTML, modern demos | frontend-slides |
 | Visual system / prompt board | art direction, image generation, brand slide assets | PPT-Design-Prompt |
 | Training / course | teaching, workshops, internal enablement | html-ppt + frontend-slides |
@@ -82,6 +84,15 @@ Recommended spines:
 - Editorial: Hook -> Context -> Core idea -> Field scenes -> Shift -> Takeaway
 - Training: Learning goal -> Concept -> Worked example -> Practice -> Recap
 - Visual system: Principles -> Prompt boards -> Asset recipes -> Guardrails -> Handoff
+- Technical report: Background -> Gap -> Comparison -> Architecture -> Modules -> Cases -> Evaluation -> Roadmap
+
+For decks that need to feel complete, include a case-and-proof layer:
+- one context page that explains why the topic matters now
+- one before/after or current-vs-new comparison
+- one architecture or operating model diagram
+- 2-4 concrete scenario or case pages with situation, intervention, result, reusable asset
+- one evaluation or KPI page that explains how success is measured
+- one roadmap, handoff, or next-step page
 
 Each slide must have one job. If a slide has two jobs, split it.
 
@@ -93,6 +104,7 @@ Create a visual system before making pages:
 - recurring components: cards, metrics, diagrams, timelines, quotes, callouts
 - image style or prompt language
 - spacing and density rules
+- style range: choose 2-4 compatible page treatments, not one repeated card layout
 
 Create an elegance lock before production:
 - one job per slide, one dominant message, one visual rhythm
@@ -166,6 +178,7 @@ Load these only when needed:
 - `references/workflow.md` for the full end-to-end process
 - `references/modes.md` for deck-type routing and outline patterns
 - `references/visual-system.md` for style selection and image prompt rules
+- `references/content-playbook.md` when a deck needs richer introductions, more cases, comparisons, evaluation pages, or a technical/report-style structure
 - `references/quality-gates.md` for verification checklist
 
 Use `scripts/audit_deck.py` when checking generated PPTX/HTML outputs. For PPTX files, treat layout warnings about overlap, off-slide text, duplicate footers, or high density as fix-before-delivery issues unless the user explicitly wants a rough draft.

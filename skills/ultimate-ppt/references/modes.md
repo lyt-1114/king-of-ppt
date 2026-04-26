@@ -24,6 +24,14 @@ Spine: Hook -> Context -> Core idea -> Field scenes -> Shift -> Takeaway.
 
 Style: magazine-like, cinematic, sparse, rhythmic. Use big quotes, chapter dividers, field notes, and strong contrast.
 
+## Technical Report
+
+Use for AI platforms, product systems, research portfolios, system architecture, and product capability reports.
+
+Spine: Background -> Pain analysis -> Current solution comparison -> Architecture -> Core modules -> Mechanism deep dives -> Case scenes -> Evaluation -> Roadmap -> Summary.
+
+Style: complete but not crowded. Mix clean consulting pages with technical diagrams, case scenes, evaluation scorecards, and occasional editorial dividers. Use chapter rhythm so detailed pages have breathing room.
+
 ## Browser-Native Interactive
 
 Use when the HTML experience matters: animation, keyboard navigation, single-file sharing, or modern visual demos.
