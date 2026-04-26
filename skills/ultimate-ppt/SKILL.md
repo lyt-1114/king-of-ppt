@@ -153,6 +153,7 @@ For image-driven PPT work, keep the deck hybrid by default:
 - titles, claims, metrics, diagrams, and sources remain editable PPT objects
 - generated images should avoid fake logos, fake UI proof, unreadable in-image text, and cluttered sci-fi AI cliches
 - substantial case pages can use a scene image plus editable situation/intervention/result blocks, followed by a proof page with large metrics
+- repeat visual motifs, not whole layouts; if pages feel batch-generated, redesign the central composition instead of swapping only titles and icons
 
 ### 6. Execute in the Best Format
 

@@ -48,6 +48,7 @@ The skill will guide the agent to:
 ### 2026-04-27
 
 - Added image-driven PPT guidance: reference-image style transfer, generated hero/case visuals, hybrid bitmap + editable PPT layouts, and safeguards against fake screenshot proof.
+- Added anti-repetition rules for image-driven decks: repeat motifs rather than full page skeletons, and redesign runs of near-identical pages.
 - Added stage-ready polish rules for direct reporting decks: 3-second glance test, 18 pt body-copy floor, non-overlapping header/footer zones, and no density fixes by shrinking type.
 - Added case-spread guidance: split substantial examples into a narrative page and an evidence page so decks can feel fuller without becoming crowded.
 - Added source-informed presentation principles from Microsoft PowerPoint accessibility guidance, Duarte audience/message discipline, and Presentation Zen restraint/simplicity guidance.

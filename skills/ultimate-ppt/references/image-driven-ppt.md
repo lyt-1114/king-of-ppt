@@ -37,21 +37,25 @@ Avoid this route when:
    - card/grid rhythm
    - image-to-text ratio
    - what must stay editable
+   - which pages are intentionally similar and which pages vary
 2. Extract a design recipe:
    - 2-3 palette colors plus 1 accent
    - title/body/metadata sizes
    - 3-5 reusable page archetypes
    - image treatment: full-bleed, split image, framed screenshot, vignette, texture, or cutout
+   - a repetition budget: which motif may repeat, and which layout must change
 3. Build a hybrid slide system:
    - reserve stable text zones before placing images
    - use images outside or behind non-critical zones
    - keep contrast panels subtle but real when text overlays imagery
    - add editable callouts and metrics on top of images
+   - vary layout primitives across pages: hero, comparison, module map, process strip, case storyboard, scorecard, roadmap
 4. Verify:
    - text remains readable in slide sorter
    - meaningful text remains editable
    - images do not imply unsupported facts
    - no text overlaps image-heavy decoration
+   - slide sorter does not show a run of near-identical pages with only swapped titles
 
 ## Generated Image Prompt Pattern
 
@@ -90,6 +94,7 @@ For WanFlow-style enterprise AI decks, useful image assets include:
 - center: one visual scene or workflow image
 - side or bottom: situation, intervention, result
 - proof goes on a second slide when metrics need room
+- for image-to-PPT decks, use storyboard structure instead of repeated cards: scenario cue, process path, result proof, reusable asset
 
 ### Architecture Scene
 
@@ -115,5 +120,8 @@ For WanFlow-style enterprise AI decks, useful image assets include:
 - Keep important text outside busy image areas.
 - Do not use more than one dominant image treatment on the same slide.
 - Use the same color grade across generated images so the deck feels like one system.
+- Do not repeat the same generated panel, node chart, or card grid across multiple slides with only different headings. That reads as batch output, not design.
+- If three consecutive slides share the same layout skeleton, redesign at least one as a visual spread, process strip, comparison, or scorecard.
+- In reference-driven decks, repeat small motifs such as palette, page number chip, wave footer, ghost character, icon line, and value bar; vary the central composition.
 - If file size matters, compress images after generation but before final PPTX delivery.
 - Final output can still be a single PPTX; temporary image assets should be embedded and cleaned up unless the user asks to keep them.

@@ -60,6 +60,8 @@ Use multiple page treatments, not multiple unrelated decks.
 - Avoid changing corner radius, shadow style, and line weight from page to page.
 - Vary composition, not quality: alternate claim pages, comparison pages, case spreads, architecture diagrams, and decision pages while preserving the same margins, typography, and footer logic.
 - When a case needs more substance, use a two-slide spread instead of a dense bento grid: narrative first, evidence second.
+- Repeat motifs, not whole layouts. A deck can keep the same wave, ghost character, page marker, icon stroke, and value bar while changing the central composition on every major page.
+- In slide sorter, avoid three consecutive pages that look like the same template with different text.
 
 ## Chinese Ink-Tech Motif
 
