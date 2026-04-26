@@ -15,6 +15,7 @@ Every serious deck must have:
 - a clear audience and decision goal
 - a narrative spine
 - enough context, cases, and proof for the audience to trust the story
+- polished slide copy with a clear point of view, not just labels
 - a visual system
 - a density budget before layout
 - source-backed claims
@@ -37,6 +38,7 @@ Create a short source brief with:
 - required facts
 - strongest proof points
 - risks, gaps, and assumptions
+- tone and writing style: executive, technical, editorial, sales, training, or cultural/ink-tech
 - required footer/source/brand constraints
 
 If the user gives enough information, proceed with reasonable defaults. Ask only when a missing choice would materially change the deck.
@@ -95,6 +97,14 @@ For decks that need to feel complete, include a case-and-proof layer:
 - one roadmap, handoff, or next-step page
 
 Each slide must have one job. If a slide has two jobs, split it.
+
+Before layout, write a copy layer:
+- a slide thesis: the sentence the page must make the audience believe
+- 2-4 supporting content blocks with complete, useful wording
+- one short core-value line for report-style decks
+- speaker/readout notes when nuance would overcrowd the slide
+
+Do not ship pages that only contain headings and tags. If a slide feels thin, enrich the idea with context, mechanism, evidence, implication, or a concrete case detail before decorating it.
 
 ### 5. Visual System
 
@@ -178,6 +188,7 @@ Load these only when needed:
 - `references/workflow.md` for the full end-to-end process
 - `references/modes.md` for deck-type routing and outline patterns
 - `references/visual-system.md` for style selection and image prompt rules
+- `references/writing-style.md` when the deck needs richer Chinese copy, elegant wording, fuller slide content, or report-style readout language
 - `references/content-playbook.md` when a deck needs richer introductions, more cases, comparisons, evaluation pages, or a technical/report-style structure
 - `references/quality-gates.md` for verification checklist
 
@@ -192,6 +203,7 @@ Use `scripts/audit_deck.py` when checking generated PPTX/HTML outputs. For PPTX 
 | Treating visual prompts as a full deck | Use prompt boards as upstream art direction |
 | Cramming too much into one slide | Split by job |
 | Making a deck "complete" by adding more text | Cut to the decision message, move detail to notes or appendix |
+| Making pages too thin with only labels | Add a thesis sentence, mechanism, evidence, implication, or case detail |
 | Using many small cards to look polished | Use fewer large units, clear hierarchy, and whitespace |
 | Trusting visual judgment without inspection | Run the PPTX audit and fix overlap/off-slide warnings |
 | Saying "done" without checking outputs | Run quality gates and report evidence |

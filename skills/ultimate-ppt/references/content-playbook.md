@@ -32,6 +32,8 @@ Each case page should answer four questions:
 
 Avoid vague case pages that only say "helped efficiency." Name the chain that changed.
 
+For premium case pages, add a fifth element: replication path. Explain which adjacent workflow can reuse the same rule library, state machine, dashboard, or review mechanism.
+
 ## Rich But Not Crowded
 
 More content does not mean more text per slide.
@@ -41,6 +43,9 @@ More content does not mean more text per slide.
 - Put one evidence object per slide: table, architecture, case, metric set, timeline, or quote.
 - Move detailed lists to notes or appendix if they do not change the decision.
 - Use short labels on diagrams; explain nuance in speaker notes or adjacent captions.
+- Make each card carry a useful idea, not only a category name.
+- Add one short explanatory sentence under metrics so the number has meaning.
+- Use richer case pages: situation, intervention, result, reusable asset, next replication path.
 
 ## Multi-Style Page System
 

@@ -51,6 +51,7 @@ The skill will guide the agent to:
 - Added elegance guardrails: density budgets, stable text bounds, centralized footers, and whitespace-first layouts.
 - Added richer content guidance for complete decks: background, pain analysis, solution comparison, architecture, core modules, cases, evaluation, roadmap, and future outlook.
 - Added multi-style guidance including technical-report pages and Chinese ink-tech presentation direction.
+- Added Chinese slide-writing guidance: thesis sentences, fuller case copy, elegant report language, metric explanations, and core-value lines.
 
 ## Repository Structure
 
@@ -58,6 +59,7 @@ The skill will guide the agent to:
 skills/ultimate-ppt/SKILL.md
 skills/ultimate-ppt/references/
 skills/ultimate-ppt/references/content-playbook.md
+skills/ultimate-ppt/references/writing-style.md
 skills/ultimate-ppt/scripts/audit_deck.py
 ```
 

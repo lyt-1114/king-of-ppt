@@ -13,6 +13,9 @@ Run these checks before delivery.
 ## Content
 
 - [ ] Every slide has one job.
+- [ ] Every non-divider slide has a thesis or takeaway sentence, not only labels.
+- [ ] Case slides include situation, intervention, result, and reusable asset.
+- [ ] Metrics include context explaining what changed and why it matters.
 - [ ] Outline follows a deliberate spine, not a generic repeated pattern.
 - [ ] The opening earns attention.
 - [ ] The middle builds proof or learning.
