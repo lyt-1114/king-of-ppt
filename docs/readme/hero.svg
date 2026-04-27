@@ -1,0 +1,89 @@
+<svg width="1280" height="520" viewBox="0 0 1280 520" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Ultimate PPT hero</title>
+  <desc id="desc">A dramatic hero graphic positioning Ultimate PPT as an Image2PPT-first, multi-engine presentation skill.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1280" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#07110F"/>
+      <stop offset="0.45" stop-color="#10201C"/>
+      <stop offset="1" stop-color="#F2E8D8"/>
+    </linearGradient>
+    <linearGradient id="flare" x1="190" y1="32" x2="1060" y2="456" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#19C6A4"/>
+      <stop offset="0.46" stop-color="#F3B35D"/>
+      <stop offset="1" stop-color="#F7F1E7" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#F8F0E3"/>
+      <stop offset="1" stop-color="#D5C4AB"/>
+    </linearGradient>
+    <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#000000" flood-opacity="0.28"/>
+    </filter>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="520" rx="34" fill="url(#bg)"/>
+  <circle cx="314" cy="158" r="230" fill="#0F766E" opacity="0.22" filter="url(#glow)"/>
+  <circle cx="884" cy="326" r="250" fill="#E1A24A" opacity="0.20" filter="url(#glow)"/>
+  <path d="M46 411C200 323 298 349 429 282C560 215 633 88 810 87C968 86 1071 163 1227 94" stroke="url(#flare)" stroke-width="2.4" opacity="0.75"/>
+  <path d="M46 448C220 359 337 386 472 321C614 253 667 142 833 142C988 142 1094 211 1227 156" stroke="#F4E7D2" stroke-width="1" opacity="0.22"/>
+
+  <g opacity="0.18">
+    <path d="M88 70H1192" stroke="#F6EBDD"/>
+    <path d="M88 166H1192" stroke="#F6EBDD"/>
+    <path d="M88 262H1192" stroke="#F6EBDD"/>
+    <path d="M88 358H1192" stroke="#F6EBDD"/>
+    <path d="M216 48V472" stroke="#F6EBDD"/>
+    <path d="M408 48V472" stroke="#F6EBDD"/>
+    <path d="M600 48V472" stroke="#F6EBDD"/>
+    <path d="M792 48V472" stroke="#F6EBDD"/>
+    <path d="M984 48V472" stroke="#F6EBDD"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="742" y="82" width="392" height="246" rx="18" fill="#F8F0E3"/>
+    <rect x="768" y="110" width="96" height="14" rx="7" fill="#0F766E"/>
+    <rect x="768" y="144" width="242" height="18" rx="9" fill="#1A2A26"/>
+    <rect x="768" y="176" width="310" height="10" rx="5" fill="#9D8D76"/>
+    <rect x="768" y="198" width="260" height="10" rx="5" fill="#B9AA94"/>
+    <rect x="768" y="236" width="104" height="56" rx="12" fill="#16352E"/>
+    <rect x="890" y="236" width="104" height="56" rx="12" fill="#E2A94F"/>
+    <rect x="1012" y="236" width="72" height="56" rx="12" fill="#DCCCB7"/>
+  </g>
+
+  <g filter="url(#shadow)" transform="rotate(-7 881 297)">
+    <rect x="684" y="268" width="396" height="152" rx="16" fill="url(#panel)"/>
+    <rect x="706" y="292" width="134" height="82" rx="12" fill="#10201C"/>
+    <rect x="858" y="294" width="160" height="16" rx="8" fill="#172A25"/>
+    <rect x="858" y="326" width="188" height="9" rx="4.5" fill="#887C69"/>
+    <rect x="858" y="348" width="142" height="9" rx="4.5" fill="#A99A82"/>
+    <rect x="858" y="382" width="84" height="14" rx="7" fill="#0F766E"/>
+  </g>
+
+  <text x="74" y="106" fill="#F8F0E3" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" letter-spacing="4">ULTIMATE PPT</text>
+  <text x="74" y="174" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="70" font-weight="900" letter-spacing="0">
+    <tspan x="74" dy="0">Not another</tspan>
+    <tspan x="74" dy="76">PPT skill.</tspan>
+  </text>
+  <text x="76" y="335" fill="#F2E8D8" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="600">
+    Image2PPT-first. Multi-engine. Editable. Verified.
+  </text>
+  <text x="76" y="374" fill="#BFD8CF" font-family="Arial, Helvetica, sans-serif" font-size="19">
+    From reference image to presentation system, not screenshot stacks.
+  </text>
+
+  <g transform="translate(76 418)">
+    <rect width="152" height="42" rx="21" fill="#0F766E"/>
+    <text x="76" y="27" text-anchor="middle" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800">IMAGE2PPT</text>
+    <rect x="166" width="176" height="42" rx="21" fill="#F3B35D"/>
+    <text x="254" y="27" text-anchor="middle" fill="#10201C" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800">EDITABLE PPTX</text>
+    <rect x="356" width="150" height="42" rx="21" fill="#F8F0E3"/>
+    <text x="431" y="27" text-anchor="middle" fill="#10201C" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800">AUDITED</text>
+  </g>
+</svg>

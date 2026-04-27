@@ -1,0 +1,51 @@
+<svg width="1280" height="430" viewBox="0 0 1280 430" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Simple PPT skills versus Ultimate PPT</title>
+  <desc id="desc">A visual comparison showing Ultimate PPT as deeper than simple PPT skills.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1280" y2="430">
+      <stop stop-color="#F7EFE2"/>
+      <stop offset="1" stop-color="#EFE0C7"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#2B2116" flood-opacity="0.16"/>
+    </filter>
+  </defs>
+  <rect width="1280" height="430" rx="28" fill="url(#bg)"/>
+  <text x="58" y="64" fill="#10201C" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="900">Not a Thin PPT Wrapper</text>
+  <text x="58" y="96" fill="#6F6252" font-family="Arial, Helvetica, sans-serif" font-size="17">Ultimate PPT adds judgment, visual extraction, editability, and verification around the generation step.</text>
+
+  <g transform="translate(58 138)" filter="url(#shadow)">
+    <rect width="526" height="238" rx="24" fill="#FFFFFF"/>
+    <text x="32" y="48" fill="#9A4B35" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="900">Typical single-route PPT skill</text>
+    <g font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#5E554A">
+      <text x="34" y="92">01  Prompt to outline</text>
+      <text x="34" y="130">02  Apply a template</text>
+      <text x="34" y="168">03  Export slides</text>
+      <text x="34" y="206">04  Hope layout is fine</text>
+    </g>
+    <rect x="328" y="84" width="146" height="98" rx="14" fill="#F0E5D4"/>
+    <rect x="348" y="104" width="84" height="12" rx="6" fill="#B9AA94"/>
+    <rect x="348" y="132" width="104" height="10" rx="5" fill="#C8B9A4"/>
+    <rect x="348" y="154" width="74" height="10" rx="5" fill="#C8B9A4"/>
+  </g>
+
+  <g transform="translate(696 116)" filter="url(#shadow)">
+    <rect width="526" height="284" rx="24" fill="#10201C"/>
+    <text x="32" y="50" fill="#F3B35D" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="900">Ultimate PPT multi-engine skill</text>
+    <g font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#EADDCB">
+      <text x="34" y="92">01  Source brief and audience goal</text>
+      <text x="34" y="126">02  Image2 visual grammar extraction</text>
+      <text x="34" y="160">03  Strategy lock and execution lock</text>
+      <text x="34" y="194">04  Two-page showcase before bulk work</text>
+      <text x="34" y="228">05  HTML / PPTX / PDF / hybrid routing</text>
+      <text x="34" y="262">06  Layout, density, source, and image2 audit</text>
+    </g>
+    <g transform="translate(364 90)">
+      <rect width="116" height="134" rx="14" fill="#F8F0E3"/>
+      <rect x="18" y="18" width="68" height="10" rx="5" fill="#0F766E"/>
+      <rect x="18" y="44" width="76" height="46" rx="8" fill="#193B34"/>
+      <rect x="18" y="106" width="82" height="8" rx="4" fill="#B8A990"/>
+      <rect x="18" y="122" width="54" height="8" rx="4" fill="#D1C0A8"/>
+    </g>
+  </g>
+</svg>

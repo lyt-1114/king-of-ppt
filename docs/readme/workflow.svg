@@ -1,0 +1,75 @@
+<svg width="1280" height="360" viewBox="0 0 1280 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Image2PPT workflow</title>
+  <desc id="desc">A six-step Image2PPT workflow from reference image to audited deck.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1280" y2="360">
+      <stop stop-color="#F8F0E3"/>
+      <stop offset="1" stop-color="#E4D5BE"/>
+    </linearGradient>
+    <linearGradient id="dark" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#10201C"/>
+      <stop offset="1" stop-color="#193B34"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-40%" width="140%" height="180%">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#18332D" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  <rect width="1280" height="360" rx="28" fill="url(#bg)"/>
+  <text x="54" y="62" fill="#10201C" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="900">Image2PPT Pipeline</text>
+  <text x="54" y="94" fill="#6F6252" font-family="Arial, Helvetica, sans-serif" font-size="17">Reference image becomes a reusable deck system, then a verified deliverable.</text>
+
+  <g transform="translate(54 132)" filter="url(#shadow)">
+    <g>
+      <rect width="170" height="144" rx="18" fill="url(#dark)"/>
+      <text x="22" y="40" fill="#F3B35D" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800">01</text>
+      <text x="22" y="72" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="900">Reference</text>
+      <text x="22" y="100" fill="#CBE2DA" font-family="Arial, Helvetica, sans-serif" font-size="14">image, PDF, site,</text>
+      <text x="22" y="120" fill="#CBE2DA" font-family="Arial, Helvetica, sans-serif" font-size="14">old PPT, product</text>
+    </g>
+    <path d="M188 72H222" stroke="#0F766E" stroke-width="4" stroke-linecap="round"/>
+    <path d="M216 62L226 72L216 82" stroke="#0F766E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g transform="translate(242 0)">
+      <rect width="170" height="144" rx="18" fill="#FFFFFF"/>
+      <text x="22" y="40" fill="#0F766E" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800">02</text>
+      <text x="22" y="72" fill="#10201C" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="900">Extract</text>
+      <text x="22" y="100" fill="#6F6252" font-family="Arial, Helvetica, sans-serif" font-size="14">palette, type, grid,</text>
+      <text x="22" y="120" fill="#6F6252" font-family="Arial, Helvetica, sans-serif" font-size="14">rhythm, image role</text>
+    </g>
+    <path d="M430 72H464" stroke="#0F766E" stroke-width="4" stroke-linecap="round"/>
+    <path d="M458 62L468 72L458 82" stroke="#0F766E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g transform="translate(484 0)">
+      <rect width="170" height="144" rx="18" fill="#FFFFFF"/>
+      <text x="22" y="40" fill="#0F766E" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800">03</text>
+      <text x="22" y="72" fill="#10201C" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="900">Lock</text>
+      <text x="22" y="100" fill="#6F6252" font-family="Arial, Helvetica, sans-serif" font-size="14">strategy, execution,</text>
+      <text x="22" y="120" fill="#6F6252" font-family="Arial, Helvetica, sans-serif" font-size="14">editable layers</text>
+    </g>
+    <path d="M672 72H706" stroke="#0F766E" stroke-width="4" stroke-linecap="round"/>
+    <path d="M700 62L710 72L700 82" stroke="#0F766E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g transform="translate(726 0)">
+      <rect width="170" height="144" rx="18" fill="#FFFFFF"/>
+      <text x="22" y="40" fill="#0F766E" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800">04</text>
+      <text x="22" y="72" fill="#10201C" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="900">Showcase</text>
+      <text x="22" y="100" fill="#6F6252" font-family="Arial, Helvetica, sans-serif" font-size="14">cover page plus</text>
+      <text x="22" y="120" fill="#6F6252" font-family="Arial, Helvetica, sans-serif" font-size="14">dense proof page</text>
+    </g>
+    <path d="M914 72H948" stroke="#0F766E" stroke-width="4" stroke-linecap="round"/>
+    <path d="M942 62L952 72L942 82" stroke="#0F766E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g transform="translate(968 0)">
+      <rect width="170" height="144" rx="18" fill="#FFFFFF"/>
+      <text x="22" y="40" fill="#0F766E" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800">05</text>
+      <text x="22" y="72" fill="#10201C" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="900">Produce</text>
+      <text x="22" y="100" fill="#6F6252" font-family="Arial, Helvetica, sans-serif" font-size="14">PPTX, HTML, PDF,</text>
+      <text x="22" y="120" fill="#6F6252" font-family="Arial, Helvetica, sans-serif" font-size="14">hybrid outputs</text>
+    </g>
+  </g>
+
+  <g transform="translate(952 303)">
+    <rect width="274" height="38" rx="19" fill="#10201C"/>
+    <text x="137" y="25" text-anchor="middle" fill="#F8F0E3" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800">06 AUDIT: overlap, overflow, density, sources</text>
+  </g>
+</svg>

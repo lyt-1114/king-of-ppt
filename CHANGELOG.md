@@ -2,6 +2,8 @@
 
 ## 2026-04-27
 
+- Redesigned the GitHub README with a stronger product-page narrative and high-impact SVG visuals.
+- Added README visual assets: hero, Image2PPT workflow, multi-engine map, and thin-skill comparison graphics under `docs/readme/`.
 - Added a dedicated Image2 Deck Workflow reference with required image2 evidence artifacts, source-type diagnosis, brand asset protocol, transfer ladder, two-page pass, production pattern, and acceptance checks.
 - Strengthened the skill trigger description so image2PPT, image-to-PPT, reference-image matching, screenshot/PDF/website/old-PPT workflows are first-class discovery triggers.
 - Added image2 lock requirements to the core workflow: extracted visual grammar, transfer level, editable layer, bitmap layer, recognition assets, safe zones, and anti-screenshot-tracing checks.
