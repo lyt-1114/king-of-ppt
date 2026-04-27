@@ -54,6 +54,7 @@ Avoid: stock office scenes, generic AI glow, unreadable labels, fake dashboards,
 
 When a brand or style reference is involved, extract cues before prompting:
 
+- recognition assets: logo, product image, UI screenshot, official render, or other real identity carrier
 - mood: what the brand feels like
 - palette: base, accent, neutral
 - typography voice: geometric, serif, mono, editorial, humanist
@@ -63,6 +64,8 @@ When a brand or style reference is involved, extract cues before prompting:
 - signature restraint: what the brand refuses to do
 
 Then translate those cues into slide images. Do not ask the image model to copy a website screenshot unless the slide is explicitly about the website.
+
+Brand recognition depends on real assets before abstract style. If a concrete brand or product is central to the deck, look for official logos, product images, UI screenshots, or user-provided assets before generating generic brand-colored visuals. If they are unavailable, state that limitation and use conceptual visuals instead of fake proof.
 
 ## Safe Zones
 

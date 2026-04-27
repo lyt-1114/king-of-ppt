@@ -6,6 +6,8 @@ Use this when the user asks for a beautiful, premium, polished, designed, high-e
 
 When visual direction is unclear, do not guess one "nice" style. Offer three distinct directions, then build the chosen one into a reusable deck grammar.
 
+Load `style-preset-library.md` when you need named presets or a base-plus-modifier style decision.
+
 ## Three-Direction Sprint
 
 Create three short art directions:

@@ -8,6 +8,8 @@ Run these checks before delivery.
 - [ ] Audience and desired action are clear.
 - [ ] Deck route was chosen and shaped the outline.
 - [ ] Delivery architecture was chosen before layout: direct PPTX, HTML-first, editable-safe HTML, PDF, or hybrid.
+- [ ] For image2/reference-image work, an image2 brief exists or the run log includes the same headings.
+- [ ] For image2/reference-image work, transfer level is explicit: faithful, inspired, upgraded, or hybrid.
 - [ ] Execution lock exists for serious/long/multi-format decks and lists canvas, colors, typography, icons, images, page rhythm, and forbidden moves.
 - [ ] Required facts, footers, brand rules, and constraints are included.
 - [ ] Numeric claims have source notes or are marked as assumptions.
@@ -37,6 +39,8 @@ Run these checks before delivery.
 - [ ] Each page has enough whitespace to read at thumbnail scale.
 - [ ] Visual assets are relevant to the subject.
 - [ ] Presentation images have a role, thesis, safe zone, and thumbnail-readable focal point.
+- [ ] Image2 decks include a visual grammar extracted from the reference: palette, type hierarchy, composition, spacing, shape language, image treatment, and footer/source behavior.
+- [ ] Image2 decks preserve the listed editable layer: titles, claims, metrics, charts, labels, diagrams, and sources.
 - [ ] Image-heavy slides preserve editable titles, claims, metrics, and source notes unless the user requested flattened poster slides.
 - [ ] Generated or conceptual images are not presented as factual screenshots or customer proof.
 - [ ] Important text does not sit on busy image areas without a contrast panel or safe zone.
@@ -49,6 +53,7 @@ Run these checks before delivery.
 
 - [ ] Required PPTX/HTML/PDF files exist.
 - [ ] HTML-first decks open through `index.html` and keyboard navigation works.
+- [ ] Image2 decks were audited with `scripts/audit_deck.py <output> --image2` when the script is available.
 - [ ] Live-talk decks keep speaker notes hidden from audience view.
 - [ ] First-slide footer/source requirement is present when requested.
 - [ ] Notes or run log are included for serious decks.

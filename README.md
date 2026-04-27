@@ -114,6 +114,7 @@ npx skills add https://github.com/lyt-1114/king-of-ppt
 `ultimate-ppt` helps the agent make better deck decisions before it starts drawing slides:
 
 - **Image2PPT style extraction**: turn a reference image, website screenshot, old PPT page, or PDF spread into a reusable visual grammar.
+- **Image2 evidence trail**: record the reference read, transfer level, editable layer, bitmap layer, and visual grammar so the result is explainable, repeatable, and auditable.
 - **Premium first impression**: create stronger covers, chapter dividers, case scenes, and product moments instead of plain title-card decks.
 - **Editable business delivery**: keep claims, numbers, labels, charts, and source notes editable instead of flattening every slide into a picture.
 - **Two-page showcase before bulk work**: test one high-impact page and one dense page first, so a 20-slide deck does not drift after page 3.
@@ -127,6 +128,7 @@ npx skills add https://github.com/lyt-1114/king-of-ppt
 
 ```text
 skills/ultimate-ppt/SKILL.md
+skills/ultimate-ppt/agents/openai.yaml
 skills/ultimate-ppt/assets/
 skills/ultimate-ppt/assets/deck_index.html
 skills/ultimate-ppt/assets/slide.css
@@ -135,12 +137,14 @@ skills/ultimate-ppt/references/content-playbook.md
 skills/ultimate-ppt/references/editable-pptx.md
 skills/ultimate-ppt/references/execution-lock.md
 skills/ultimate-ppt/references/html-first-deck.md
+skills/ultimate-ppt/references/image2-deck-workflow.md
 skills/ultimate-ppt/references/image-driven-ppt.md
 skills/ultimate-ppt/references/layout-theme-system.md
 skills/ultimate-ppt/references/presentation-image-system.md
 skills/ultimate-ppt/references/presentation-readout.md
 skills/ultimate-ppt/references/presenter-motion-export.md
 skills/ultimate-ppt/references/quality-gates.md
+skills/ultimate-ppt/references/style-preset-library.md
 skills/ultimate-ppt/references/visual-direction-showcase.md
 skills/ultimate-ppt/references/visual-system.md
 skills/ultimate-ppt/references/workflow.md
@@ -153,6 +157,7 @@ skills/ultimate-ppt/scripts/audit_deck.py
 ```bash
 python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/ultimate-ppt
 python skills/ultimate-ppt/scripts/audit_deck.py path/to/output-folder
+python skills/ultimate-ppt/scripts/audit_deck.py path/to/output-folder --image2
 ```
 
 ## Try It
@@ -179,17 +184,7 @@ Create hidden presenter notes and an HTML preview, then export a PPTX.
 
 ## Update Log
 
-### 2026-04-27
-
-- Repositioned the project around Image2PPT / image-driven deck creation.
-- Added HTML-first deck engine guidance: browser-playable `index.html` as visual source, isolated slide files, visual verification, and starter `assets/deck_index.html` / `assets/slide.css`.
-- Added visual direction/showcase workflow: three distinct style directions and a two-page grammar pass for premium 5+ slide decks.
-- Added editable PPTX guidance: early editability decision, HTML constraints, hybrid bitmap + editable object pattern, and fallback for visual HTML that later needs PPTX.
-- Added execution-lock guidance: page rhythm, approved colors/fonts/icons/images, and forbidden moves.
-- Added layout/theme system guidance: token-first themes, layout archetype catalog, preflight checks, image ratio rules, and presenter-note handling.
-- Added presenter/motion/export guidance: hidden speaker notes, semantic animation recipes, viewport fitting, PPTX conversion intake, PDF/export/deploy discipline, and optional browser editing boundaries.
-- Added presentation-image system guidance: slide images as arguments, role/thesis/safe-zone prompt skeletons, brand-inspired translation, and text-safe image rules.
-- Added PPTX layout audit checks, density guardrails, image-driven PPT rules, and source-informed presentation principles.
+See [CHANGELOG.md](CHANGELOG.md) for the full history.
 
 ## License
 

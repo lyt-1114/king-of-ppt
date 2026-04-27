@@ -1,11 +1,13 @@
 ---
 name: ultimate-ppt
-description: Use when creating, improving, converting, or evaluating presentations, PPT/PPTX decks, HTML slides, pitch decks, keynote-style talks, sales decks, reports, launch decks, training decks, or visual slide systems from documents, websites, notes, data, or rough ideas.
+description: Use when creating, improving, converting, or evaluating presentations, PPT/PPTX decks, HTML slides, image2PPT/image-to-PPT decks, reference-image style matching, screenshot/PDF/website/old-PPT to deck workflows, pitch decks, keynote-style talks, sales decks, reports, launch decks, training decks, or visual slide systems from documents, images, websites, notes, data, or rough ideas.
 ---
 
 # Ultimate PPT
 
 Create the strongest possible presentation from source material by combining strategy-first PPT planning, template-driven HTML/PPT execution, magazine-grade storytelling, browser-native slide craft, visual prompt systems, and verification discipline.
+
+Image2PPT is the flagship route: convert reference images into a presentation system, not a stack of screenshots.
 
 ## Core Rule
 
@@ -21,6 +23,7 @@ Every serious deck must have:
 - polished slide copy with a clear point of view, not just labels
 - a visual system
 - a visual grammar proven on representative pages before bulk production
+- for image2 work, an image2 brief and visual grammar that explain what was extracted from the reference
 - a density budget before layout
 - source-backed claims
 - speaker/readout notes when useful
@@ -63,6 +66,8 @@ Choose one primary mode and optionally one secondary mode:
 | Image-driven PPT | reference-image style transfer, generated hero/case visuals, premium case showcases | image-driven-ppt + PPT-Design-Prompt |
 | Training / course | teaching, workshops, internal enablement | html-ppt + frontend-slides |
 
+If the user provides a reference image, screenshot, PDF page, website capture, old PPT page, product image, brand visual, or rough mockup, route through Image-driven PPT unless the user explicitly wants a plain content deck.
+
 Use the route to shape content, not just visual style. Two different modes should not produce the same outline.
 
 ### 3. Strategy Lock
@@ -81,6 +86,16 @@ Before slide production, write a compact strategy lock:
 - evidence and citation plan
 - presenter notes, motion, export, or conversion needs
 - acceptance checks
+
+For image2 work, also create an image2 lock:
+- source type and reference sources
+- visual grammar extracted from the reference
+- transfer level: faithful, inspired, upgraded, or hybrid
+- must-editable layer: titles, claims, metrics, charts, labels, diagrams, sources
+- bitmap layer: atmosphere, case scene, product context, screenshot frame, texture
+- recognition assets: logo, product image, UI screenshot, brand color, typography clues
+- image safe-zone strategy
+- similarity targets and anti-screenshot-tracing checks
 
 For high-stakes, long, or multi-format decks, save this as `design_spec.md` or `strategy-lock.md` beside the output, then create an `execution-lock.md` with the concrete canvas, colors, fonts, icon language, image inventory, page rhythm, and forbidden moves.
 
@@ -174,6 +189,7 @@ For image-driven PPT work, keep the deck hybrid by default:
 - generated images should avoid fake logos, fake UI proof, unreadable in-image text, and cluttered sci-fi AI cliches
 - substantial case pages can use a scene image plus editable situation/intervention/result blocks, followed by a proof page with large metrics
 - repeat visual motifs, not whole layouts; if pages feel batch-generated, redesign the central composition instead of swapping only titles and icons
+- leave an evidence trail: `image2-brief.md`, `visual-grammar.md`, and `run-log.md` or equivalent sections explaining the reference extraction, transfer level, editable layer, bitmap layer, and checks
 
 ### 6. Execute in the Best Format
 
@@ -257,11 +273,13 @@ Load these only when needed:
 - `references/visual-system.md` for style selection and image prompt rules
 - `references/execution-lock.md` for serious, long, multi-format, template-based, or consistency-sensitive decks
 - `references/layout-theme-system.md` when choosing themes, page archetypes, layout catalogs, presenter notes, image ratios, or reusable HTML deck systems
+- `references/style-preset-library.md` when choosing a named visual direction, adapting a reference image into a style preset, or avoiding generic theme choices
 - `references/presenter-motion-export.md` when the deck needs live speaker notes, presenter mode, animation, viewport fitting, PPTX conversion intake, PDF export, deployment, or browser editing
 - `references/presentation-image-system.md` when generating/selecting cover images, divider images, concept visuals, data backdrops, brand-inspired slide images, or any image intended to carry slide meaning
 - `references/visual-direction-showcase.md` when the user asks for a beautiful, premium, polished, designed, high-end, less generic, style-matched, or more impressive deck
 - `references/html-first-deck.md` when building HTML decks, visual previews, browser-presentable decks, PDF-ready decks, or decks where first-impression design quality matters
 - `references/editable-pptx.md` when the final output must be editable in PowerPoint/Keynote or when converting HTML to editable PPTX
+- `references/image2-deck-workflow.md` when the user provides a reference image, screenshot, PDF page, website capture, old PPT page, product image, brand visual, or rough mockup
 - `references/image-driven-ppt.md` when the user asks for image-to-PPT, image2PPT, reference-image/PDF style matching, generated presentation images, stronger case visuals, or a deck that feels more like a designed showcase
 - `references/presentation-readout.md` when the user needs a PPT that can be presented directly, projected, or read comfortably without zooming
 - `references/writing-style.md` when the deck needs richer Chinese copy, elegant wording, fuller slide content, or report-style readout language
@@ -270,7 +288,7 @@ Load these only when needed:
 
 Use `assets/deck_index.html` and `assets/slide.css` as starter files for HTML-first decks when the codebase does not already provide a better presentation shell.
 
-Use `scripts/audit_deck.py` when checking generated PPTX/HTML outputs. For PPTX files, treat layout warnings about overlap, off-slide text, duplicate footers, or high density as fix-before-delivery issues unless the user explicitly wants a rough draft.
+Use `scripts/audit_deck.py` when checking generated PPTX/HTML outputs. Add `--image2` for image-driven decks so the audit also checks the expected image2 evidence files. For PPTX files, treat layout warnings about overlap, off-slide text, duplicate footers, or high density as fix-before-delivery issues unless the user explicitly wants a rough draft.
 
 ## Common Mistakes
 

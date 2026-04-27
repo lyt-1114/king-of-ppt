@@ -1,0 +1,8 @@
+interface:
+  display_name: "Ultimate PPT"
+  short_description: "Image2PPT-first presentation skill for polished, editable, verified decks."
+  brand_color: "#0F766E"
+  default_prompt: "Use $ultimate-ppt to turn this reference image and notes into a polished, editable presentation deck."
+
+policy:
+  allow_implicit_invocation: true

@@ -44,6 +44,14 @@ Acceptance checks:
 
 For premium, visual, or ambiguous decks, load `visual-direction-showcase.md` before locking the style. For HTML-first work, load `html-first-deck.md`. For editable PPTX, load `editable-pptx.md` before writing layout code.
 
+For image2, reference-image, screenshot, PDF-page, website-capture, old-PPT, product-image, brand-visual, or rough-mockup work, load `image2-deck-workflow.md` and create:
+
+- `image2-brief.md` or an equivalent run-log section
+- `visual-grammar.md`
+- a transfer decision: faithful, inspired, upgraded, or hybrid
+- an editable-layer / bitmap-layer split
+- image safe-zone and recognition-asset notes
+
 For serious, long, template-based, or multi-format decks, create `execution-lock.md` after the strategy lock. It should specify canvas, colors, typography, icons, image inventory, page rhythm, and forbidden moves. Treat it as the production contract.
 
 ## 3. Production
@@ -62,6 +70,8 @@ For decks with 5 or more slides, build two representative pages first:
 
 Use them to confirm typography, margins, image treatment, density, and footer logic before producing the rest.
 
+For image2 decks, the two-page pass must also confirm that the style relation to the reference is visible without flattening the deck into screenshots.
+
 If the deck is a live talk, write hidden presenter notes during production rather than after the deck is finished. Notes should support oral delivery and transitions, not duplicate slide text.
 
 If the task is PPTX conversion or enhancement, extract and summarize the old deck first, then choose faithful remake, visual upgrade, or narrative rewrite. Do not default to screenshot tracing.
@@ -74,6 +84,12 @@ Run quality gates before final response. If using the bundled script:
 
 ```bash
 python scripts/audit_deck.py path/to/output
+```
+
+For image2 decks:
+
+```bash
+python scripts/audit_deck.py path/to/output --image2
 ```
 
 Report the result and any limitations.

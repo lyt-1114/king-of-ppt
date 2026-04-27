@@ -12,6 +12,8 @@ Do not turn a serious business deck into a stack of flattened posters unless the
 - editable PPT layer: title, subtitle, claim, metrics, evidence blocks, diagrams, sources
 - validation layer: overlap audit, font-size audit, contrast/readability check, asset relevance check
 
+For end-to-end image2 work, load `image2-deck-workflow.md` and leave a traceable image2 brief, visual grammar, transfer level, and editable/bitmap layer split.
+
 Every image should be assigned a role before generation or selection:
 
 - cover hero
@@ -51,12 +53,14 @@ Avoid this route when:
    - image-to-text ratio
    - what must stay editable
    - which pages are intentionally similar and which pages vary
+   - recognition assets: logo, product image, UI screenshot, brand colors, typography clues
 2. Extract a design recipe:
    - 2-3 palette colors plus 1 accent
    - title/body/metadata sizes
    - 3-5 reusable page archetypes
    - image treatment: full-bleed, split image, framed screenshot, vignette, texture, or cutout
    - a repetition budget: which motif may repeat, and which layout must change
+   - a transfer level: faithful, inspired, upgraded, or hybrid
 3. Build a hybrid slide system:
    - reserve stable text zones before placing images
    - use images outside or behind non-critical zones
@@ -69,6 +73,19 @@ Avoid this route when:
    - images do not imply unsupported facts
    - no text overlaps image-heavy decoration
    - slide sorter does not show a run of near-identical pages with only swapped titles
+   - `image2-brief.md`, `visual-grammar.md`, and `run-log.md` or equivalent sections record what was extracted and why
+
+## Image2 Artifact Checklist
+
+For serious image2 decks, include:
+
+- `image2-brief.md`: sources, source type, audience, goal, output, must-editable layer, bitmap layer, missing assets, risks
+- `visual-grammar.md`: palette, type hierarchy, composition, spacing, image treatment, diagram/chart language, footer behavior
+- `strategy-lock.md`: transfer level, slide list, output path, acceptance checks
+- `execution-lock.md`: canvas, margins, colors, fonts, icons, image inventory, page rhythm, forbidden moves
+- `run-log.md`: sources read, two-page pass result, audit command, limitations
+
+Run `scripts/audit_deck.py <output> --image2` when available.
 
 ## Generated Image Prompt Pattern
 

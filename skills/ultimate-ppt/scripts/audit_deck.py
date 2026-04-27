@@ -127,7 +127,52 @@ def audit_pptx_layout(pptx):
     return errors, warnings
 
 
-def audit_folder(folder):
+def read_markdown_files(folder):
+    docs = {}
+    for md in Path(folder).glob("*.md"):
+        docs[md.name.lower()] = md.read_text(encoding="utf-8", errors="ignore")
+    return docs
+
+
+def has_doc_or_runlog(docs, filenames, required_terms):
+    for name in filenames:
+        if name in docs:
+            return True
+    runlog = "\n".join(docs.get(name, "") for name in ("run-log.md", "skill-run.md"))
+    return all(term.lower() in runlog.lower() for term in required_terms)
+
+
+def audit_image2_evidence(folder):
+    docs = read_markdown_files(folder)
+    warnings = []
+
+    if not docs:
+        return ["Image2 audit: no markdown evidence files found."]
+
+    if not has_doc_or_runlog(docs, ("image2-brief.md",), ("image2", "must", "editable")):
+        warnings.append("Image2 audit: missing image2-brief.md or equivalent run-log section.")
+    if not has_doc_or_runlog(docs, ("visual-grammar.md",), ("visual grammar", "palette", "typography")):
+        warnings.append("Image2 audit: missing visual-grammar.md or equivalent run-log section.")
+    if "strategy-lock.md" not in docs and "strategy lock" not in "\n".join(docs.values()).lower():
+        warnings.append("Image2 audit: missing strategy-lock.md or equivalent strategy section.")
+    if "execution-lock.md" not in docs and "execution lock" not in "\n".join(docs.values()).lower():
+        warnings.append("Image2 audit: missing execution-lock.md or equivalent execution section.")
+
+    all_text = "\n".join(docs.values()).lower()
+    for term in ("faithful", "inspired", "upgraded", "hybrid"):
+        if term in all_text:
+            break
+    else:
+        warnings.append("Image2 audit: transfer level not found (faithful, inspired, upgraded, or hybrid).")
+
+    for term in ("editable", "bitmap"):
+        if term not in all_text:
+            warnings.append(f"Image2 audit: {term} layer not documented.")
+
+    return warnings
+
+
+def audit_folder(folder, require_image2=False):
     folder = Path(folder)
     errors = []
     warnings = []
@@ -165,14 +210,18 @@ def audit_folder(folder):
     if not (folder / "run-log.md").exists() and not (folder / "skill-run.md").exists():
         warnings.append("No run-log.md or skill-run.md found.")
 
+    if require_image2:
+        warnings.extend(audit_image2_evidence(folder))
+
     return errors, warnings
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("path", help="Output folder to audit")
+    parser.add_argument("--image2", action="store_true", help="Also check Image2PPT evidence files and transfer notes")
     args = parser.parse_args()
-    errors, warnings = audit_folder(args.path)
+    errors, warnings = audit_folder(args.path, require_image2=args.image2)
     if errors:
         print("FAIL")
         for item in errors:
