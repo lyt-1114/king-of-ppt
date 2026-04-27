@@ -1,60 +1,66 @@
 <svg width="1280" height="390" viewBox="0 0 1280 390" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">Ultimate PPT engine map</title>
-  <desc id="desc">A light engine map showing Image2PPT connected to strategy, visual grammar, HTML-first, editable PPTX, presenter, and audit engines.</desc>
+  <desc id="desc">An integrated high-contrast engine map showing Image2PPT connected to strategy, visual grammar, HTML-first, editable PPTX, presenter, and audit engines.</desc>
   <defs>
-    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
-      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#10201C" flood-opacity="0.08"/>
+    <filter id="shadow" x="-12%" y="-16%" width="124%" height="142%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#10201C" flood-opacity="0.14"/>
     </filter>
+    <linearGradient id="core" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#0F766E"/>
+      <stop offset="1" stop-color="#D99A3D"/>
+    </linearGradient>
   </defs>
   <rect x="1" y="1" width="1278" height="388" rx="22" fill="#FBF8F1" stroke="#E3D5C2"/>
-  <text x="54" y="58" fill="#10201C" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="900">A presentation system, not a template shortcut</text>
-  <text x="54" y="88" fill="#6C6154" font-family="Arial, Helvetica, sans-serif" font-size="16">Image2PPT sits in the center. The surrounding engines keep the deck strategic, editable, and verifiable.</text>
+  <rect x="34" y="28" width="1212" height="334" rx="22" fill="#F4EBDC" stroke="#E2D3BF"/>
+  <text x="62" y="68" fill="#10201C" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="900">A presentation system, not a template shortcut</text>
+  <text x="62" y="98" fill="#6C6154" font-family="Arial, Helvetica, sans-serif" font-size="16">Image2PPT is the center. The surrounding engines keep the deck strategic, editable, and verifiable.</text>
 
-  <g stroke="#D8CAB7" stroke-width="2">
-    <path d="M640 204H292"/>
-    <path d="M640 204H988"/>
-    <path d="M640 204L430 304"/>
-    <path d="M640 204L850 304"/>
-    <path d="M640 204L430 132"/>
-    <path d="M640 204L850 132"/>
+  <g stroke="#927F68" stroke-width="2" opacity="0.34">
+    <path d="M640 214H292"/>
+    <path d="M640 214H988"/>
+    <path d="M640 214L430 314"/>
+    <path d="M640 214L850 314"/>
+    <path d="M640 214L430 142"/>
+    <path d="M640 214L850 142"/>
   </g>
 
   <g filter="url(#shadow)">
-    <rect x="526" y="150" width="228" height="108" rx="18" fill="#10201C"/>
-    <text x="640" y="193" text-anchor="middle" fill="#F8F0E3" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900">Image2PPT</text>
-    <text x="640" y="222" text-anchor="middle" fill="#BFD8CF" font-family="Arial, Helvetica, sans-serif" font-size="14">reference to deck grammar</text>
+    <rect x="516" y="154" width="248" height="120" rx="22" fill="#10201C"/>
+    <rect x="536" y="174" width="208" height="80" rx="16" fill="url(#core)" opacity="0.18"/>
+    <text x="640" y="205" text-anchor="middle" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="900">Image2PPT</text>
+    <text x="640" y="235" text-anchor="middle" fill="#CFE3DC" font-family="Arial, Helvetica, sans-serif" font-size="14">reference to deck grammar</text>
   </g>
 
   <g font-family="Arial, Helvetica, sans-serif" filter="url(#shadow)">
-    <g transform="translate(90 160)">
+    <g transform="translate(90 170)">
       <rect width="240" height="88" rx="16" fill="#FFFFFF" stroke="#E3D5C2"/>
       <text x="22" y="36" fill="#0F766E" font-size="18" font-weight="900">Strategy</text>
       <text x="22" y="62" fill="#6C6154" font-size="14">audience, goal, proof</text>
     </g>
-    <g transform="translate(290 88)">
-      <rect width="240" height="88" rx="16" fill="#FFFFFF" stroke="#E3D5C2"/>
-      <text x="22" y="36" fill="#0F766E" font-size="18" font-weight="900">Visual Grammar</text>
-      <text x="22" y="62" fill="#6C6154" font-size="14">palette, type, rhythm</text>
+    <g transform="translate(290 98)">
+      <rect width="240" height="88" rx="16" fill="#10201C"/>
+      <text x="22" y="36" fill="#F3B35D" font-size="18" font-weight="900">Visual Grammar</text>
+      <text x="22" y="62" fill="#CFE3DC" font-size="14">palette, type, rhythm</text>
     </g>
-    <g transform="translate(290 276)">
+    <g transform="translate(290 286)">
       <rect width="240" height="88" rx="16" fill="#FFFFFF" stroke="#E3D5C2"/>
       <text x="22" y="36" fill="#0F766E" font-size="18" font-weight="900">HTML-First</text>
       <text x="22" y="62" fill="#6C6154" font-size="14">browser visual preview</text>
     </g>
-    <g transform="translate(750 88)">
+    <g transform="translate(750 98)">
       <rect width="240" height="88" rx="16" fill="#FFFFFF" stroke="#E3D5C2"/>
       <text x="22" y="36" fill="#0F766E" font-size="18" font-weight="900">Editable PPTX</text>
       <text x="22" y="62" fill="#6C6154" font-size="14">business layer stays editable</text>
     </g>
-    <g transform="translate(750 276)">
+    <g transform="translate(750 286)">
       <rect width="240" height="88" rx="16" fill="#FFFFFF" stroke="#E3D5C2"/>
       <text x="22" y="36" fill="#0F766E" font-size="18" font-weight="900">Presenter</text>
       <text x="22" y="62" fill="#6C6154" font-size="14">notes, pacing, readability</text>
     </g>
-    <g transform="translate(950 160)">
-      <rect width="240" height="88" rx="16" fill="#FFFFFF" stroke="#E3D5C2"/>
-      <text x="22" y="36" fill="#0F766E" font-size="18" font-weight="900">Audit</text>
-      <text x="22" y="62" fill="#6C6154" font-size="14">layout and image2 evidence</text>
+    <g transform="translate(950 170)">
+      <rect width="240" height="88" rx="16" fill="#10201C"/>
+      <text x="22" y="36" fill="#F3B35D" font-size="18" font-weight="900">Audit</text>
+      <text x="22" y="62" fill="#CFE3DC" font-size="14">layout and image2 evidence</text>
     </g>
   </g>
 </svg>

@@ -1,49 +1,78 @@
-<svg width="1280" height="380" viewBox="0 0 1280 380" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">Ultimate PPT</title>
-  <desc id="desc">A calm README hero for Ultimate PPT, an Image2PPT-first presentation system.</desc>
+<svg width="1280" height="420" viewBox="0 0 1280 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Ultimate PPT hero</title>
+  <desc id="desc">A high-impact but README-integrated hero for Ultimate PPT, an Image2PPT-first presentation system.</desc>
   <defs>
-    <linearGradient id="paper" x1="0" y1="0" x2="1280" y2="380" gradientUnits="userSpaceOnUse">
+    <linearGradient id="outer" x1="0" y1="0" x2="1280" y2="420" gradientUnits="userSpaceOnUse">
       <stop stop-color="#FBF8F1"/>
       <stop offset="1" stop-color="#EFE3D0"/>
     </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#0F766E"/>
-      <stop offset="1" stop-color="#D99A3D"/>
+    <linearGradient id="stage" x1="94" y1="46" x2="1186" y2="364" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#07110F"/>
+      <stop offset="0.48" stop-color="#10201C"/>
+      <stop offset="1" stop-color="#27443B"/>
     </linearGradient>
-    <filter id="soft" x="-10%" y="-10%" width="120%" height="130%">
-      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#10201C" flood-opacity="0.10"/>
+    <linearGradient id="energy" x1="160" y1="60" x2="1110" y2="352" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#20D0AA"/>
+      <stop offset="0.48" stop-color="#F3B35D"/>
+      <stop offset="1" stop-color="#F8F0E3" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-15%" width="120%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#10201C" flood-opacity="0.18"/>
+    </filter>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="22" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
     </filter>
   </defs>
-  <rect x="1" y="1" width="1278" height="378" rx="24" fill="url(#paper)" stroke="#E3D5C2"/>
-  <path d="M64 295C210 219 320 238 456 185C592 132 698 80 861 108C1011 134 1085 202 1212 145" stroke="#0F766E" stroke-width="2" opacity="0.24"/>
-  <path d="M64 324C240 243 352 273 508 220C664 167 747 137 904 166C1055 194 1128 233 1212 203" stroke="#D99A3D" stroke-width="2" opacity="0.22"/>
 
-  <g transform="translate(760 72)" filter="url(#soft)">
-    <rect width="360" height="204" rx="18" fill="#FFFFFF" stroke="#DED1BD"/>
-    <rect x="28" y="28" width="108" height="12" rx="6" fill="#0F766E"/>
-    <rect x="28" y="58" width="226" height="18" rx="9" fill="#10201C"/>
-    <rect x="28" y="92" width="284" height="9" rx="4.5" fill="#B8AA95"/>
-    <rect x="28" y="112" width="236" height="9" rx="4.5" fill="#C7B9A4"/>
-    <rect x="28" y="146" width="88" height="34" rx="9" fill="#10201C"/>
-    <rect x="132" y="146" width="88" height="34" rx="9" fill="#D99A3D"/>
-    <rect x="236" y="146" width="76" height="34" rx="9" fill="#E9DDCA"/>
-  </g>
-  <g transform="translate(922 222)" filter="url(#soft)">
-    <rect width="210" height="72" rx="16" fill="#10201C"/>
-    <text x="24" y="30" fill="#F7EFE2" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800">AUDITED OUTPUT</text>
-    <text x="24" y="52" fill="#BFD8CF" font-family="Arial, Helvetica, sans-serif" font-size="13">editable, readable, verified</text>
+  <rect x="1" y="1" width="1278" height="418" rx="24" fill="url(#outer)" stroke="#E3D5C2"/>
+  <rect x="54" y="42" width="1172" height="318" rx="26" fill="url(#stage)" filter="url(#shadow)"/>
+  <circle cx="304" cy="158" r="164" fill="#0F766E" opacity="0.24" filter="url(#glow)"/>
+  <circle cx="982" cy="260" r="186" fill="#D99A3D" opacity="0.20" filter="url(#glow)"/>
+  <path d="M104 288C258 204 384 232 522 168C660 104 770 78 916 104C1058 130 1132 190 1182 156" stroke="url(#energy)" stroke-width="2.4" opacity="0.82"/>
+  <path d="M104 320C282 230 402 270 558 214C714 158 790 144 944 174C1088 202 1148 230 1182 210" stroke="#F6EBDD" stroke-width="1.2" opacity="0.24"/>
+
+  <g opacity="0.12">
+    <path d="M96 118H1184" stroke="#F8F0E3"/>
+    <path d="M96 196H1184" stroke="#F8F0E3"/>
+    <path d="M96 274H1184" stroke="#F8F0E3"/>
+    <path d="M252 66V338" stroke="#F8F0E3"/>
+    <path d="M444 66V338" stroke="#F8F0E3"/>
+    <path d="M636 66V338" stroke="#F8F0E3"/>
+    <path d="M828 66V338" stroke="#F8F0E3"/>
+    <path d="M1020 66V338" stroke="#F8F0E3"/>
   </g>
 
-  <text x="70" y="86" fill="#0F766E" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800" letter-spacing="3">ULTIMATE PPT</text>
-  <text x="70" y="150" fill="#10201C" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="900">Image2PPT-first</text>
-  <text x="70" y="206" fill="#10201C" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="900">presentation system</text>
-  <text x="72" y="252" fill="#5E5347" font-family="Arial, Helvetica, sans-serif" font-size="20">Reference image to editable deck grammar, not screenshot stacks.</text>
-  <g transform="translate(72 286)">
-    <rect width="116" height="34" rx="17" fill="#0F766E"/>
-    <text x="58" y="23" text-anchor="middle" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="800">IMAGE2</text>
-    <rect x="128" width="132" height="34" rx="17" fill="#10201C"/>
-    <text x="194" y="23" text-anchor="middle" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="800">EDITABLE</text>
-    <rect x="272" width="112" height="34" rx="17" fill="#D99A3D"/>
-    <text x="328" y="23" text-anchor="middle" fill="#10201C" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="800">VERIFIED</text>
+  <g transform="translate(790 92)" filter="url(#shadow)">
+    <rect width="316" height="190" rx="17" fill="#F8F0E3"/>
+    <rect x="24" y="25" width="92" height="11" rx="5.5" fill="#0F766E"/>
+    <rect x="24" y="54" width="210" height="17" rx="8.5" fill="#10201C"/>
+    <rect x="24" y="88" width="258" height="9" rx="4.5" fill="#9E927D"/>
+    <rect x="24" y="108" width="216" height="9" rx="4.5" fill="#B8AA95"/>
+    <rect x="24" y="140" width="78" height="31" rx="9" fill="#10201C"/>
+    <rect x="118" y="140" width="78" height="31" rx="9" fill="#D99A3D"/>
+    <rect x="212" y="140" width="70" height="31" rx="9" fill="#E6D8C3"/>
+  </g>
+  <g transform="translate(942 260)" filter="url(#shadow)">
+    <rect width="194" height="62" rx="15" fill="#10201C" stroke="#375A50"/>
+    <text x="22" y="27" fill="#F8F0E3" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="900">AUDIT READY</text>
+    <text x="22" y="46" fill="#BFD8CF" font-family="Arial, Helvetica, sans-serif" font-size="12">layout + image2 evidence</text>
+  </g>
+
+  <text x="96" y="105" fill="#F8F0E3" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800" letter-spacing="3">ULTIMATE PPT</text>
+  <text x="96" y="163" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="900">Image2PPT-first</text>
+  <text x="96" y="224" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="900">presentation system</text>
+  <text x="98" y="268" fill="#CFE3DC" font-family="Arial, Helvetica, sans-serif" font-size="19">Reference image to editable deck grammar, not screenshot stacks.</text>
+
+  <g transform="translate(96 304)">
+    <rect width="112" height="34" rx="17" fill="#0F766E"/>
+    <text x="56" y="23" text-anchor="middle" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="900">IMAGE2</text>
+    <rect x="124" width="130" height="34" rx="17" fill="#F3B35D"/>
+    <text x="189" y="23" text-anchor="middle" fill="#10201C" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="900">EDITABLE</text>
+    <rect x="266" width="112" height="34" rx="17" fill="#F8F0E3"/>
+    <text x="322" y="23" text-anchor="middle" fill="#10201C" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="900">VERIFIED</text>
   </g>
 </svg>

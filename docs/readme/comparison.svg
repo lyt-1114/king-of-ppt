@@ -1,17 +1,18 @@
 <svg width="1280" height="390" viewBox="0 0 1280 390" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">Thin PPT skill versus Ultimate PPT</title>
-  <desc id="desc">A calm comparison between thin PPT skills and Ultimate PPT.</desc>
+  <desc id="desc">An integrated high-contrast comparison between thin PPT skills and Ultimate PPT.</desc>
   <defs>
-    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
-      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#10201C" flood-opacity="0.08"/>
+    <filter id="shadow" x="-10%" y="-14%" width="120%" height="136%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#10201C" flood-opacity="0.12"/>
     </filter>
   </defs>
   <rect x="1" y="1" width="1278" height="388" rx="22" fill="#FBF8F1" stroke="#E3D5C2"/>
-  <text x="54" y="58" fill="#10201C" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="900">The difference is not style. It is depth.</text>
-  <text x="54" y="88" fill="#6C6154" font-family="Arial, Helvetica, sans-serif" font-size="16">Simple deck generation is one step. Ultimate PPT adds decisions before and checks after.</text>
+  <rect x="34" y="28" width="1212" height="334" rx="22" fill="#F4EBDC" stroke="#E2D3BF"/>
+  <text x="62" y="68" fill="#10201C" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="900">The difference is not style. It is depth.</text>
+  <text x="62" y="98" fill="#6C6154" font-family="Arial, Helvetica, sans-serif" font-size="16">Simple deck generation is one step. Ultimate PPT adds decisions before and checks after.</text>
 
   <g font-family="Arial, Helvetica, sans-serif" filter="url(#shadow)">
-    <g transform="translate(68 128)">
+    <g transform="translate(68 138)">
       <rect width="520" height="204" rx="18" fill="#FFFFFF" stroke="#E3D5C2"/>
       <text x="30" y="42" fill="#8E4D3A" font-size="22" font-weight="900">Thin PPT skill</text>
       <text x="30" y="82" fill="#6C6154" font-size="16">Prompt</text>
@@ -24,7 +25,7 @@
       <rect x="306" y="136" width="78" height="8" rx="4" fill="#C8BBA8"/>
     </g>
 
-    <g transform="translate(692 108)">
+    <g transform="translate(692 118)">
       <rect width="520" height="244" rx="18" fill="#10201C"/>
       <text x="30" y="44" fill="#F3B35D" font-size="22" font-weight="900">Ultimate PPT</text>
       <text x="30" y="84" fill="#E8DDCC" font-size="16">Source brief and audience goal</text>

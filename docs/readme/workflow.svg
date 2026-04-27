@@ -1,19 +1,20 @@
 <svg width="1280" height="350" viewBox="0 0 1280 350" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">Image2PPT workflow</title>
-  <desc id="desc">A light workflow diagram from reference to grammar, lock, showcase, output, and audit.</desc>
+  <desc id="desc">A high-contrast but integrated workflow diagram from reference to grammar, lock, showcase, output, and audit.</desc>
   <defs>
-    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
-      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#10201C" flood-opacity="0.08"/>
+    <filter id="shadow" x="-10%" y="-14%" width="120%" height="136%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#10201C" flood-opacity="0.12"/>
     </filter>
   </defs>
   <rect x="1" y="1" width="1278" height="348" rx="22" fill="#FBF8F1" stroke="#E3D5C2"/>
-  <text x="54" y="58" fill="#10201C" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="900">Image2PPT: from visual reference to delivery system</text>
-  <text x="54" y="88" fill="#6C6154" font-family="Arial, Helvetica, sans-serif" font-size="16">The workflow exists to prevent beautiful but uneditable screenshot decks.</text>
+  <rect x="34" y="28" width="1212" height="294" rx="22" fill="#F4EBDC" stroke="#E2D3BF"/>
+  <text x="62" y="68" fill="#10201C" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="900">Image2PPT: from visual reference to delivery system</text>
+  <text x="62" y="98" fill="#6C6154" font-family="Arial, Helvetica, sans-serif" font-size="16">The workflow exists to prevent beautiful but uneditable screenshot decks.</text>
 
-  <g transform="translate(54 132)" font-family="Arial, Helvetica, sans-serif" filter="url(#shadow)">
+  <g transform="translate(54 142)" font-family="Arial, Helvetica, sans-serif" filter="url(#shadow)">
     <g>
       <rect width="178" height="118" rx="16" fill="#10201C"/>
-      <text x="22" y="34" fill="#D99A3D" font-size="13" font-weight="900">01</text>
+      <text x="22" y="34" fill="#F3B35D" font-size="13" font-weight="900">01</text>
       <text x="22" y="62" fill="#FFFFFF" font-size="19" font-weight="900">Reference</text>
       <text x="22" y="88" fill="#BFD8CF" font-size="13">image, PDF, site, old PPT</text>
     </g>
@@ -30,10 +31,10 @@
       <text x="22" y="88" fill="#6C6154" font-size="13">strategy and execution rules</text>
     </g>
     <g transform="translate(630 0)">
-      <rect width="178" height="118" rx="16" fill="#FFFFFF" stroke="#E3D5C2"/>
-      <text x="22" y="34" fill="#0F766E" font-size="13" font-weight="900">04</text>
-      <text x="22" y="62" fill="#10201C" font-size="19" font-weight="900">Showcase</text>
-      <text x="22" y="88" fill="#6C6154" font-size="13">cover plus dense proof page</text>
+      <rect width="178" height="118" rx="16" fill="#10201C"/>
+      <text x="22" y="34" fill="#F3B35D" font-size="13" font-weight="900">04</text>
+      <text x="22" y="62" fill="#FFFFFF" font-size="19" font-weight="900">Showcase</text>
+      <text x="22" y="88" fill="#BFD8CF" font-size="13">cover plus dense proof page</text>
     </g>
     <g transform="translate(840 0)">
       <rect width="178" height="118" rx="16" fill="#FFFFFF" stroke="#E3D5C2"/>
@@ -42,18 +43,18 @@
       <text x="22" y="88" fill="#6C6154" font-size="13">PPTX, HTML, PDF, hybrid</text>
     </g>
     <g transform="translate(1050 0)">
-      <rect width="178" height="118" rx="16" fill="#FFFFFF" stroke="#E3D5C2"/>
-      <text x="22" y="34" fill="#0F766E" font-size="13" font-weight="900">06</text>
-      <text x="22" y="62" fill="#10201C" font-size="19" font-weight="900">Audit</text>
-      <text x="22" y="88" fill="#6C6154" font-size="13">layout, sources, image2 evidence</text>
+      <rect width="178" height="118" rx="16" fill="#10201C"/>
+      <text x="22" y="34" fill="#F3B35D" font-size="13" font-weight="900">06</text>
+      <text x="22" y="62" fill="#FFFFFF" font-size="19" font-weight="900">Audit</text>
+      <text x="22" y="88" fill="#BFD8CF" font-size="13">layout, sources, image2 evidence</text>
     </g>
   </g>
 
-  <g stroke="#0F766E" stroke-width="2" stroke-linecap="round" opacity="0.55">
-    <path d="M242 191H264"/>
-    <path d="M452 191H474"/>
-    <path d="M662 191H684"/>
-    <path d="M872 191H894"/>
-    <path d="M1082 191H1104"/>
+  <g stroke="#0F766E" stroke-width="2.4" stroke-linecap="round" opacity="0.68">
+    <path d="M242 201H264"/>
+    <path d="M452 201H474"/>
+    <path d="M662 201H684"/>
+    <path d="M872 201H894"/>
+    <path d="M1082 201H1104"/>
   </g>
 </svg>
