@@ -26,28 +26,6 @@ Give the agent a reference image, PDF page, website screenshot, brand visual, pr
 
 It is not "screenshot to PPT." It is **reference image to presentation system**.
 
-## Try It
-
-```text
-Use ultimate-ppt to turn this reference image and product notes into a premium sales deck.
-Keep the final PPTX editable, but match the image's visual mood.
-```
-
-```text
-Use ultimate-ppt to convert this website screenshot into a 12-slide product launch deck.
-Extract the visual grammar first, then create a two-page showcase before the full deck.
-```
-
-```text
-Use ultimate-ppt to improve this ugly PPT.
-Preserve the facts, rebuild the visual system, add stronger case pages, and audit the final PPTX.
-```
-
-```text
-Use ultimate-ppt to make a speaker-ready keynote from this document.
-Create hidden presenter notes and an HTML preview, then export a PPTX.
-```
-
 ## What Makes It Different
 
 ### 1. Image2 Is First-Class
@@ -175,6 +153,28 @@ skills/ultimate-ppt/scripts/audit_deck.py
 ```bash
 python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/ultimate-ppt
 python skills/ultimate-ppt/scripts/audit_deck.py path/to/output-folder
+```
+
+## Try It
+
+```text
+Use ultimate-ppt to turn this reference image and product notes into a premium sales deck.
+Keep the final PPTX editable, but match the image's visual mood.
+```
+
+```text
+Use ultimate-ppt to convert this website screenshot into a 12-slide product launch deck.
+Extract the visual grammar first, then create a two-page showcase before the full deck.
+```
+
+```text
+Use ultimate-ppt to improve this ugly PPT.
+Preserve the facts, rebuild the visual system, add stronger case pages, and audit the final PPTX.
+```
+
+```text
+Use ultimate-ppt to make a speaker-ready keynote from this document.
+Create hidden presenter notes and an HTML preview, then export a PPTX.
 ```
 
 ## Update Log
