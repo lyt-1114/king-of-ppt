@@ -1,66 +1,86 @@
-<svg width="1280" height="390" viewBox="0 0 1280 390" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+<svg width="1280" height="500" viewBox="0 0 1280 500" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">Ultimate PPT engine map</title>
   <desc id="desc">Dark technology engine map for Ultimate PPT.</desc>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1280" y2="390">
-      <stop stop-color="#050908"/>
-      <stop offset="1" stop-color="#162B26"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1280" y2="500" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#030706"/>
+      <stop offset="0.55" stop-color="#0B1614"/>
+      <stop offset="1" stop-color="#132A25"/>
     </linearGradient>
-    <linearGradient id="core" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#0F766E"/>
+    <linearGradient id="core" x1="560" y1="165" x2="720" y2="325" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#21D7B2"/>
       <stop offset="1" stop-color="#F2B35D"/>
     </linearGradient>
-    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
-      <feGaussianBlur stdDeviation="14" result="blur"/>
+    <filter id="softGlow" x="-70%" y="-70%" width="240%" height="240%">
+      <feGaussianBlur stdDeviation="20" result="blur"/>
       <feMerge>
         <feMergeNode in="blur"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
+    <filter id="cardShadow" x="-20%" y="-30%" width="140%" height="170%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.32"/>
+    </filter>
   </defs>
-  <rect width="1280" height="390" rx="26" fill="url(#bg)"/>
-  <text x="62" y="64" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="900">One Skill. Multiple Engines.</text>
-  <text x="62" y="96" fill="#BFE5DA" font-family="Arial, Helvetica, sans-serif" font-size="17">Image2PPT is the core. The surrounding engines keep the deck strategic, editable, and verified.</text>
 
-  <g stroke="#D8FFF4" stroke-width="2" opacity="0.25">
-    <path d="M640 214H288"/>
-    <path d="M640 214H992"/>
-    <path d="M640 214L430 316"/>
-    <path d="M640 214L850 316"/>
-    <path d="M640 214L430 130"/>
-    <path d="M640 214L850 130"/>
+  <rect width="1280" height="500" rx="28" fill="url(#bg)"/>
+  <circle cx="312" cy="162" r="180" fill="#0F766E" opacity="0.20" filter="url(#softGlow)"/>
+  <circle cx="980" cy="322" r="220" fill="#D99A3D" opacity="0.14" filter="url(#softGlow)"/>
+
+  <g opacity="0.12">
+    <path d="M76 112H1204" stroke="#D8FFF4"/>
+    <path d="M76 206H1204" stroke="#D8FFF4"/>
+    <path d="M76 300H1204" stroke="#D8FFF4"/>
+    <path d="M76 394H1204" stroke="#D8FFF4"/>
+    <path d="M228 70V430" stroke="#D8FFF4"/>
+    <path d="M434 70V430" stroke="#D8FFF4"/>
+    <path d="M640 70V430" stroke="#D8FFF4"/>
+    <path d="M846 70V430" stroke="#D8FFF4"/>
+    <path d="M1052 70V430" stroke="#D8FFF4"/>
   </g>
 
-  <g filter="url(#glow)">
-    <circle cx="640" cy="214" r="82" fill="url(#core)"/>
-    <text x="640" y="207" text-anchor="middle" fill="#07110F" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900">IMAGE2PPT</text>
-    <text x="640" y="236" text-anchor="middle" fill="#07110F" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800">CORE</text>
+  <text x="72" y="74" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="36" font-weight="900">Multi-Engine Architecture</text>
+  <text x="72" y="108" fill="#9FEADA" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" letter-spacing="2">IMAGE2PPT AS THE ROUTER</text>
+
+  <g stroke="#D8FFF4" stroke-width="2" opacity="0.28">
+    <path d="M640 250H292"/>
+    <path d="M640 250H988"/>
+    <path d="M640 250L420 156"/>
+    <path d="M640 250L860 156"/>
+    <path d="M640 250L420 346"/>
+    <path d="M640 250L860 346"/>
   </g>
 
-  <g font-family="Arial, Helvetica, sans-serif">
-    <g transform="translate(92 170)">
-      <rect width="232" height="76" rx="16" fill="#F7EFE2"/>
-      <text x="26" y="47" fill="#10201C" font-size="19" font-weight="900">Strategy</text>
+  <g filter="url(#softGlow)">
+    <circle cx="640" cy="250" r="86" fill="url(#core)"/>
+    <text x="640" y="244" text-anchor="middle" fill="#030706" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="900">IMAGE2PPT</text>
+    <text x="640" y="273" text-anchor="middle" fill="#030706" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="900">CORE ROUTER</text>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" filter="url(#cardShadow)">
+    <g transform="translate(96 212)">
+      <rect width="230" height="76" rx="16" fill="#F7EFE2"/>
+      <text x="28" y="48" fill="#07110F" font-size="22" font-weight="900">Strategy</text>
     </g>
-    <g transform="translate(300 90)">
-      <rect width="232" height="76" rx="16" fill="#10201C" stroke="#2C5F53"/>
-      <text x="26" y="47" fill="#F2B35D" font-size="19" font-weight="900">Visual Grammar</text>
+    <g transform="translate(318 118)">
+      <rect width="230" height="76" rx="16" fill="#10201C" stroke="#2F6C60"/>
+      <text x="28" y="48" fill="#F2B35D" font-size="22" font-weight="900">Grammar</text>
     </g>
-    <g transform="translate(300 300)">
-      <rect width="232" height="76" rx="16" fill="#F7EFE2"/>
-      <text x="26" y="47" fill="#10201C" font-size="19" font-weight="900">HTML Preview</text>
+    <g transform="translate(318 356)">
+      <rect width="230" height="76" rx="16" fill="#F7EFE2"/>
+      <text x="28" y="48" fill="#07110F" font-size="22" font-weight="900">HTML</text>
     </g>
-    <g transform="translate(748 90)">
-      <rect width="232" height="76" rx="16" fill="#F7EFE2"/>
-      <text x="26" y="47" fill="#10201C" font-size="19" font-weight="900">Editable PPTX</text>
+    <g transform="translate(732 118)">
+      <rect width="230" height="76" rx="16" fill="#F7EFE2"/>
+      <text x="28" y="48" fill="#07110F" font-size="22" font-weight="900">Editable PPTX</text>
     </g>
-    <g transform="translate(748 300)">
-      <rect width="232" height="76" rx="16" fill="#F7EFE2"/>
-      <text x="26" y="47" fill="#10201C" font-size="19" font-weight="900">Presenter</text>
+    <g transform="translate(732 356)">
+      <rect width="230" height="76" rx="16" fill="#F7EFE2"/>
+      <text x="28" y="48" fill="#07110F" font-size="22" font-weight="900">Presenter</text>
     </g>
-    <g transform="translate(956 170)">
-      <rect width="232" height="76" rx="16" fill="#10201C" stroke="#2C5F53"/>
-      <text x="26" y="47" fill="#F2B35D" font-size="19" font-weight="900">Audit</text>
+    <g transform="translate(954 212)">
+      <rect width="230" height="76" rx="16" fill="#10201C" stroke="#2F6C60"/>
+      <text x="28" y="48" fill="#F2B35D" font-size="22" font-weight="900">Audit</text>
     </g>
   </g>
 </svg>

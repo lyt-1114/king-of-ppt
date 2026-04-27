@@ -1,57 +1,100 @@
-<svg width="1280" height="350" viewBox="0 0 1280 350" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+<svg width="1280" height="470" viewBox="0 0 1280 470" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">Image2PPT workflow</title>
-  <desc id="desc">Dark technology workflow from reference to audit.</desc>
+  <desc id="desc">Dark technology workflow from reference to audit with artifact and verification layers.</desc>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1280" y2="350">
-      <stop stop-color="#050908"/>
-      <stop offset="1" stop-color="#162B26"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1280" y2="470" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#030706"/>
+      <stop offset="0.58" stop-color="#0B1614"/>
+      <stop offset="1" stop-color="#132A25"/>
     </linearGradient>
-    <filter id="shadow" x="-12%" y="-18%" width="124%" height="150%">
-      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.28"/>
+    <linearGradient id="rail" x1="92" y1="235" x2="1188" y2="235" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#21D7B2"/>
+      <stop offset="0.5" stop-color="#F2B35D"/>
+      <stop offset="1" stop-color="#21D7B2"/>
+    </linearGradient>
+    <filter id="shadow" x="-14%" y="-20%" width="128%" height="160%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#000000" flood-opacity="0.30"/>
+    </filter>
+    <filter id="glow" x="-40%" y="-80%" width="180%" height="260%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
     </filter>
   </defs>
-  <rect width="1280" height="350" rx="26" fill="url(#bg)"/>
-  <text x="62" y="64" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="900">Image2PPT Pipeline</text>
-  <text x="62" y="96" fill="#BFE5DA" font-family="Arial, Helvetica, sans-serif" font-size="17">From visual reference to editable, audited presentation output.</text>
 
-  <g transform="translate(58 142)" font-family="Arial, Helvetica, sans-serif" filter="url(#shadow)">
+  <rect width="1280" height="470" rx="28" fill="url(#bg)"/>
+  <circle cx="286" cy="158" r="160" fill="#0F766E" opacity="0.18" filter="url(#glow)"/>
+  <circle cx="1028" cy="326" r="190" fill="#D99A3D" opacity="0.13" filter="url(#glow)"/>
+
+  <text x="72" y="72" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="36" font-weight="900">Image2PPT Production Flow</text>
+  <text x="72" y="106" fill="#9FEADA" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" letter-spacing="2">REFERENCE TO EDITABLE OUTPUT</text>
+
+  <path d="M118 235H1162" stroke="url(#rail)" stroke-width="4" stroke-linecap="round" opacity="0.75" filter="url(#glow)"/>
+
+  <g transform="translate(68 156)" font-family="Arial, Helvetica, sans-serif" filter="url(#shadow)">
     <g>
-      <rect width="160" height="104" rx="16" fill="#F7EFE2"/>
-      <text x="24" y="38" fill="#0F766E" font-size="13" font-weight="900">01</text>
-      <text x="24" y="68" fill="#10201C" font-size="19" font-weight="900">Reference</text>
+      <rect width="150" height="112" rx="16" fill="#F7EFE2"/>
+      <text x="22" y="36" fill="#0F766E" font-size="13" font-weight="900">01</text>
+      <text x="22" y="66" fill="#07110F" font-size="20" font-weight="900">Reference</text>
+      <text x="22" y="92" fill="#6E6254" font-size="12">image / PDF</text>
     </g>
-    <g transform="translate(200 0)">
-      <rect width="160" height="104" rx="16" fill="#10201C" stroke="#2C5F53"/>
-      <text x="24" y="38" fill="#F2B35D" font-size="13" font-weight="900">02</text>
-      <text x="24" y="68" fill="#FFFFFF" font-size="19" font-weight="900">Extract</text>
+    <g transform="translate(190 0)">
+      <rect width="150" height="112" rx="16" fill="#10201C" stroke="#2F6C60"/>
+      <text x="22" y="36" fill="#F2B35D" font-size="13" font-weight="900">02</text>
+      <text x="22" y="66" fill="#FFFFFF" font-size="20" font-weight="900">Extract</text>
+      <text x="22" y="92" fill="#BFE5DA" font-size="12">visual grammar</text>
     </g>
-    <g transform="translate(400 0)">
-      <rect width="160" height="104" rx="16" fill="#F7EFE2"/>
-      <text x="24" y="38" fill="#0F766E" font-size="13" font-weight="900">03</text>
-      <text x="24" y="68" fill="#10201C" font-size="19" font-weight="900">Lock</text>
+    <g transform="translate(380 0)">
+      <rect width="150" height="112" rx="16" fill="#F7EFE2"/>
+      <text x="22" y="36" fill="#0F766E" font-size="13" font-weight="900">03</text>
+      <text x="22" y="66" fill="#07110F" font-size="20" font-weight="900">Lock</text>
+      <text x="22" y="92" fill="#6E6254" font-size="12">strategy rules</text>
     </g>
-    <g transform="translate(600 0)">
-      <rect width="160" height="104" rx="16" fill="#10201C" stroke="#2C5F53"/>
-      <text x="24" y="38" fill="#F2B35D" font-size="13" font-weight="900">04</text>
-      <text x="24" y="68" fill="#FFFFFF" font-size="19" font-weight="900">Showcase</text>
+    <g transform="translate(570 0)">
+      <rect width="150" height="112" rx="16" fill="#10201C" stroke="#2F6C60"/>
+      <text x="22" y="36" fill="#F2B35D" font-size="13" font-weight="900">04</text>
+      <text x="22" y="66" fill="#FFFFFF" font-size="20" font-weight="900">Showcase</text>
+      <text x="22" y="92" fill="#BFE5DA" font-size="12">2-page proof</text>
     </g>
-    <g transform="translate(800 0)">
-      <rect width="160" height="104" rx="16" fill="#F7EFE2"/>
-      <text x="24" y="38" fill="#0F766E" font-size="13" font-weight="900">05</text>
-      <text x="24" y="68" fill="#10201C" font-size="19" font-weight="900">Produce</text>
+    <g transform="translate(760 0)">
+      <rect width="150" height="112" rx="16" fill="#F7EFE2"/>
+      <text x="22" y="36" fill="#0F766E" font-size="13" font-weight="900">05</text>
+      <text x="22" y="66" fill="#07110F" font-size="20" font-weight="900">Produce</text>
+      <text x="22" y="92" fill="#6E6254" font-size="12">PPTX / HTML</text>
     </g>
-    <g transform="translate(1000 0)">
-      <rect width="160" height="104" rx="16" fill="#10201C" stroke="#2C5F53"/>
-      <text x="24" y="38" fill="#F2B35D" font-size="13" font-weight="900">06</text>
-      <text x="24" y="68" fill="#FFFFFF" font-size="19" font-weight="900">Audit</text>
+    <g transform="translate(950 0)">
+      <rect width="150" height="112" rx="16" fill="#10201C" stroke="#2F6C60"/>
+      <text x="22" y="36" fill="#F2B35D" font-size="13" font-weight="900">06</text>
+      <text x="22" y="66" fill="#FFFFFF" font-size="20" font-weight="900">Audit</text>
+      <text x="22" y="92" fill="#BFE5DA" font-size="12">quality gates</text>
     </g>
   </g>
 
-  <g stroke="#21D7B2" stroke-width="2.5" stroke-linecap="round" opacity="0.7">
-    <path d="M228 194H258"/>
-    <path d="M428 194H458"/>
-    <path d="M628 194H658"/>
-    <path d="M828 194H858"/>
-    <path d="M1028 194H1058"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="72" y="335" fill="#FFFFFF" font-size="20" font-weight="900">Artifacts created</text>
+    <g transform="translate(72 358)">
+      <rect width="154" height="40" rx="20" fill="#10201C" stroke="#2F6C60"/>
+      <text x="77" y="26" text-anchor="middle" fill="#F2B35D" font-size="13" font-weight="900">image2-brief</text>
+      <rect x="170" width="170" height="40" rx="20" fill="#10201C" stroke="#2F6C60"/>
+      <text x="255" y="26" text-anchor="middle" fill="#F2B35D" font-size="13" font-weight="900">visual-grammar</text>
+      <rect x="356" width="150" height="40" rx="20" fill="#10201C" stroke="#2F6C60"/>
+      <text x="431" y="26" text-anchor="middle" fill="#F2B35D" font-size="13" font-weight="900">strategy-lock</text>
+      <rect x="522" width="158" height="40" rx="20" fill="#10201C" stroke="#2F6C60"/>
+      <text x="601" y="26" text-anchor="middle" fill="#F2B35D" font-size="13" font-weight="900">execution-lock</text>
+      <rect x="696" width="110" height="40" rx="20" fill="#10201C" stroke="#2F6C60"/>
+      <text x="751" y="26" text-anchor="middle" fill="#F2B35D" font-size="13" font-weight="900">run-log</text>
+    </g>
+
+    <text x="914" y="335" fill="#FFFFFF" font-size="20" font-weight="900">Verified</text>
+    <g transform="translate(914 358)">
+      <rect width="108" height="40" rx="20" fill="#F7EFE2"/>
+      <text x="54" y="26" text-anchor="middle" fill="#07110F" font-size="13" font-weight="900">layout</text>
+      <rect x="122" width="108" height="40" rx="20" fill="#F7EFE2"/>
+      <text x="176" y="26" text-anchor="middle" fill="#07110F" font-size="13" font-weight="900">density</text>
+      <rect x="244" width="108" height="40" rx="20" fill="#F7EFE2"/>
+      <text x="298" y="26" text-anchor="middle" fill="#07110F" font-size="13" font-weight="900">sources</text>
+    </g>
   </g>
 </svg>
