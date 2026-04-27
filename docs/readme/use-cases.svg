@@ -13,48 +13,48 @@
   </defs>
   <rect width="1280" height="520" rx="30" fill="url(#bg)"/>
   <text x="72" y="78" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="36" font-weight="900">Built For High-Stakes Deck Work</text>
-  <text x="72" y="112" fill="#9FEADA" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="800" letter-spacing="2">NOT JUST ONE PPT SCENARIO</text>
+  <text x="72" y="112" fill="#65D9FF" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="800" letter-spacing="2">NOT JUST ONE PPT SCENARIO</text>
 
   <g font-family="Arial, Helvetica, sans-serif" filter="url(#shadow)">
     <g transform="translate(72 160)">
-      <rect width="248" height="116" rx="18" fill="#F6EFE4"/>
-      <text x="24" y="48" fill="#07110F" font-size="21" font-weight="900">Reference to PPT</text>
-      <text x="24" y="78" fill="#6E6254" font-size="14">image2 grammar</text>
+      <rect width="248" height="116" rx="18" fill="#0A1714" stroke="#00A86B"/>
+      <text x="24" y="48" fill="#FFFFFF" font-size="21" font-weight="900">Reference to PPT</text>
+      <text x="24" y="78" fill="#65D9FF" font-size="14">image2 grammar</text>
     </g>
     <g transform="translate(364 160)">
-      <rect width="248" height="116" rx="18" fill="#0A1714" stroke="#2F7C6C"/>
-      <text x="24" y="48" fill="#FFB84D" font-size="21" font-weight="900">Product Launch</text>
-      <text x="24" y="78" fill="#BFE5DA" font-size="14">hero moments</text>
+      <rect width="248" height="116" rx="18" fill="#0A1714" stroke="#285BFF"/>
+      <text x="24" y="48" fill="#FF2E63" font-size="21" font-weight="900">Product Launch</text>
+      <text x="24" y="78" fill="#A7FCE0" font-size="14">hero moments</text>
     </g>
     <g transform="translate(656 160)">
-      <rect width="248" height="116" rx="18" fill="#F6EFE4"/>
-      <text x="24" y="48" fill="#07110F" font-size="21" font-weight="900">Sales Deck</text>
-      <text x="24" y="78" fill="#6E6254" font-size="14">proof and decision</text>
+      <rect width="248" height="116" rx="18" fill="#0A1714" stroke="#00A86B"/>
+      <text x="24" y="48" fill="#FFFFFF" font-size="21" font-weight="900">Sales Deck</text>
+      <text x="24" y="78" fill="#65D9FF" font-size="14">proof and decision</text>
     </g>
     <g transform="translate(948 160)">
-      <rect width="248" height="116" rx="18" fill="#0A1714" stroke="#2F7C6C"/>
-      <text x="24" y="48" fill="#FFB84D" font-size="21" font-weight="900">Technical Report</text>
-      <text x="24" y="78" fill="#BFE5DA" font-size="14">systems and cases</text>
+      <rect width="248" height="116" rx="18" fill="#0A1714" stroke="#285BFF"/>
+      <text x="24" y="48" fill="#FF2E63" font-size="21" font-weight="900">Technical Report</text>
+      <text x="24" y="78" fill="#A7FCE0" font-size="14">systems and cases</text>
     </g>
     <g transform="translate(72 324)">
-      <rect width="248" height="116" rx="18" fill="#0A1714" stroke="#2F7C6C"/>
-      <text x="24" y="48" fill="#FFB84D" font-size="21" font-weight="900">Keynote</text>
-      <text x="24" y="78" fill="#BFE5DA" font-size="14">notes and rhythm</text>
+      <rect width="248" height="116" rx="18" fill="#0A1714" stroke="#285BFF"/>
+      <text x="24" y="48" fill="#FF2E63" font-size="21" font-weight="900">Keynote</text>
+      <text x="24" y="78" fill="#A7FCE0" font-size="14">notes and rhythm</text>
     </g>
     <g transform="translate(364 324)">
-      <rect width="248" height="116" rx="18" fill="#F6EFE4"/>
-      <text x="24" y="48" fill="#07110F" font-size="21" font-weight="900">PPT Cleanup</text>
-      <text x="24" y="78" fill="#6E6254" font-size="14">rebuild ugly decks</text>
+      <rect width="248" height="116" rx="18" fill="#0A1714" stroke="#00A86B"/>
+      <text x="24" y="48" fill="#FFFFFF" font-size="21" font-weight="900">PPT Cleanup</text>
+      <text x="24" y="78" fill="#65D9FF" font-size="14">rebuild ugly decks</text>
     </g>
     <g transform="translate(656 324)">
-      <rect width="248" height="116" rx="18" fill="#0A1714" stroke="#2F7C6C"/>
-      <text x="24" y="48" fill="#FFB84D" font-size="21" font-weight="900">Brand Deck</text>
-      <text x="24" y="78" fill="#BFE5DA" font-size="14">visual identity</text>
+      <rect width="248" height="116" rx="18" fill="#0A1714" stroke="#285BFF"/>
+      <text x="24" y="48" fill="#FF2E63" font-size="21" font-weight="900">Brand Deck</text>
+      <text x="24" y="78" fill="#A7FCE0" font-size="14">visual identity</text>
     </g>
     <g transform="translate(948 324)">
-      <rect width="248" height="116" rx="18" fill="#F6EFE4"/>
-      <text x="24" y="48" fill="#07110F" font-size="21" font-weight="900">Training</text>
-      <text x="24" y="78" fill="#6E6254" font-size="14">clarity and pacing</text>
+      <rect width="248" height="116" rx="18" fill="#0A1714" stroke="#00A86B"/>
+      <text x="24" y="48" fill="#FFFFFF" font-size="21" font-weight="900">Training</text>
+      <text x="24" y="78" fill="#65D9FF" font-size="14">clarity and pacing</text>
     </g>
   </g>
 </svg>
