@@ -121,10 +121,6 @@ The skill includes quality gates and a bundled audit script for layout and image
 | Keynote / live talk | Adds presenter notes, stage-readable typography, HTML preview |
 | PPT cleanup | Preserves facts while rebuilding the narrative and visual system |
 
-<p align="center">
-  <img src="docs/readme/use-cases.svg" alt="Ultimate PPT use cases" width="92%">
-</p>
-
 ## Workflow
 
 1. Read source material: documents, screenshots, URLs, images, data, old PPTs.
