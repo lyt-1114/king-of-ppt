@@ -13,48 +13,48 @@
   </defs>
   <rect width="1280" height="500" rx="30" fill="url(#bg)"/>
   <text x="72" y="78" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="36" font-weight="900">Forced Agent Discipline</text>
-  <text x="72" y="112" fill="#65D9FF" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="800" letter-spacing="2">THE SKILL CHANGES HOW THE AGENT WORKS</text>
+  <text x="72" y="112" fill="#9FEADA" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="800" letter-spacing="2">THE SKILL CHANGES HOW THE AGENT WORKS</text>
 
   <g font-family="Arial, Helvetica, sans-serif" filter="url(#shadow)">
     <g transform="translate(72 168)">
-      <rect width="206" height="210" rx="20" fill="#0A1714" stroke="#285BFF"/>
-      <text x="26" y="46" fill="#FF2E63" font-size="14" font-weight="900">01</text>
+      <rect width="206" height="210" rx="20" fill="#0A1714" stroke="#2F7C6C"/>
+      <text x="26" y="46" fill="#FFB84D" font-size="14" font-weight="900">01</text>
       <text x="26" y="84" fill="#FFFFFF" font-size="24" font-weight="900">Judge</text>
-      <text x="26" y="122" fill="#A7FCE0" font-size="15">audience</text>
-      <text x="26" y="148" fill="#A7FCE0" font-size="15">goal</text>
-      <text x="26" y="174" fill="#A7FCE0" font-size="15">route</text>
+      <text x="26" y="122" fill="#BFE5DA" font-size="15">audience</text>
+      <text x="26" y="148" fill="#BFE5DA" font-size="15">goal</text>
+      <text x="26" y="174" fill="#BFE5DA" font-size="15">route</text>
     </g>
     <g transform="translate(306 168)">
-      <rect width="206" height="210" rx="20" fill="#0A1714" stroke="#00A86B"/>
-      <text x="26" y="46" fill="#00A86B" font-size="14" font-weight="900">02</text>
-      <text x="26" y="84" fill="#FFFFFF" font-size="24" font-weight="900">Extract</text>
-      <text x="26" y="122" fill="#65D9FF" font-size="15">palette</text>
-      <text x="26" y="148" fill="#65D9FF" font-size="15">type</text>
-      <text x="26" y="174" fill="#65D9FF" font-size="15">rhythm</text>
+      <rect width="206" height="210" rx="20" fill="#F6EFE4"/>
+      <text x="26" y="46" fill="#0F766E" font-size="14" font-weight="900">02</text>
+      <text x="26" y="84" fill="#07110F" font-size="24" font-weight="900">Extract</text>
+      <text x="26" y="122" fill="#6E6254" font-size="15">palette</text>
+      <text x="26" y="148" fill="#6E6254" font-size="15">type</text>
+      <text x="26" y="174" fill="#6E6254" font-size="15">rhythm</text>
     </g>
     <g transform="translate(540 168)">
-      <rect width="206" height="210" rx="20" fill="#0A1714" stroke="#285BFF"/>
-      <text x="26" y="46" fill="#FF2E63" font-size="14" font-weight="900">03</text>
+      <rect width="206" height="210" rx="20" fill="#0A1714" stroke="#2F7C6C"/>
+      <text x="26" y="46" fill="#FFB84D" font-size="14" font-weight="900">03</text>
       <text x="26" y="84" fill="#FFFFFF" font-size="24" font-weight="900">Prove</text>
-      <text x="26" y="122" fill="#A7FCE0" font-size="15">cover</text>
-      <text x="26" y="148" fill="#A7FCE0" font-size="15">dense page</text>
-      <text x="26" y="174" fill="#A7FCE0" font-size="15">grammar</text>
+      <text x="26" y="122" fill="#BFE5DA" font-size="15">cover</text>
+      <text x="26" y="148" fill="#BFE5DA" font-size="15">dense page</text>
+      <text x="26" y="174" fill="#BFE5DA" font-size="15">grammar</text>
     </g>
     <g transform="translate(774 168)">
-      <rect width="206" height="210" rx="20" fill="#0A1714" stroke="#00A86B"/>
-      <text x="26" y="46" fill="#00A86B" font-size="14" font-weight="900">04</text>
-      <text x="26" y="84" fill="#FFFFFF" font-size="24" font-weight="900">Preserve</text>
-      <text x="26" y="122" fill="#65D9FF" font-size="15">editable text</text>
-      <text x="26" y="148" fill="#65D9FF" font-size="15">metrics</text>
-      <text x="26" y="174" fill="#65D9FF" font-size="15">sources</text>
+      <rect width="206" height="210" rx="20" fill="#F6EFE4"/>
+      <text x="26" y="46" fill="#0F766E" font-size="14" font-weight="900">04</text>
+      <text x="26" y="84" fill="#07110F" font-size="24" font-weight="900">Preserve</text>
+      <text x="26" y="122" fill="#6E6254" font-size="15">editable text</text>
+      <text x="26" y="148" fill="#6E6254" font-size="15">metrics</text>
+      <text x="26" y="174" fill="#6E6254" font-size="15">sources</text>
     </g>
     <g transform="translate(1008 168)">
-      <rect width="206" height="210" rx="20" fill="#0A1714" stroke="#285BFF"/>
-      <text x="26" y="46" fill="#FF2E63" font-size="14" font-weight="900">05</text>
+      <rect width="206" height="210" rx="20" fill="#0A1714" stroke="#2F7C6C"/>
+      <text x="26" y="46" fill="#FFB84D" font-size="14" font-weight="900">05</text>
       <text x="26" y="84" fill="#FFFFFF" font-size="24" font-weight="900">Verify</text>
-      <text x="26" y="122" fill="#A7FCE0" font-size="15">layout</text>
-      <text x="26" y="148" fill="#A7FCE0" font-size="15">density</text>
-      <text x="26" y="174" fill="#A7FCE0" font-size="15">evidence</text>
+      <text x="26" y="122" fill="#BFE5DA" font-size="15">layout</text>
+      <text x="26" y="148" fill="#BFE5DA" font-size="15">density</text>
+      <text x="26" y="174" fill="#BFE5DA" font-size="15">evidence</text>
     </g>
   </g>
 </svg>
