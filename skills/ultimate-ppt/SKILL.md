@@ -14,10 +14,13 @@ Do not start by writing slides. Start by reading sources and deciding what kind 
 Every serious deck must have:
 - a clear audience and decision goal
 - a delivery context: live presentation, readout document, sales conversation, classroom, or appendix
+- an output architecture chosen before layout: editable PPTX, HTML-first, PDF, or hybrid
+- an execution lock for serious or multi-format decks: canvas, color, typography, icon, image, rhythm, and forbidden moves
 - a narrative spine
 - enough context, cases, and proof for the audience to trust the story
 - polished slide copy with a clear point of view, not just labels
 - a visual system
+- a visual grammar proven on representative pages before bulk production
 - a density budget before layout
 - source-backed claims
 - speaker/readout notes when useful
@@ -66,17 +69,20 @@ Use the route to shape content, not just visual style. Two different modes shoul
 
 Before slide production, write a compact strategy lock:
 - canvas and output format: PPTX, HTML, PDF, or mixed
+- delivery architecture: direct PPTX, HTML-first deck, editable-safe HTML, or hybrid image/editable PPTX
 - page count range
 - audience and desired action
 - narrative spine
 - slide archetypes
 - visual style
+- whether a two-page visual grammar pass is required
 - color and typography plan
 - image/diagram plan
 - evidence and citation plan
+- presenter notes, motion, export, or conversion needs
 - acceptance checks
 
-For high-stakes decks, save this as `design_spec.md` or `strategy-lock.md` beside the output.
+For high-stakes, long, or multi-format decks, save this as `design_spec.md` or `strategy-lock.md` beside the output, then create an `execution-lock.md` with the concrete canvas, colors, fonts, icon language, image inventory, page rhythm, and forbidden moves.
 
 ### 4. Build the Content Architecture
 
@@ -127,7 +133,14 @@ Create a visual system before making pages:
 - recurring components: cards, metrics, diagrams, timelines, quotes, callouts
 - image style or prompt language
 - spacing and density rules
+- layout/theme tokens and a small layout catalog matched to slide jobs
 - style range: choose 2-4 compatible page treatments, not one repeated card layout
+
+If the user asks for a beautiful, premium, high-end, designed, less generic, style-matched, or more impressive deck, or if the visual direction is vague, run a visual direction sprint before making final pages:
+- propose 3 distinct visual directions that differ in composition, typography, image treatment, and density, not only color
+- recommend one direction based on audience and delivery context
+- when the deck has 5+ slides, create or describe a two-page showcase: one high-impact page and one dense content page
+- lock the visual grammar before bulk production
 
 Create an elegance lock before production:
 - one job per slide, one dominant message, one visual rhythm
@@ -148,6 +161,13 @@ Avoid generic AI slide aesthetics:
 Use visual assets when the subject benefits from them: logos, website captures, product screenshots, generated imagery, diagrams, charts, and icons.
 If visual polish is the main complaint, vary page treatments deliberately: claim, comparison, architecture, case story, case proof, scorecard, roadmap, and decision pages should not all look like the same grid.
 
+For presentation images, treat each image as a slide argument:
+- choose the image role: cover hero, divider, concept visual, comparison plate, data backdrop, system plate, case scene, or closing poster
+- write the slide thesis before prompting or selecting the image
+- reserve 25-35% clean text-safe space when overlay text is expected
+- keep titles, metrics, body copy, sources, and proof labels editable unless the user requests flattened poster slides
+- avoid stock office scenes, generic AI glow, fake dashboards, and unreadable microtext
+
 For image-driven PPT work, keep the deck hybrid by default:
 - images carry atmosphere, product/case context, scene memory, and visual polish
 - titles, claims, metrics, diagrams, and sources remain editable PPT objects
@@ -165,12 +185,21 @@ Choose the production path that best matches the goal:
 - Visual prompt board: use when the task is really about image direction rather than full deck generation.
 - Image-driven PPTX: use when the user wants the final deliverable to remain a single editable PPTX but needs stronger hero images, case scenes, or reference-image style matching.
 
+For premium visual decks, prefer an HTML-first source unless the user explicitly needs a directly editable PPTX. Use the HTML deck to establish visual quality, inspect pages in a browser, and then produce PDF/PPTX derivatives as needed.
+
+When editability is required, decide before layout. Do not build a free-form HTML deck with gradients, complex SVG, pseudo-element text, and web components and then promise a fully editable PPTX. Use the editable PPTX path from the beginning or deliver a faithful PDF plus a simplified editable PPTX.
+
 For HTML decks:
 - keep every slide within `100vh`
 - avoid scrolling inside slides
 - use responsive constraints and `clamp()`
 - include keyboard navigation
 - include notes/presenter script when useful
+- for serious decks, use a browser-playable `index.html` with isolated slide files when possible
+- for 5+ slides, verify the two-page grammar pass before producing all pages
+- use shared theme tokens and known layout archetypes before inventing new classes
+- if the deck is a live talk, include hidden speaker notes and verify they are not visible to the audience
+- if motion is used, animate semantic blocks and keep static fallback readable
 
 For PPTX decks:
 - use real slide dimensions
@@ -182,6 +211,12 @@ For PPTX decks:
 - keep footer/source requirements on the specified pages
 - generate speaker notes separately if the library cannot write notes reliably
 
+For PPT conversion or enhancement:
+- extract and summarize existing titles, text, notes, images, and slide order before redesign
+- decide whether the goal is faithful remake, visual upgrade, or narrative rewrite
+- preserve required facts and wording unless the user asks for rewriting
+- rebuild the visual system instead of screenshot-tracing by default
+
 ### 7. Quality Gates
 
 Before delivery, verify:
@@ -190,10 +225,20 @@ Before delivery, verify:
 - first-slide required footers are present
 - every claim with a number has a source or note
 - text does not overflow
+- visual grammar was tested on representative pages for serious or premium decks
+- execution lock was followed for colors, fonts, icons, images, and rhythm where required
 - each slide has one clear job
 - deck mode shaped the content, not only the colors
 - exported/openable files exist
 - notes or run log explain key choices
+
+For HTML-first outputs, also verify:
+- `index.html` opens and keyboard navigation works
+- every slide fits the viewport without internal scrolling
+- the two-page showcase and at least one dense page were inspected
+- no three consecutive slides look like the same template with swapped text
+- presenter notes are hidden from audience slides when present
+- export or deployment limitations are reported honestly
 
 For PPTX outputs, also verify:
 - no non-empty text boxes overlap except intentional labels inside their own shape
@@ -210,11 +255,20 @@ Load these only when needed:
 - `references/workflow.md` for the full end-to-end process
 - `references/modes.md` for deck-type routing and outline patterns
 - `references/visual-system.md` for style selection and image prompt rules
+- `references/execution-lock.md` for serious, long, multi-format, template-based, or consistency-sensitive decks
+- `references/layout-theme-system.md` when choosing themes, page archetypes, layout catalogs, presenter notes, image ratios, or reusable HTML deck systems
+- `references/presenter-motion-export.md` when the deck needs live speaker notes, presenter mode, animation, viewport fitting, PPTX conversion intake, PDF export, deployment, or browser editing
+- `references/presentation-image-system.md` when generating/selecting cover images, divider images, concept visuals, data backdrops, brand-inspired slide images, or any image intended to carry slide meaning
+- `references/visual-direction-showcase.md` when the user asks for a beautiful, premium, polished, designed, high-end, less generic, style-matched, or more impressive deck
+- `references/html-first-deck.md` when building HTML decks, visual previews, browser-presentable decks, PDF-ready decks, or decks where first-impression design quality matters
+- `references/editable-pptx.md` when the final output must be editable in PowerPoint/Keynote or when converting HTML to editable PPTX
 - `references/image-driven-ppt.md` when the user asks for image-to-PPT, image2PPT, reference-image/PDF style matching, generated presentation images, stronger case visuals, or a deck that feels more like a designed showcase
 - `references/presentation-readout.md` when the user needs a PPT that can be presented directly, projected, or read comfortably without zooming
 - `references/writing-style.md` when the deck needs richer Chinese copy, elegant wording, fuller slide content, or report-style readout language
 - `references/content-playbook.md` when a deck needs richer introductions, more cases, comparisons, evaluation pages, or a technical/report-style structure
 - `references/quality-gates.md` for verification checklist
+
+Use `assets/deck_index.html` and `assets/slide.css` as starter files for HTML-first decks when the codebase does not already provide a better presentation shell.
 
 Use `scripts/audit_deck.py` when checking generated PPTX/HTML outputs. For PPTX files, treat layout warnings about overlap, off-slide text, duplicate footers, or high density as fix-before-delivery issues unless the user explicitly wants a rough draft.
 
@@ -229,6 +283,13 @@ Use `scripts/audit_deck.py` when checking generated PPTX/HTML outputs. For PPTX 
 | Making a deck "complete" by adding more text | Cut to the decision message, move detail to notes or appendix |
 | Making pages too thin with only labels | Add a thesis sentence, mechanism, evidence, implication, or case detail |
 | Making pages "complete" by using tiny fonts | Split the story across more slides or move detail to notes/appendix |
+| Producing all slides before testing the visual direction | Build a two-page grammar pass first for 5+ slide premium decks |
+| Treating HTML and editable PPTX as the same path | Decide editability before layout and load `editable-pptx.md` |
+| Making every page the same grid | Repeat motifs, not whole layouts |
+| Letting colors/fonts/icons drift page by page | Create and follow `execution-lock.md` |
+| Baking long text or metrics into generated images | Keep claims and proof editable; use images for scene and memory |
+| Adding motion or presenter text visibly on slides | Use hidden notes and animate semantic blocks only |
+| Converting PPTX by tracing screenshots | Extract content, decide remake vs upgrade, then rebuild |
 | Using many small cards to look polished | Use fewer large units, clear hierarchy, and whitespace |
 | Trusting visual judgment without inspection | Run the PPTX audit and fix overlap/off-slide warnings |
 | Saying "done" without checking outputs | Run quality gates and report evidence |

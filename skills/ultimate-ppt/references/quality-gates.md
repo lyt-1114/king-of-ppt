@@ -7,6 +7,8 @@ Run these checks before delivery.
 - [ ] All provided documents, URLs, images, and instructions were read or explicitly skipped with reason.
 - [ ] Audience and desired action are clear.
 - [ ] Deck route was chosen and shaped the outline.
+- [ ] Delivery architecture was chosen before layout: direct PPTX, HTML-first, editable-safe HTML, PDF, or hybrid.
+- [ ] Execution lock exists for serious/long/multi-format decks and lists canvas, colors, typography, icons, images, page rhythm, and forbidden moves.
 - [ ] Required facts, footers, brand rules, and constraints are included.
 - [ ] Numeric claims have source notes or are marked as assumptions.
 
@@ -25,6 +27,8 @@ Run these checks before delivery.
 ## Visual
 
 - [ ] Palette and typography are consistent.
+- [ ] For serious or premium 5+ slide decks, two representative grammar pages were created or inspected before bulk production.
+- [ ] Colors, fonts, icons, and image treatment follow the execution lock when one exists.
 - [ ] Text fits inside slide boundaries.
 - [ ] Meaningful presentation text is not below 12 pt; live body text is generally 18 pt or larger.
 - [ ] Non-empty text boxes do not overlap unintentionally.
@@ -32,9 +36,11 @@ Run these checks before delivery.
 - [ ] Slide density matches the chosen archetype; dense detail is moved to notes or appendix.
 - [ ] Each page has enough whitespace to read at thumbnail scale.
 - [ ] Visual assets are relevant to the subject.
+- [ ] Presentation images have a role, thesis, safe zone, and thumbnail-readable focal point.
 - [ ] Image-heavy slides preserve editable titles, claims, metrics, and source notes unless the user requested flattened poster slides.
 - [ ] Generated or conceptual images are not presented as factual screenshots or customer proof.
 - [ ] Important text does not sit on busy image areas without a contrast panel or safe zone.
+- [ ] Page rhythm varies: no three consecutive slides are the same central layout with swapped content.
 - [ ] No decorative clutter.
 - [ ] Charts/metrics are readable.
 - [ ] Mobile/browser HTML slides fit 100vh with no internal scrolling.
@@ -42,6 +48,8 @@ Run these checks before delivery.
 ## Output
 
 - [ ] Required PPTX/HTML/PDF files exist.
+- [ ] HTML-first decks open through `index.html` and keyboard navigation works.
+- [ ] Live-talk decks keep speaker notes hidden from audience view.
 - [ ] First-slide footer/source requirement is present when requested.
 - [ ] Notes or run log are included for serious decks.
 - [ ] Export/openability has been checked.

@@ -12,6 +12,19 @@ Do not turn a serious business deck into a stack of flattened posters unless the
 - editable PPT layer: title, subtitle, claim, metrics, evidence blocks, diagrams, sources
 - validation layer: overlap audit, font-size audit, contrast/readability check, asset relevance check
 
+Every image should be assigned a role before generation or selection:
+
+- cover hero
+- section divider
+- concept visualization
+- comparison plate
+- data backdrop
+- system/workflow plate
+- case scene
+- closing poster
+
+If the role is unclear, the image is probably decoration.
+
 ## When To Use Image-Driven Layouts
 
 Choose this route when:
@@ -62,13 +75,16 @@ Avoid this route when:
 Use one prompt per asset. Do not ask a single image to solve the whole deck.
 
 ```text
-Use case: productivity-visual
-Asset type: 16:9 presentation hero/case scene
-Subject: [specific business scene or workflow]
-Composition: clear empty space for title on [left/right/top], main visual focus on [area]
-Style: premium Chinese enterprise technology deck, soft paper texture, teal ink accents, calm consulting polish
-Lighting: clean, bright, high contrast for projected presentation
-Avoid: robot handshake, purple sci-fi brain, unreadable UI text, fake logos, cluttered bento grid, tiny captions
+Create a [image role] for a presentation.
+Slide thesis: [one sentence].
+Audience/context: [who will see it and why].
+Composition: one dominant focal point, one support layer, clean [left/right/top] text-safe zone.
+Style direction: [deck visual grammar or brand-inspired cues].
+Palette: [base, accent, neutral].
+Texture/depth: [paper, metal, ink, glass, studio light, grain].
+Text in image: none or only [short label / numeral / marker].
+Avoid: stock office scenes, generic AI glow, unreadable labels, fake dashboards, clutter, watermark.
+16:9 horizontal, presentation-first, strong thumbnail readability.
 ```
 
 For WanFlow-style enterprise AI decks, useful image assets include:
@@ -78,6 +94,15 @@ For WanFlow-style enterprise AI decks, useful image assets include:
 - manufacturing exception command view with inventory nodes, dispatch route, and escalation path
 - retail operations review scene with campaign metrics, customer feedback, logistics status, and same-day recap
 - abstract execution-chain visual: data, process, agent, human gate, evaluation loop
+
+Default image spec:
+
+- horizontal 16:9
+- 3840x2160 preferred, 1920x1080 acceptable
+- one dominant focal point
+- 25-35% clean text-safe space
+- meaningful content inside the central 80%
+- minimal or no baked-in text
 
 ## Layout Patterns
 

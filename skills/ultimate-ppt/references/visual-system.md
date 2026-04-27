@@ -8,9 +8,12 @@ Before making slides, define:
 - type roles: display, title, body, metadata, numeric
 - components: metric card, quote page, timeline, comparison, diagram, CTA
 - imagery: screenshot, generated visual, diagram, logo, icon set
+- layout catalog: the page archetypes this deck may use
+- theme tokens: CSS variables or PPTX constants for colors, fonts, radii, line weights
 - density: sparse keynote, medium pitch, dense consulting
 - whitespace budget: outer margins, gutters, and maximum number of blocks
 - text budget: maximum lines per title, subtitle, body block, and card
+- proof pages: which two representative slides will validate the grammar before bulk production
 
 If the deck is image-driven, also define:
 
@@ -19,6 +22,22 @@ If the deck is image-driven, also define:
 - image crop rules and safe areas
 - contrast treatment for text over images
 - whether each image is factual evidence, conceptual illustration, or atmospheric support
+
+## Visual Direction Sprint
+
+Use this when the user asks for a beautiful, premium, high-end, less generic, style-matched, or more impressive deck, or when the topic does not imply an obvious visual direction.
+
+Offer three directions that differ in composition, typography, imagery, and density. Recommend one. Then prove the recommendation with a two-page grammar pass before producing all slides.
+
+Good directions describe a reusable system:
+
+- the kind of page rhythm it supports
+- what the cover looks like
+- how dense proof pages stay readable
+- which motifs repeat
+- which visual clichés are forbidden
+
+Bad directions are only palettes.
 
 ## Elegance Rules
 
@@ -35,6 +54,8 @@ Elegant decks usually come from restraint, not decoration.
 - Make title, subtitle, body, and footer zones non-overlapping by construction; do not rely on visual alignment if the actual text boxes intersect.
 - Avoid abrupt size jumps. If a headline is 32 pt, nearby body text should usually sit around 18-22 pt rather than collapsing to 10-12 pt.
 - Use atmosphere at the edges and meaning in the center: backgrounds can set tone, but the central content must stay clean and readable.
+- Treat generated or selected images as slide arguments. Each image needs a role, a thesis, a safe zone, and a reason to exist.
+- Keep presenter notes, source notes, and delivery guidance out of visible slide content.
 
 ## Style Routes
 
@@ -49,6 +70,21 @@ Elegant decks usually come from restraint, not decoration.
 | Browser-native | high-contrast interface, motion layers, geometric atmosphere |
 | Prompt board | dark or neutral boards, prompt cards, asset recipes |
 
+## Layout Archetypes
+
+Choose page structure from the slide job:
+
+| Job | Archetypes |
+| --- | --- |
+| orient | cover, TOC, section divider |
+| explain | two-column, annotated diagram, concept page |
+| prove | KPI grid, chart, table, case proof |
+| compare | before/after, options matrix, pros/cons |
+| system | architecture, workflow, layered model |
+| time | timeline, roadmap, gantt |
+| teach | concept, example, practice, recap |
+| close | decision page, final judgment, CTA |
+
 ## Mixing Styles Without Losing Coherence
 
 Use multiple page treatments, not multiple unrelated decks.
@@ -62,6 +98,13 @@ Use multiple page treatments, not multiple unrelated decks.
 - When a case needs more substance, use a two-slide spread instead of a dense bento grid: narrative first, evidence second.
 - Repeat motifs, not whole layouts. A deck can keep the same wave, ghost character, page marker, icon stroke, and value bar while changing the central composition on every major page.
 - In slide sorter, avoid three consecutive pages that look like the same template with different text.
+
+For 5+ slide decks, the first serious production step should be a two-page showcase:
+
+- one sparse/high-impact page
+- one dense/content-heavy page
+
+If either fails, fix the grammar rather than continuing.
 
 ## Chinese Ink-Tech Motif
 
@@ -101,6 +144,8 @@ For final PPTX output, place generated images as embedded bitmap layers and keep
 - robot handshake imagery
 - dense walls of text
 - repeated bento grids without narrative purpose
+- emoji as a visual system
+- tiny technical labels used mainly as decoration
 - tiny unreadable screenshots
 
 ## Slide Density

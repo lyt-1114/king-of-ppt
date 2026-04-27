@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HTML Deck</title>
+  <style>
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #111;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    #stage {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      width: 1920px;
+      height: 1080px;
+      transform-origin: center center;
+      background: #fff;
+      box-shadow: 0 20px 80px rgba(0, 0, 0, 0.35);
+    }
+
+    iframe {
+      width: 1920px;
+      height: 1080px;
+      border: 0;
+      display: block;
+      background: #fff;
+    }
+
+    #counter {
+      position: fixed;
+      right: 18px;
+      bottom: 16px;
+      color: rgba(255, 255, 255, 0.78);
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-variant-numeric: tabular-nums;
+      user-select: none;
+    }
+
+    @media print {
+      html, body {
+        width: 1920px;
+        height: auto;
+        overflow: visible;
+        background: #fff;
+      }
+
+      #stage, #counter {
+        display: none;
+      }
+
+      .print-slide {
+        display: block;
+        width: 1920px;
+        height: 1080px;
+        page-break-after: always;
+        break-after: page;
+        border: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main id="stage">
+    <iframe id="slideFrame" title="Current slide"></iframe>
+  </main>
+  <div id="counter"></div>
+
+  <script>
+    window.DECK_MANIFEST = [
+      { file: "slides/01-cover.html", label: "Cover" }
+    ];
+
+    const state = {
+      current: 0,
+      slides: window.DECK_MANIFEST
+    };
+
+    const stage = document.getElementById("stage");
+    const frame = document.getElementById("slideFrame");
+    const counter = document.getElementById("counter");
+    const storageKey = "ultimate-ppt-slide-" + location.pathname;
+
+    function fitStage() {
+      const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+      stage.style.transform = `translate(-50%, -50%) scale(${scale})`;
+      stage.style.left = `${window.innerWidth / 2}px`;
+      stage.style.top = `${window.innerHeight / 2}px`;
+    }
+
+    function clamp(index) {
+      return Math.max(0, Math.min(state.slides.length - 1, index));
+    }
+
+    function show(index, updateHash = true) {
+      state.current = clamp(index);
+      const slide = state.slides[state.current];
+      frame.src = slide.file;
+      counter.textContent = `${state.current + 1} / ${state.slides.length} · ${slide.label || slide.file}`;
+      localStorage.setItem(storageKey, String(state.current));
+      if (updateHash) history.replaceState(null, "", `#slide-${state.current + 1}`);
+    }
+
+    function fromHash() {
+      const match = location.hash.match(/^#slide-(\d+)$/);
+      return match ? clamp(Number(match[1]) - 1) : null;
+    }
+
+    function preparePrintFrames() {
+      document.querySelectorAll(".print-slide").forEach(node => node.remove());
+      state.slides.forEach(slide => {
+        const printFrame = document.createElement("iframe");
+        printFrame.className = "print-slide";
+        printFrame.src = slide.file;
+        printFrame.title = slide.label || slide.file;
+        document.body.appendChild(printFrame);
+      });
+    }
+
+    window.addEventListener("resize", fitStage);
+    window.addEventListener("beforeprint", preparePrintFrames);
+    window.addEventListener("hashchange", () => {
+      const next = fromHash();
+      if (next !== null) show(next, false);
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.target.matches("input, textarea, [contenteditable]")) return;
+
+      if (["ArrowRight", "PageDown", " "].includes(event.key)) {
+        event.preventDefault();
+        show(state.current + 1);
+      }
+      if (["ArrowLeft", "PageUp"].includes(event.key)) {
+        event.preventDefault();
+        show(state.current - 1);
+      }
+      if (event.key === "Home") {
+        event.preventDefault();
+        show(0);
+      }
+      if (event.key === "End") {
+        event.preventDefault();
+        show(state.slides.length - 1);
+      }
+    });
+
+    fitStage();
+    const initial = fromHash();
+    const saved = Number(localStorage.getItem(storageKey));
+    show(initial !== null ? initial : Number.isFinite(saved) ? saved : 0, initial === null);
+  </script>
+</body>
+</html>
