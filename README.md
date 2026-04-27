@@ -131,28 +131,19 @@ From this repository URL:
 npx skills add https://github.com/lyt-1114/king-of-ppt
 ```
 
-Or copy the folder manually:
-
-```bash
-mkdir -p ~/.codex/skills
-cp -r skills/ultimate-ppt ~/.codex/skills/
-```
-
 ## Capabilities
 
-`ultimate-ppt` combines and extends the strongest patterns from multiple PPT-oriented skills:
+`ultimate-ppt` helps the agent make better deck decisions before it starts drawing slides:
 
-- strategy-first deck planning from `ppt-master`
-- template-driven HTML/PPT production from `html-ppt-skill`
-- editorial/keynote storytelling from `guizang-ppt-skill`
-- presentation-image prompt discipline from `PPT-Design-Prompt`
-- browser-native viewport-safe slide craft from `frontend-slides`
-- HTML-first visual production with PDF/PPTX derivatives
-- two-page visual grammar passes before bulk slide production
-- editable-PPTX constraint handling
-- execution-lock discipline for production consistency
-- presenter notes, motion recipes, viewport fitting, export discipline, and PPTX conversion intake
-- fact-driven verification without coercive tone
+- **Image2PPT style extraction**: turn a reference image, website screenshot, old PPT page, or PDF spread into a reusable visual grammar.
+- **Premium first impression**: create stronger covers, chapter dividers, case scenes, and product moments instead of plain title-card decks.
+- **Editable business delivery**: keep claims, numbers, labels, charts, and source notes editable instead of flattening every slide into a picture.
+- **Two-page showcase before bulk work**: test one high-impact page and one dense page first, so a 20-slide deck does not drift after page 3.
+- **Execution lock for consistency**: fix canvas, colors, typography, icons, image treatment, page rhythm, and forbidden moves before production.
+- **HTML-first visual preview**: use a browser-playable deck to inspect design quality before exporting PPTX or PDF.
+- **Speaker-ready output**: add hidden presenter notes, stage-readable typography, and cleaner live-talk pacing.
+- **PPT cleanup and rebuild**: preserve facts from an ugly or old PPT, then rebuild the story and visual system.
+- **Verification before delivery**: audit overlap, overflow, density, duplicate footers, missing sources, and unreadable thumbnail pages.
 
 ## Repository Structure
 
