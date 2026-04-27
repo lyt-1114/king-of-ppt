@@ -1,42 +1,33 @@
 <svg width="1280" height="390" viewBox="0 0 1280 390" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">Thin PPT skill versus Ultimate PPT</title>
-  <desc id="desc">An integrated high-contrast comparison between thin PPT skills and Ultimate PPT.</desc>
+  <desc id="desc">Dark technology comparison showing Ultimate PPT as deeper than thin PPT skills.</desc>
   <defs>
-    <filter id="shadow" x="-10%" y="-14%" width="120%" height="136%">
-      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#10201C" flood-opacity="0.12"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1280" y2="390">
+      <stop stop-color="#050908"/>
+      <stop offset="1" stop-color="#162B26"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-16%" width="120%" height="142%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#000000" flood-opacity="0.28"/>
     </filter>
   </defs>
-  <rect x="1" y="1" width="1278" height="388" rx="22" fill="#FBF8F1" stroke="#E3D5C2"/>
-  <rect x="34" y="28" width="1212" height="334" rx="22" fill="#F4EBDC" stroke="#E2D3BF"/>
-  <text x="62" y="68" fill="#10201C" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="900">The difference is not style. It is depth.</text>
-  <text x="62" y="98" fill="#6C6154" font-family="Arial, Helvetica, sans-serif" font-size="16">Simple deck generation is one step. Ultimate PPT adds decisions before and checks after.</text>
+  <rect width="1280" height="390" rx="26" fill="url(#bg)"/>
+  <text x="62" y="64" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="900">The difference is depth.</text>
+  <text x="62" y="96" fill="#BFE5DA" font-family="Arial, Helvetica, sans-serif" font-size="17">Simple generation is one step. Ultimate PPT adds decisions before and checks after.</text>
 
   <g font-family="Arial, Helvetica, sans-serif" filter="url(#shadow)">
-    <g transform="translate(68 138)">
-      <rect width="520" height="204" rx="18" fill="#FFFFFF" stroke="#E3D5C2"/>
-      <text x="30" y="42" fill="#8E4D3A" font-size="22" font-weight="900">Thin PPT skill</text>
-      <text x="30" y="82" fill="#6C6154" font-size="16">Prompt</text>
-      <text x="30" y="118" fill="#6C6154" font-size="16">Template</text>
-      <text x="30" y="154" fill="#6C6154" font-size="16">Export</text>
-      <text x="30" y="184" fill="#9A8B78" font-size="14">Fast, useful, but shallow for serious decks.</text>
-      <rect x="286" y="68" width="168" height="92" rx="12" fill="#F0E6D8"/>
-      <rect x="306" y="88" width="90" height="10" rx="5" fill="#B8AA95"/>
-      <rect x="306" y="116" width="112" height="8" rx="4" fill="#C8BBA8"/>
-      <rect x="306" y="136" width="78" height="8" rx="4" fill="#C8BBA8"/>
+    <g transform="translate(76 138)">
+      <rect width="500" height="190" rx="18" fill="#F7EFE2"/>
+      <text x="32" y="48" fill="#8E4D3A" font-size="24" font-weight="900">Thin PPT Skill</text>
+      <text x="32" y="98" fill="#10201C" font-size="20" font-weight="800">Prompt → Template → Export</text>
+      <text x="32" y="140" fill="#6C6154" font-size="16">Fast, but shallow for serious decks.</text>
     </g>
 
-    <g transform="translate(692 118)">
-      <rect width="520" height="244" rx="18" fill="#10201C"/>
-      <text x="30" y="44" fill="#F3B35D" font-size="22" font-weight="900">Ultimate PPT</text>
-      <text x="30" y="84" fill="#E8DDCC" font-size="16">Source brief and audience goal</text>
-      <text x="30" y="116" fill="#E8DDCC" font-size="16">Image2 visual grammar</text>
-      <text x="30" y="148" fill="#E8DDCC" font-size="16">Strategy lock and execution lock</text>
-      <text x="30" y="180" fill="#E8DDCC" font-size="16">Two-page proof before bulk work</text>
-      <text x="30" y="212" fill="#E8DDCC" font-size="16">Editable output plus audit evidence</text>
-      <rect x="350" y="72" width="112" height="112" rx="14" fill="#F8F0E3"/>
-      <rect x="370" y="94" width="62" height="9" rx="4.5" fill="#0F766E"/>
-      <rect x="370" y="120" width="72" height="40" rx="8" fill="#D99A3D"/>
-      <rect x="370" y="176" width="70" height="7" rx="3.5" fill="#B8AA95"/>
+    <g transform="translate(704 118)">
+      <rect width="500" height="230" rx="18" fill="#10201C" stroke="#2C5F53"/>
+      <text x="32" y="50" fill="#F2B35D" font-size="24" font-weight="900">Ultimate PPT</text>
+      <text x="32" y="98" fill="#FFFFFF" font-size="20" font-weight="800">Source → Grammar → Lock</text>
+      <text x="32" y="138" fill="#FFFFFF" font-size="20" font-weight="800">Showcase → Output → Audit</text>
+      <text x="32" y="184" fill="#BFE5DA" font-size="16">Strategic, editable, visual, verified.</text>
     </g>
   </g>
 </svg>
