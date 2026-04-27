@@ -2,6 +2,8 @@
 
 ## 2026-04-27
 
+- Rebuilt the README SVG visual system from scratch with a unified black technology style, lower text density, and no overlapping text boxes.
+- Added additional README visuals for forced agent discipline, use cases, and the hybrid capability stack.
 - Refined the GitHub README narrative so the core value is explained through stronger text instead of relying on standalone promotional graphics.
 - Reworked README SVG assets into lighter, more integrated information panels that fit the surrounding GitHub page content.
 - Redesigned the GitHub README with a stronger product-page narrative and high-impact SVG visuals.

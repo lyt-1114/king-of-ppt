@@ -1,76 +1,84 @@
-<svg width="1280" height="440" viewBox="0 0 1280 440" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">Ultimate PPT</title>
-  <desc id="desc">Dark technology hero for Ultimate PPT, an Image2PPT-first presentation system.</desc>
+<svg width="1280" height="520" viewBox="0 0 1280 520" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Ultimate PPT hero</title>
+  <desc id="desc">Black tech hero graphic for Ultimate PPT, an Image2PPT-first presentation system.</desc>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1280" y2="440" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#050908"/>
-      <stop offset="0.48" stop-color="#0D1916"/>
-      <stop offset="1" stop-color="#182D28"/>
+    <radialGradient id="orbA" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(282 154) rotate(39) scale(320)">
+      <stop stop-color="#20F5C4" stop-opacity="0.36"/>
+      <stop offset="1" stop-color="#20F5C4" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="orbB" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(972 338) rotate(39) scale(360)">
+      <stop stop-color="#FFB84D" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#FFB84D" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bg" x1="0" y1="0" x2="1280" y2="520">
+      <stop stop-color="#020403"/>
+      <stop offset="0.5" stop-color="#07110F"/>
+      <stop offset="1" stop-color="#10251F"/>
     </linearGradient>
-    <linearGradient id="line" x1="82" y1="58" x2="1194" y2="350" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#21D7B2"/>
-      <stop offset="0.45" stop-color="#F2B35D"/>
+    <linearGradient id="scan" x1="80" y1="82" x2="1200" y2="390">
+      <stop stop-color="#22FFD2"/>
+      <stop offset="0.5" stop-color="#FFB84D"/>
       <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
     </linearGradient>
-    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
-      <feGaussianBlur stdDeviation="22" result="blur"/>
+    <linearGradient id="deck" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#F6EFE4"/>
+      <stop offset="1" stop-color="#BFAF97"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
       <feMerge>
         <feMergeNode in="blur"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
-      <feDropShadow dx="0" dy="20" stdDeviation="24" flood-color="#000000" flood-opacity="0.35"/>
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="24" stdDeviation="26" flood-color="#000000" flood-opacity="0.48"/>
     </filter>
   </defs>
 
-  <rect width="1280" height="440" rx="28" fill="url(#bg)"/>
-  <circle cx="310" cy="150" r="180" fill="#0F766E" opacity="0.23" filter="url(#glow)"/>
-  <circle cx="1000" cy="282" r="210" fill="#D99A3D" opacity="0.18" filter="url(#glow)"/>
+  <rect width="1280" height="520" rx="30" fill="url(#bg)"/>
+  <rect width="1280" height="520" rx="30" fill="url(#orbA)"/>
+  <rect width="1280" height="520" rx="30" fill="url(#orbB)"/>
 
-  <g opacity="0.16">
-    <path d="M76 92H1204" stroke="#E8FFF8"/>
-    <path d="M76 176H1204" stroke="#E8FFF8"/>
-    <path d="M76 260H1204" stroke="#E8FFF8"/>
-    <path d="M76 344H1204" stroke="#E8FFF8"/>
-    <path d="M220 56V384" stroke="#E8FFF8"/>
-    <path d="M412 56V384" stroke="#E8FFF8"/>
-    <path d="M604 56V384" stroke="#E8FFF8"/>
-    <path d="M796 56V384" stroke="#E8FFF8"/>
-    <path d="M988 56V384" stroke="#E8FFF8"/>
+  <g opacity="0.13">
+    <path d="M72 98H1208" stroke="#D7FFF5"/>
+    <path d="M72 184H1208" stroke="#D7FFF5"/>
+    <path d="M72 270H1208" stroke="#D7FFF5"/>
+    <path d="M72 356H1208" stroke="#D7FFF5"/>
+    <path d="M230 58V454" stroke="#D7FFF5"/>
+    <path d="M434 58V454" stroke="#D7FFF5"/>
+    <path d="M638 58V454" stroke="#D7FFF5"/>
+    <path d="M842 58V454" stroke="#D7FFF5"/>
+    <path d="M1046 58V454" stroke="#D7FFF5"/>
   </g>
 
-  <path d="M72 314C236 216 382 244 528 176C674 108 798 72 946 106C1084 138 1144 204 1212 166" stroke="url(#line)" stroke-width="2.8" opacity="0.9"/>
-  <path d="M72 348C264 238 398 284 560 224C722 164 812 148 966 184C1098 214 1160 246 1212 226" stroke="#D8FFF4" stroke-width="1.2" opacity="0.25"/>
+  <path d="M72 374C214 270 376 292 530 216C684 140 800 96 958 132C1104 166 1176 228 1212 184" stroke="url(#scan)" stroke-width="3" opacity="0.92" filter="url(#glow)"/>
+  <path d="M72 410C266 294 402 330 578 270C754 210 860 202 1002 238C1124 268 1182 292 1212 272" stroke="#CFFFF4" stroke-width="1.2" opacity="0.26"/>
 
-  <text x="78" y="90" fill="#D8FFF4" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800" letter-spacing="4">ULTIMATE PPT</text>
-  <text x="78" y="158" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="60" font-weight="900">Image2PPT-first</text>
-  <text x="78" y="226" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="60" font-weight="900">presentation system</text>
-  <text x="80" y="276" fill="#BFE5DA" font-family="Arial, Helvetica, sans-serif" font-size="21">Reference images become editable, verified deck grammar.</text>
-
-  <g transform="translate(80 318)">
-    <rect width="120" height="38" rx="19" fill="#0F766E"/>
-    <text x="60" y="25" text-anchor="middle" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="900">IMAGE2</text>
-    <rect x="134" width="136" height="38" rx="19" fill="#F2B35D"/>
-    <text x="202" y="25" text-anchor="middle" fill="#0B1513" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="900">EDITABLE</text>
-    <rect x="284" width="126" height="38" rx="19" fill="#F5EFE4"/>
-    <text x="347" y="25" text-anchor="middle" fill="#0B1513" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="900">VERIFIED</text>
+  <g transform="translate(800 110)" filter="url(#shadow)">
+    <path d="M0 152L250 80L388 156L136 236L0 152Z" fill="#0A1714" stroke="#2B7A69"/>
+    <path d="M42 120L246 62L350 121L144 185L42 120Z" fill="url(#deck)"/>
+    <path d="M76 108L158 86" stroke="#0F766E" stroke-width="8" stroke-linecap="round"/>
+    <path d="M88 136L252 91" stroke="#10201C" stroke-width="10" stroke-linecap="round"/>
+    <path d="M122 160L282 116" stroke="#A7957D" stroke-width="6" stroke-linecap="round"/>
+    <path d="M150 178L262 146" stroke="#BFAF97" stroke-width="6" stroke-linecap="round"/>
+    <path d="M44 168L146 200" stroke="#20F5C4" stroke-width="2" opacity="0.65"/>
+    <path d="M246 64L246 26" stroke="#20F5C4" stroke-width="2" opacity="0.65"/>
+    <circle cx="246" cy="22" r="5" fill="#20F5C4"/>
+    <circle cx="44" cy="168" r="5" fill="#20F5C4"/>
   </g>
 
-  <g transform="translate(790 92)" filter="url(#shadow)">
-    <rect width="330" height="214" rx="18" fill="#F7EFE2"/>
-    <rect x="26" y="26" width="100" height="12" rx="6" fill="#0F766E"/>
-    <rect x="26" y="58" width="222" height="18" rx="9" fill="#10201C"/>
-    <rect x="26" y="96" width="278" height="10" rx="5" fill="#9E927D"/>
-    <rect x="26" y="120" width="230" height="10" rx="5" fill="#B8AA95"/>
-    <rect x="26" y="158" width="82" height="34" rx="10" fill="#10201C"/>
-    <rect x="124" y="158" width="82" height="34" rx="10" fill="#D99A3D"/>
-    <rect x="222" y="158" width="82" height="34" rx="10" fill="#E4D6C1"/>
-  </g>
+  <text x="78" y="96" fill="#D7FFF5" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800" letter-spacing="4">ULTIMATE PPT</text>
+  <text x="78" y="170" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="66" font-weight="900">Image2PPT OS</text>
+  <text x="78" y="238" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="900">for serious decks</text>
+  <text x="80" y="294" fill="#B8EEE0" font-family="Arial, Helvetica, sans-serif" font-size="22">Reference image -> editable deck grammar -> audited output.</text>
 
-  <g transform="translate(938 292)" filter="url(#shadow)">
-    <rect width="214" height="64" rx="16" fill="#10201C" stroke="#2C5F53"/>
-    <text x="24" y="28" fill="#F7EFE2" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="900">AUDIT READY</text>
-    <text x="24" y="48" fill="#BFE5DA" font-family="Arial, Helvetica, sans-serif" font-size="12">layout + image2 evidence</text>
+  <g transform="translate(80 338)" font-family="Arial, Helvetica, sans-serif">
+    <rect width="112" height="38" rx="19" fill="#0F766E"/>
+    <text x="56" y="25" text-anchor="middle" fill="#FFFFFF" font-size="13" font-weight="900">IMAGE2</text>
+    <rect x="128" width="128" height="38" rx="19" fill="#FFB84D"/>
+    <text x="192" y="25" text-anchor="middle" fill="#07110F" font-size="13" font-weight="900">EDITABLE</text>
+    <rect x="272" width="118" height="38" rx="19" fill="#F6EFE4"/>
+    <text x="331" y="25" text-anchor="middle" fill="#07110F" font-size="13" font-weight="900">AUDITED</text>
   </g>
 </svg>

@@ -79,6 +79,10 @@ A thin PPT skill can be useful for simple slides. Ultimate PPT is built for the 
 
 ## What The Skill Forces The Agent To Do
 
+<p align="center">
+  <img src="docs/readme/skill-forces.svg" alt="What Ultimate PPT forces the agent to do" width="92%">
+</p>
+
 ### 1. Start With Judgment
 
 The agent does not begin by decorating pages. It first decides the audience, the decision goal, the deck route, the proof layer, and the output architecture.
@@ -117,6 +121,10 @@ The skill includes quality gates and a bundled audit script for layout and image
 | Keynote / live talk | Adds presenter notes, stage-readable typography, HTML preview |
 | PPT cleanup | Preserves facts while rebuilding the narrative and visual system |
 
+<p align="center">
+  <img src="docs/readme/use-cases.svg" alt="Ultimate PPT use cases" width="92%">
+</p>
+
 ## Workflow
 
 1. Read source material: documents, screenshots, URLs, images, data, old PPTs.
@@ -131,6 +139,10 @@ The skill includes quality gates and a bundled audit script for layout and image
 10. Report what was built, what was checked, and any limitations.
 
 ## Capabilities
+
+<p align="center">
+  <img src="docs/readme/capability-stack.svg" alt="Ultimate PPT hybrid deck stack" width="92%">
+</p>
 
 - **Image2PPT style extraction**: turn a reference image, website screenshot, old PPT page, or PDF spread into a reusable visual grammar.
 - **Image2 evidence trail**: record the reference read, transfer level, editable layer, bitmap layer, and visual grammar so the result is explainable, repeatable, and auditable.
