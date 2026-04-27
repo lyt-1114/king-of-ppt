@@ -2,6 +2,8 @@
 
 ## 2026-04-27
 
+- Refined the GitHub README narrative so the core value is explained through stronger text instead of relying on standalone promotional graphics.
+- Reworked README SVG assets into lighter, more integrated information panels that fit the surrounding GitHub page content.
 - Redesigned the GitHub README with a stronger product-page narrative and high-impact SVG visuals.
 - Added README visual assets: hero, Image2PPT workflow, multi-engine map, and thin-skill comparison graphics under `docs/readme/`.
 - Added a dedicated Image2 Deck Workflow reference with required image2 evidence artifacts, source-type diagnosis, brand asset protocol, transfer ladder, two-page pass, production pattern, and acceptance checks.

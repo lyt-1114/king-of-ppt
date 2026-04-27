@@ -1,61 +1,70 @@
 # Ultimate PPT
 
 <p align="center">
-  <img src="docs/readme/hero.svg" alt="Ultimate PPT: Not another PPT skill. Image2PPT-first, multi-engine, editable, verified." width="100%">
+  <img src="docs/readme/hero.svg" alt="Ultimate PPT: Image2PPT-first presentation system" width="94%">
 </p>
 
-**Ultimate PPT is an Image2PPT-first agent skill for creating polished, editable, multi-format, and verified presentations.**
+**Ultimate PPT is not another single-path PPT skill.**
 
-Most PPT skills stop at "generate slides from text." Ultimate PPT goes further: it reads visual references, extracts design grammar, plans the story, locks execution rules, builds a two-page visual proof, chooses the right output engine, and audits the result before delivery.
+It is an **Image2PPT-first presentation system** for turning reference images, screenshots, websites, PDFs, old decks, notes, data, and rough ideas into polished decks that look designed, stay editable, and pass delivery checks.
 
-It is built for one hard problem: AI slides often look generic. Ultimate PPT starts from **visual evidence and design intent**, then rebuilds the deck as a real presentation system instead of flattening everything into screenshots.
+Most PPT skills generate slides. Ultimate PPT builds the system behind the slides:
+
+- it reads the source and decides what the deck must achieve
+- it extracts visual grammar from reference images instead of copying screenshots
+- it locks narrative, layout, typography, image roles, and forbidden moves before production
+- it proves the visual direction on two representative pages before making the full deck
+- it routes the output to editable PPTX, HTML-first, PDF, hybrid, or speaker-ready formats
+- it audits the result before claiming the deck is ready
 
 ```bash
 npx skills add https://github.com/lyt-1114/king-of-ppt
 ```
 
-## The Claim
+## Why It Feels Different
 
-This is not a simple PPT generator.
+Ordinary PPT skills usually answer one request: "make slides."
 
-Ultimate PPT is a **multi-engine presentation system** centered on Image2PPT:
+Ultimate PPT answers the harder question: **what presentation system should exist behind these slides so the final deck is persuasive, editable, visually coherent, and safe to deliver?**
 
-- **Image2PPT core**: reference image, screenshot, PDF page, website, poster, old PPT, product visual, or rough mockup becomes a reusable deck grammar.
-- **Strategy engine**: audience, decision goal, narrative spine, proof layer, and deck route are chosen before slides are drawn.
-- **Visual system engine**: palette, typography, grid, image role, page rhythm, and forbidden moves are locked before bulk production.
-- **HTML-first engine**: browser-native decks can be used as the visual source of truth for premium previews and exports.
-- **Editable PPTX engine**: business-critical text, claims, numbers, diagrams, and sources remain editable when the user needs PowerPoint.
-- **Presenter engine**: live-talk decks can include hidden notes, pacing, motion, and stage-readable typography.
-- **Audit engine**: generated outputs are checked for overlap, overflow, density, duplicate footers, source coverage, and image2 evidence.
+That is why the skill is built around multiple engines, not one template path.
 
 <p align="center">
-  <img src="docs/readme/engine-map.svg" alt="Ultimate PPT engine map" width="100%">
+  <img src="docs/readme/engine-map.svg" alt="Ultimate PPT engine map" width="92%">
 </p>
 
-## Why Image2PPT
+The engine map is the point: Image2PPT is the center, but it is supported by strategy, visual grammar, HTML preview, editable PPTX constraints, presenter support, and audit checks. This is what keeps the output from becoming a pretty but fragile screenshot deck.
 
-Image2 is the flagship workflow.
+## Image2PPT Is The Core
 
-Give the agent a reference image, PDF page, website screenshot, brand visual, product screenshot, poster, old PPT, or rough mockup. The skill extracts the visual grammar and uses it to produce a deck with:
+Image2PPT here does not mean "turn an image into a slide background."
 
-- editable titles, claims, metrics, charts, labels, and source notes
-- image-driven covers, dividers, case scenes, and premium showcase pages
-- a two-page visual grammar pass before bulk production
-- an execution lock for colors, fonts, icons, image treatment, page rhythm, and forbidden moves
-- HTML-first preview when visual quality matters
-- PPTX/PDF/HTML outputs depending on the real delivery need
-- audit checks for overlap, overflow, density, duplicate footers, unreadable text, and missing image2 evidence
+It means:
 
-It is not "screenshot to PPT." It is **reference image to presentation system**.
+1. read the reference image like a designer
+2. extract its palette, type hierarchy, spacing, composition, image treatment, and page rhythm
+3. translate that grammar into reusable slide archetypes
+4. keep the important business layer editable
+5. verify the result instead of trusting visual vibes
 
 <p align="center">
-  <img src="docs/readme/workflow.svg" alt="Image2PPT workflow" width="100%">
+  <img src="docs/readme/workflow.svg" alt="Image2PPT workflow" width="92%">
 </p>
 
-## Built To Beat Thin PPT Skills
+The default output is hybrid:
+
+- **bitmap layer**: atmosphere, scene, product context, case memory, cover image, screenshot frame
+- **editable layer**: titles, claims, metrics, charts, diagrams, labels, sources
+- **verification layer**: overlap, overflow, density, readability, source coverage, image2 evidence
+
+So the deck can look premium without becoming uneditable.
+
+## Not A Thin PPT Wrapper
+
+A thin PPT skill can be useful for simple slides. Ultimate PPT is built for the jobs where simple generation breaks: premium sales decks, product launches, technical reports, keynote talks, old-PPT rebuilds, brand visual decks, and reference-image style matching.
 
 <p align="center">
-  <img src="docs/readme/comparison.svg" alt="Typical PPT skill versus Ultimate PPT" width="100%">
+  <img src="docs/readme/comparison.svg" alt="Typical PPT skill versus Ultimate PPT" width="92%">
 </p>
 
 | Thin PPT Skill | Ultimate PPT |
@@ -68,58 +77,32 @@ It is not "screenshot to PPT." It is **reference image to presentation system**.
 | Visual quality judged by vibe | Runs quality gates and layout audits |
 | Easy to drift after slide 3 | Uses strategy lock and execution lock for consistency |
 
-## What Makes It Different
+## What The Skill Forces The Agent To Do
 
-### 1. Image2 Is First-Class
+### 1. Start With Judgment
 
-Images are treated as slide arguments, not decoration. Each generated or selected image must have a role, thesis, safe zone, and thumbnail-readable focal point.
+The agent does not begin by decorating pages. It first decides the audience, the decision goal, the deck route, the proof layer, and the output architecture.
 
-The deck stays hybrid by default:
+### 2. Extract A Visual Grammar
 
-- bitmap layer: atmosphere, product/case scene, cover visual, texture, screenshot frame
-- editable layer: slide title, claim, numbers, diagrams, labels, source notes
-- validation layer: overlap checks, font-size checks, density checks, factual-source checks
+For image2 work, the agent records what it found in the reference: palette, typography, grid, spacing, image treatment, footer logic, editable layer, bitmap layer, and transfer level.
 
-### 2. Visual Grammar Before Bulk Production
+### 3. Prove The Direction Early
 
-For serious or premium decks, the agent does not produce 30 slides and hope the style works. It first creates or describes two representative pages:
+For serious decks, the agent creates or describes two representative pages first:
 
-- one high-impact page such as cover, thesis, or divider
-- one dense page such as case, architecture, data, or comparison
+- a high-impact page such as a cover, thesis, or divider
+- a dense page such as a case, architecture, comparison, data, or proof slide
 
-Those two pages lock the grammar: margins, typography, color rhythm, footer logic, image treatment, chart style, and density budget.
+If those two pages do not work, the system changes before bulk production.
 
-### 3. Strategy + Execution Lock
+### 4. Keep Business Content Editable
 
-The skill separates thinking from production:
+The skill treats editable PPTX and maximum visual freedom as different paths. It keeps titles, claims, numbers, labels, charts, and source notes editable whenever the user needs a business deck.
 
-- `source-brief.md`: audience, goal, proof, constraints
-- `image2-brief.md`: reference source, editable layer, bitmap layer, transfer level, risks
-- `visual-grammar.md`: palette, type hierarchy, composition, spacing, image treatment
-- `strategy-lock.md`: narrative spine, deck route, output architecture
-- `execution-lock.md`: canvas, colors, fonts, icons, images, rhythm, forbidden moves
+### 5. Verify Before Delivery
 
-That makes long decks more consistent and keeps the agent from drifting into random colors, repeated grids, tiny text, or mixed icon styles.
-
-### 4. Editable When It Matters
-
-Editable PPTX and maximum visual freedom are different paths. The skill forces that choice early.
-
-If the user needs PPTX editing, the deck follows editable-safe constraints from the beginning. If visual fidelity matters more, the skill can deliver HTML/PDF plus a simplified editable PPTX when useful.
-
-### 5. Verification Is Built In
-
-Before claiming completion, the skill checks:
-
-- text overflow and off-slide text
-- overlapping non-empty text boxes
-- duplicate footers or source lines
-- high slide density
-- thumbnail readability
-- source-backed numeric claims
-- hidden speaker notes for live-talk decks
-- browser navigation for HTML-first decks
-- image2 evidence files and visual grammar notes
+The skill includes quality gates and a bundled audit script for layout and image2 evidence checks. The point is simple: do not say the deck is done just because it looks good in one preview.
 
 ## Use Cases
 
@@ -149,8 +132,6 @@ Before claiming completion, the skill checks:
 
 ## Capabilities
 
-`ultimate-ppt` helps the agent make better deck decisions before it starts drawing slides:
-
 - **Image2PPT style extraction**: turn a reference image, website screenshot, old PPT page, or PDF spread into a reusable visual grammar.
 - **Image2 evidence trail**: record the reference read, transfer level, editable layer, bitmap layer, and visual grammar so the result is explainable, repeatable, and auditable.
 - **Premium first impression**: create stronger covers, chapter dividers, case scenes, and product moments instead of plain title-card decks.
@@ -163,8 +144,6 @@ Before claiming completion, the skill checks:
 - **Verification before delivery**: audit overlap, overflow, density, duplicate footers, missing sources, and unreadable thumbnail pages.
 
 ## Install
-
-From this repository URL:
 
 ```bash
 npx skills add https://github.com/lyt-1114/king-of-ppt

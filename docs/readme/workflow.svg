@@ -1,75 +1,59 @@
-<svg width="1280" height="360" viewBox="0 0 1280 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+<svg width="1280" height="350" viewBox="0 0 1280 350" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">Image2PPT workflow</title>
-  <desc id="desc">A six-step Image2PPT workflow from reference image to audited deck.</desc>
+  <desc id="desc">A light workflow diagram from reference to grammar, lock, showcase, output, and audit.</desc>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1280" y2="360">
-      <stop stop-color="#F8F0E3"/>
-      <stop offset="1" stop-color="#E4D5BE"/>
-    </linearGradient>
-    <linearGradient id="dark" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#10201C"/>
-      <stop offset="1" stop-color="#193B34"/>
-    </linearGradient>
-    <filter id="shadow" x="-20%" y="-40%" width="140%" height="180%">
-      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#18332D" flood-opacity="0.18"/>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#10201C" flood-opacity="0.08"/>
     </filter>
   </defs>
-  <rect width="1280" height="360" rx="28" fill="url(#bg)"/>
-  <text x="54" y="62" fill="#10201C" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="900">Image2PPT Pipeline</text>
-  <text x="54" y="94" fill="#6F6252" font-family="Arial, Helvetica, sans-serif" font-size="17">Reference image becomes a reusable deck system, then a verified deliverable.</text>
+  <rect x="1" y="1" width="1278" height="348" rx="22" fill="#FBF8F1" stroke="#E3D5C2"/>
+  <text x="54" y="58" fill="#10201C" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="900">Image2PPT: from visual reference to delivery system</text>
+  <text x="54" y="88" fill="#6C6154" font-family="Arial, Helvetica, sans-serif" font-size="16">The workflow exists to prevent beautiful but uneditable screenshot decks.</text>
 
-  <g transform="translate(54 132)" filter="url(#shadow)">
+  <g transform="translate(54 132)" font-family="Arial, Helvetica, sans-serif" filter="url(#shadow)">
     <g>
-      <rect width="170" height="144" rx="18" fill="url(#dark)"/>
-      <text x="22" y="40" fill="#F3B35D" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800">01</text>
-      <text x="22" y="72" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="900">Reference</text>
-      <text x="22" y="100" fill="#CBE2DA" font-family="Arial, Helvetica, sans-serif" font-size="14">image, PDF, site,</text>
-      <text x="22" y="120" fill="#CBE2DA" font-family="Arial, Helvetica, sans-serif" font-size="14">old PPT, product</text>
+      <rect width="178" height="118" rx="16" fill="#10201C"/>
+      <text x="22" y="34" fill="#D99A3D" font-size="13" font-weight="900">01</text>
+      <text x="22" y="62" fill="#FFFFFF" font-size="19" font-weight="900">Reference</text>
+      <text x="22" y="88" fill="#BFD8CF" font-size="13">image, PDF, site, old PPT</text>
     </g>
-    <path d="M188 72H222" stroke="#0F766E" stroke-width="4" stroke-linecap="round"/>
-    <path d="M216 62L226 72L216 82" stroke="#0F766E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-
-    <g transform="translate(242 0)">
-      <rect width="170" height="144" rx="18" fill="#FFFFFF"/>
-      <text x="22" y="40" fill="#0F766E" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800">02</text>
-      <text x="22" y="72" fill="#10201C" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="900">Extract</text>
-      <text x="22" y="100" fill="#6F6252" font-family="Arial, Helvetica, sans-serif" font-size="14">palette, type, grid,</text>
-      <text x="22" y="120" fill="#6F6252" font-family="Arial, Helvetica, sans-serif" font-size="14">rhythm, image role</text>
+    <g transform="translate(210 0)">
+      <rect width="178" height="118" rx="16" fill="#FFFFFF" stroke="#E3D5C2"/>
+      <text x="22" y="34" fill="#0F766E" font-size="13" font-weight="900">02</text>
+      <text x="22" y="62" fill="#10201C" font-size="19" font-weight="900">Extract</text>
+      <text x="22" y="88" fill="#6C6154" font-size="13">palette, type, grid, image role</text>
     </g>
-    <path d="M430 72H464" stroke="#0F766E" stroke-width="4" stroke-linecap="round"/>
-    <path d="M458 62L468 72L458 82" stroke="#0F766E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-
-    <g transform="translate(484 0)">
-      <rect width="170" height="144" rx="18" fill="#FFFFFF"/>
-      <text x="22" y="40" fill="#0F766E" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800">03</text>
-      <text x="22" y="72" fill="#10201C" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="900">Lock</text>
-      <text x="22" y="100" fill="#6F6252" font-family="Arial, Helvetica, sans-serif" font-size="14">strategy, execution,</text>
-      <text x="22" y="120" fill="#6F6252" font-family="Arial, Helvetica, sans-serif" font-size="14">editable layers</text>
+    <g transform="translate(420 0)">
+      <rect width="178" height="118" rx="16" fill="#FFFFFF" stroke="#E3D5C2"/>
+      <text x="22" y="34" fill="#0F766E" font-size="13" font-weight="900">03</text>
+      <text x="22" y="62" fill="#10201C" font-size="19" font-weight="900">Lock</text>
+      <text x="22" y="88" fill="#6C6154" font-size="13">strategy and execution rules</text>
     </g>
-    <path d="M672 72H706" stroke="#0F766E" stroke-width="4" stroke-linecap="round"/>
-    <path d="M700 62L710 72L700 82" stroke="#0F766E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-
-    <g transform="translate(726 0)">
-      <rect width="170" height="144" rx="18" fill="#FFFFFF"/>
-      <text x="22" y="40" fill="#0F766E" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800">04</text>
-      <text x="22" y="72" fill="#10201C" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="900">Showcase</text>
-      <text x="22" y="100" fill="#6F6252" font-family="Arial, Helvetica, sans-serif" font-size="14">cover page plus</text>
-      <text x="22" y="120" fill="#6F6252" font-family="Arial, Helvetica, sans-serif" font-size="14">dense proof page</text>
+    <g transform="translate(630 0)">
+      <rect width="178" height="118" rx="16" fill="#FFFFFF" stroke="#E3D5C2"/>
+      <text x="22" y="34" fill="#0F766E" font-size="13" font-weight="900">04</text>
+      <text x="22" y="62" fill="#10201C" font-size="19" font-weight="900">Showcase</text>
+      <text x="22" y="88" fill="#6C6154" font-size="13">cover plus dense proof page</text>
     </g>
-    <path d="M914 72H948" stroke="#0F766E" stroke-width="4" stroke-linecap="round"/>
-    <path d="M942 62L952 72L942 82" stroke="#0F766E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-
-    <g transform="translate(968 0)">
-      <rect width="170" height="144" rx="18" fill="#FFFFFF"/>
-      <text x="22" y="40" fill="#0F766E" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800">05</text>
-      <text x="22" y="72" fill="#10201C" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="900">Produce</text>
-      <text x="22" y="100" fill="#6F6252" font-family="Arial, Helvetica, sans-serif" font-size="14">PPTX, HTML, PDF,</text>
-      <text x="22" y="120" fill="#6F6252" font-family="Arial, Helvetica, sans-serif" font-size="14">hybrid outputs</text>
+    <g transform="translate(840 0)">
+      <rect width="178" height="118" rx="16" fill="#FFFFFF" stroke="#E3D5C2"/>
+      <text x="22" y="34" fill="#0F766E" font-size="13" font-weight="900">05</text>
+      <text x="22" y="62" fill="#10201C" font-size="19" font-weight="900">Produce</text>
+      <text x="22" y="88" fill="#6C6154" font-size="13">PPTX, HTML, PDF, hybrid</text>
+    </g>
+    <g transform="translate(1050 0)">
+      <rect width="178" height="118" rx="16" fill="#FFFFFF" stroke="#E3D5C2"/>
+      <text x="22" y="34" fill="#0F766E" font-size="13" font-weight="900">06</text>
+      <text x="22" y="62" fill="#10201C" font-size="19" font-weight="900">Audit</text>
+      <text x="22" y="88" fill="#6C6154" font-size="13">layout, sources, image2 evidence</text>
     </g>
   </g>
 
-  <g transform="translate(952 303)">
-    <rect width="274" height="38" rx="19" fill="#10201C"/>
-    <text x="137" y="25" text-anchor="middle" fill="#F8F0E3" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800">06 AUDIT: overlap, overflow, density, sources</text>
+  <g stroke="#0F766E" stroke-width="2" stroke-linecap="round" opacity="0.55">
+    <path d="M242 191H264"/>
+    <path d="M452 191H474"/>
+    <path d="M662 191H684"/>
+    <path d="M872 191H894"/>
+    <path d="M1082 191H1104"/>
   </g>
 </svg>
