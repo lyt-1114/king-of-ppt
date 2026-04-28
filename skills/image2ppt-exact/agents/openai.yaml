@@ -1,8 +1,8 @@
 interface:
   display_name: "Image2PPT Exact"
-  short_description: "Exact image deck export and editable PPTX rebuild routes."
+  short_description: "Full image-to-PPT route with exact proof and editable rebuild outputs."
   brand_color: "#0F766E"
-  default_prompt: "Use $image2ppt-exact to convert approved slide images into exact SVG proof assets and an editable PPTX rebuild."
+  default_prompt: "Use $image2ppt-exact full-rebuild to convert approved slide images into exact proof assets, an editable text layer, and an optional high-fidelity editable PPTX rebuild."
 
 policy:
   allow_implicit_invocation: true

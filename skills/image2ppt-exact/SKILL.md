@@ -1,16 +1,18 @@
 ---
 name: image2ppt-exact
-description: Use when converting approved full-slide images into exact SVG/PPTX proof assets, OCR-based editable text PPTX files, or high-fidelity editable PowerPoint rebuilds using blueprint JSON with native text boxes, shapes, lines, pictures, panels, chips, and footers.
+description: Use when converting approved full-slide images into exact SVG/PPTX proof assets, OCR-based editable text PPTX files, full-rebuild pipelines, or high-fidelity editable PowerPoint rebuilds using blueprint JSON with native text boxes, shapes, lines, pictures, panels, chips, and footers.
 ---
 
 # Image2PPT Exact
 
-Use this skill for the reproducible handoff route:
+Use this skill for the reproducible handoff route. Prefer the full rebuild route when the user wants the strongest end-to-end conversion:
 
 ```text
-approved slide images -> exact SVG wrappers / exact image PPTX
-approved slide images -> OCR JSON -> editable text PPTX
-blueprint JSON -> high-fidelity editable PPTX
+approved slide images
+-> exact SVG wrappers / exact image PPTX
+-> OCR JSON / editable text PPTX
+-> optional blueprint JSON / high-fidelity editable PPTX
+-> unified full-rebuild log
 ```
 
 ## Core Boundary
@@ -18,7 +20,7 @@ blueprint JSON -> high-fidelity editable PPTX
 - SVG files produced by this route are usually PNG wrappers. They are pixel-faithful, but not editable as native PPT text or shapes.
 - Editable PPTX output must be rebuilt as native PowerPoint objects.
 - OCR-only output gives editable text boxes, not a polished high-fidelity deck.
-- For decks similar to a successful high-fidelity editable rebuild, use `blueprint-rebuild` with explicit layout objects.
+- For decks similar to a successful high-fidelity editable rebuild, use `full-rebuild` with `--blueprint` so the exact proof, editable text layer, high-fidelity rebuild, and verification log are produced together.
 
 ## Package Setup
 
@@ -43,14 +45,35 @@ pip install "git+https://github.com/lyt-1114/king-of-ppt.git#subdirectory=packag
 
 ## Route Selection
 
-Choose exactly one primary route before running commands:
+Use `full-rebuild` as the default route when the user asks for a complete conversion. Use the lower-level routes only when debugging or when the user explicitly wants one output layer.
 
 | Need | Route | Command |
 | --- | --- | --- |
+| Complete exact proof + editable text + optional high-fidelity rebuild | Full rebuild | `image2ppt-exact full-rebuild` |
 | Pixel-faithful proof of approved image deck | Exact export | `image2ppt-exact export` |
 | Editable text boxes from slide images | OCR editable text | `image2ppt-exact ocr` then `image2ppt-exact editable` |
 | One-command verified image -> SVG -> editable text flow | Verified pipeline | `image2ppt-exact image-svg-editable` |
 | Polished high-fidelity editable deck | Blueprint rebuild | `image2ppt-exact blueprint-rebuild` |
+
+## Recommended Route: Full Rebuild
+
+```bash
+image2ppt-exact full-rebuild path/to/slides \
+  --out path/to/rebuild \
+  --blueprint path/to/deck.blueprint.json \
+  --assets-root path/to/assets \
+  --background keep \
+  --force
+```
+
+This route runs the layers together:
+
+- exact SVG wrappers, HTML preview, and exact image PPTX
+- OCR JSON and editable text PPTX
+- optional high-fidelity native-object PPTX when `--blueprint` is provided
+- `full-rebuild-log.md` with the output paths, slide count, OCR text count, editable text box count, and blueprint object counts
+
+If `--blueprint` is omitted, still run `full-rebuild` for the exact proof and editable text layer, but report that the high-fidelity native-object rebuild was skipped.
 
 ## Route 1: Exact Export
 
@@ -119,6 +142,7 @@ image2ppt-exact --help
 
 For a real output, inspect the generated log:
 
+- `full-rebuild-log.md` for the recommended full rebuild route
 - `run-log.md` for exact export
 - `pipeline-execution-log.md` for image-svg-editable
 - `*.blueprint-log.md` for blueprint rebuild
