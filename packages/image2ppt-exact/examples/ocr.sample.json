@@ -1,0 +1,12 @@
+{
+  "blocks": [
+    {
+      "text": "Editable text",
+      "bbox": [120, 90, 420, 48],
+      "font_size": 22,
+      "color": "#111827",
+      "bold": false,
+      "align": "left"
+    }
+  ]
+}

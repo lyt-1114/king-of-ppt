@@ -200,13 +200,11 @@ cd packages/image2ppt-exact && python -m unittest discover -s tests
 
 For approved image-render decks that must be reproduced exactly, the repository
 also includes `packages/image2ppt-exact`. It turns full-slide images into
-base64 SVG wrappers, writes an HTML preview and run log, builds a full-image
-PPTX, and can run a verified `image-svg-editable` route so the same source slide
-images produce SVG proof assets, OCR JSON, and a PPTX with editable PowerPoint
-text boxes. The exact route is for pixel-level fidelity; the editable text route
-is a reconstruction from OCR JSON. For decks that need to resemble the earlier
-high-fidelity editable rebuild, `blueprint-rebuild` turns a JSON layout blueprint
-into native PPT text boxes, shapes, lines, pictures, panels, chips, and footers.
+base64 SVG wrappers, builds full-image proof PPTX files, reconstructs editable
+text PPTX files from OCR JSON, and supports high-fidelity blueprint rebuilds
+with native PPT text boxes, shapes, lines, pictures, panels, chips, and footers.
+
+Start here: [packages/image2ppt-exact/README.md](packages/image2ppt-exact/README.md).
 
 ## Try It
 

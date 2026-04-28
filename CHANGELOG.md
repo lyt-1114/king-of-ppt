@@ -6,6 +6,7 @@
 - Added an OCR/editable handoff route: slide images to per-slide OCR JSON, then OCR JSON to native PowerPoint text boxes for editable-text PPTX reconstruction.
 - Added the verified `image-svg-editable` command to run image-to-SVG proof generation and editable PPTX reconstruction in one fixed pipeline with slide-count and editable-text checks.
 - Added `blueprint-rebuild` for high-fidelity editable PPTX reconstruction from JSON using native PowerPoint text, shapes, lines, pictures, and reusable panel/chip/footer components.
+- Reorganized `packages/image2ppt-exact` documentation into a route-based README, per-route docs, blueprint schema, and sample JSON inputs.
 - Documented the fidelity/editability tradeoff explicitly so exact image reproduction is not confused with recovered editable PPT objects.
 
 ## 2026-04-27

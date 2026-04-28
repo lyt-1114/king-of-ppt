@@ -1,0 +1,78 @@
+{
+  "canvas": {
+    "width": 1920,
+    "height": 1080
+  },
+  "theme": {
+    "font": "Microsoft YaHei",
+    "font_size": 12,
+    "text": "#f4f8f7",
+    "accent": "#01e1d9",
+    "panel_fill": "#163f45",
+    "muted": "#8ea6a8"
+  },
+  "slides": [
+    {
+      "background": {
+        "color": "#04191c"
+      },
+      "elements": [
+        {
+          "type": "text",
+          "x": 120,
+          "y": 100,
+          "w": 900,
+          "h": 90,
+          "text": "High fidelity editable rebuild",
+          "font_size": 28,
+          "bold": true
+        },
+        {
+          "type": "text",
+          "x": 120,
+          "y": 190,
+          "w": 1180,
+          "h": 60,
+          "text": "Blueprint route creates native PowerPoint objects instead of OCR-only overlays.",
+          "font_size": 15,
+          "color": "#cad7d8"
+        },
+        {
+          "type": "component",
+          "name": "panel",
+          "x": 120,
+          "y": 320,
+          "w": 520,
+          "h": 260,
+          "title": "Native panel",
+          "body": "The card, accent bar, title, and body are all separate editable PPT objects."
+        },
+        {
+          "type": "component",
+          "name": "chip",
+          "x": 720,
+          "y": 320,
+          "w": 260,
+          "h": 64,
+          "text": "Editable chip"
+        },
+        {
+          "type": "line",
+          "x1": 720,
+          "y1": 460,
+          "x2": 1180,
+          "y2": 460,
+          "color": "#99efe9",
+          "width": 1.4
+        },
+        {
+          "type": "component",
+          "name": "footer",
+          "page": "01",
+          "label": "Blueprint rebuild",
+          "source": "Source: image2ppt-exact examples"
+        }
+      ]
+    }
+  ]
+}
