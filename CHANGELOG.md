@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-04-29
+
+- Added `packages/image2ppt-exact`, a reproducible CLI package for the historical Image2PPT exact export flow: full-slide images to base64 SVG wrappers, HTML preview, run log, and full-image PPTX.
+- Added an OCR/editable handoff route: slide images to per-slide OCR JSON, then OCR JSON to native PowerPoint text boxes for editable-text PPTX reconstruction.
+- Documented the fidelity/editability tradeoff explicitly so exact image reproduction is not confused with recovered editable PPT objects.
+
 ## 2026-04-27
 
 - Rebuilt the README SVG visual system from scratch with a unified black technology style, lower text density, and no overlapping text boxes.

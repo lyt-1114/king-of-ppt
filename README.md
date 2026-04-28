@@ -183,6 +183,8 @@ skills/ultimate-ppt/references/visual-system.md
 skills/ultimate-ppt/references/workflow.md
 skills/ultimate-ppt/references/writing-style.md
 skills/ultimate-ppt/scripts/audit_deck.py
+packages/image2ppt-exact/
+packages/image2ppt-exact/src/image2ppt_exact/
 ```
 
 ## Validate
@@ -191,7 +193,17 @@ skills/ultimate-ppt/scripts/audit_deck.py
 python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/ultimate-ppt
 python skills/ultimate-ppt/scripts/audit_deck.py path/to/output-folder
 python skills/ultimate-ppt/scripts/audit_deck.py path/to/output-folder --image2
+cd packages/image2ppt-exact && python -m unittest discover -s tests
 ```
+
+## Exact Image Deck Package
+
+For approved image-render decks that must be reproduced exactly, the repository
+also includes `packages/image2ppt-exact`. It turns full-slide images into
+base64 SVG wrappers, writes an HTML preview and run log, builds a full-image
+PPTX, and can run an OCR-to-native-text pass so the last handoff can become a
+PPTX with editable PowerPoint text boxes. The exact route is for pixel-level
+fidelity; the editable text route is a reconstruction from OCR JSON.
 
 ## Try It
 

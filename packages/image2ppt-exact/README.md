@@ -1,0 +1,122 @@
+# image2ppt-exact
+
+`image2ppt-exact` makes the historical Image2PPT handoff reproducible:
+
+```text
+full-slide images -> pixel-identical SVG wrappers -> HTML preview + run log -> PPTX
+full-slide images -> OCR JSON -> native editable PPT text boxes
+```
+
+This package is intentionally honest about the tradeoff. It preserves the approved
+render exactly by wrapping each slide image inside an SVG and placing the slide
+image full-canvas in the PPTX. It does **not** recover editable text boxes, vector
+shapes, or chart objects from a flattened image unless you run the OCR/editable
+step and accept that the editable layer is a reconstruction.
+
+## Install
+
+From this package folder:
+
+```bash
+pip install -e .
+```
+
+For OCR extraction:
+
+```bash
+pip install -e .[ocr]
+```
+
+## Usage
+
+```bash
+image2ppt-exact export path/to/image2_assets/slides --out path/to/svg_exact --force
+```
+
+With an explicit PPTX path:
+
+```bash
+image2ppt-exact export path/to/slides \
+  --out path/to/svg_exact \
+  --pptx path/to/final_exact.pptx \
+  --title "Approved Image2PPT Deck" \
+  --force
+```
+
+The output folder contains:
+
+- `slides_svg/slide_XX.svg`: each SVG embeds the matching source image as a
+  full-canvas base64 image.
+- `index.html`: browser preview for checking the generated SVG deck.
+- `run-log.md`: source, output, page count, and limitations.
+- `exact_image_deck.pptx`: full-slide image PPTX unless `--no-pptx` is used.
+
+## Editable Text Step
+
+The editable route is split into two reproducible commands.
+
+First, extract one OCR JSON file per slide:
+
+```bash
+image2ppt-exact ocr path/to/slides --out path/to/ocr_json --lang ch
+```
+
+Then rebuild a PPTX with native PowerPoint text boxes:
+
+```bash
+image2ppt-exact editable path/to/slides \
+  --ocr path/to/ocr_json \
+  --pptx path/to/editable_text_layer.pptx \
+  --background keep \
+  --font "Microsoft YaHei"
+```
+
+`--background keep` preserves the original slide render below the editable text
+boxes. `--background blank` creates text-only slides from OCR boxes, which is
+useful when you want to manually rebuild the visual layer without duplicated
+flattened text.
+
+OCR JSON can also be edited by hand. Each `slide_XX.json` file uses:
+
+```json
+{
+  "blocks": [
+    {
+      "text": "Editable text",
+      "bbox": [120, 90, 420, 48],
+      "font_size": 22,
+      "color": "#111827",
+      "bold": false,
+      "align": "left"
+    }
+  ]
+}
+```
+
+## Reproduce The Earlier Cargill Flow
+
+From the original working folder, the historical command maps to:
+
+```bash
+image2ppt-exact export cargill_wanflow_ppt_output/image2_assets/slides \
+  --out cargill_wanflow_ppt_svg_exact_rebuild \
+  --pptx cargill_wanflow_ppt_svg_exact_rebuild/exact_image_deck.pptx \
+  --title "Cargill Wanflow Image2PPT Exact Export" \
+  --force
+
+image2ppt-exact ocr cargill_wanflow_ppt_output/image2_assets/slides \
+  --out cargill_wanflow_ppt_svg_exact_rebuild/ocr_json \
+  --lang ch
+
+image2ppt-exact editable cargill_wanflow_ppt_output/image2_assets/slides \
+  --ocr cargill_wanflow_ppt_svg_exact_rebuild/ocr_json \
+  --pptx cargill_wanflow_ppt_svg_exact_rebuild/editable_text_layer.pptx \
+  --background keep
+```
+
+## Important Limitation
+
+Putting an SVG into PPT is not the same thing as making the PPT editable. If the
+SVG contains a single embedded PNG, PowerPoint can only edit it as an image layer.
+For editable decks, rebuild the slide with native PPT text boxes, shapes, lines,
+tables, charts, and replaceable images.
