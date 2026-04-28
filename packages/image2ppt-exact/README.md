@@ -53,6 +53,30 @@ The output folder contains:
 
 ## Editable Text Step
 
+For the exact route you care about, use the verified one-command pipeline:
+
+```bash
+image2ppt-exact image-svg-editable path/to/slides \
+  --out path/to/rebuild \
+  --pptx path/to/rebuild/editable_text_layer.pptx \
+  --background keep \
+  --force
+```
+
+This always performs the same sequence:
+
+```text
+slide images -> SVG exact wrappers + preview -> OCR JSON -> native editable PPTX -> verification
+```
+
+The command refuses to report success when OCR JSON is missing, contains zero
+text blocks, the editable PPTX slide count is wrong, or the generated PPTX has
+no editable text boxes. It also writes `pipeline-execution-log.md`, which records
+the same decision boundary used in the earlier successful run: SVG is only a
+PNG wrapper, editability requires a separate native PPTX reconstruction, the
+source image deck is not overwritten, and pixel-identical output cannot be fully
+editable at the same time.
+
 The editable route is split into two reproducible commands.
 
 First, extract one OCR JSON file per slide:
@@ -112,6 +136,12 @@ image2ppt-exact editable cargill_wanflow_ppt_output/image2_assets/slides \
   --ocr cargill_wanflow_ppt_svg_exact_rebuild/ocr_json \
   --pptx cargill_wanflow_ppt_svg_exact_rebuild/editable_text_layer.pptx \
   --background keep
+
+image2ppt-exact image-svg-editable cargill_wanflow_ppt_output/image2_assets/slides \
+  --out cargill_wanflow_ppt_svg_exact_rebuild \
+  --pptx cargill_wanflow_ppt_svg_exact_rebuild/editable_text_layer.pptx \
+  --background keep \
+  --force
 ```
 
 ## Important Limitation

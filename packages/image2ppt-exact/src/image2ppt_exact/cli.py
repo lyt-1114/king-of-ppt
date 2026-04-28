@@ -5,6 +5,7 @@ from pathlib import Path
 
 from .editable import EditableConfig, OcrConfig, create_editable_text_pptx, extract_ocr_json
 from .exporter import ExportConfig, export_exact_deck
+from .pipeline import ImageSvgEditableConfig, run_image_svg_editable_pipeline
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -81,6 +82,50 @@ def build_parser() -> argparse.ArgumentParser:
     editable.add_argument("--font", default="Microsoft YaHei")
     editable.add_argument("--color", default="#111827")
 
+    pipeline = subparsers.add_parser(
+        "image-svg-editable",
+        help=(
+            "Run image -> SVG exact proof -> OCR JSON -> editable PPTX with "
+            "verification."
+        ),
+    )
+    pipeline.add_argument("src", type=Path, help="Folder containing slide images.")
+    pipeline.add_argument("--out", type=Path, required=True, help="Output folder.")
+    pipeline.add_argument(
+        "--pptx",
+        type=Path,
+        default=None,
+        help="Editable PPTX path. Defaults to OUT/editable_text_layer.pptx.",
+    )
+    pipeline.add_argument(
+        "--ocr",
+        type=Path,
+        default=None,
+        help="Existing OCR JSON folder. If omitted, creates OUT/ocr_json.",
+    )
+    pipeline.add_argument(
+        "--pattern",
+        default="slide_*.png",
+        help="Glob used to find slide images. Default: slide_*.png",
+    )
+    pipeline.add_argument("--width", type=int, default=1920, help="Canvas width.")
+    pipeline.add_argument("--height", type=int, default=1080, help="Canvas height.")
+    pipeline.add_argument("--lang", default="ch", help="PaddleOCR language.")
+    pipeline.add_argument(
+        "--background",
+        choices=["keep", "blank"],
+        default="keep",
+        help="Keep original slide image as background, or create text-only slides.",
+    )
+    pipeline.add_argument("--font", default="Microsoft YaHei")
+    pipeline.add_argument("--color", default="#111827")
+    pipeline.add_argument("--force", action="store_true")
+    pipeline.add_argument(
+        "--allow-empty-text",
+        action="store_true",
+        help="Allow decks with zero OCR text blocks.",
+    )
+
     return parser
 
 
@@ -137,6 +182,35 @@ def main(argv: list[str] | None = None) -> int:
             )
         )
         print(f"editable_pptx={pptx_path}")
+        return 0
+
+    if args.command == "image-svg-editable":
+        result = run_image_svg_editable_pipeline(
+            ImageSvgEditableConfig(
+                src=args.src,
+                out=args.out,
+                editable_pptx_path=args.pptx,
+                ocr_dir=args.ocr,
+                pattern=args.pattern,
+                width=args.width,
+                height=args.height,
+                lang=args.lang,
+                background=args.background,
+                default_font=args.font,
+                default_color=args.color,
+                force=args.force,
+                allow_empty_text=args.allow_empty_text,
+            )
+        )
+        print(f"slides={result.slide_count}")
+        print(f"svg_dir={result.svg_dir}")
+        print(f"preview={result.preview_path}")
+        print(f"exact_pptx={result.exact_pptx_path}")
+        print(f"ocr_json={result.ocr_dir}")
+        print(f"editable_pptx={result.editable_pptx_path}")
+        print(f"pipeline_log={result.pipeline_log_path}")
+        print(f"ocr_text_blocks={result.expected_text_blocks}")
+        print(f"editable_text_boxes={result.actual_text_boxes}")
         return 0
 
     parser.error(f"Unknown command: {args.command}")

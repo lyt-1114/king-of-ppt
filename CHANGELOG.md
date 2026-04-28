@@ -4,6 +4,7 @@
 
 - Added `packages/image2ppt-exact`, a reproducible CLI package for the historical Image2PPT exact export flow: full-slide images to base64 SVG wrappers, HTML preview, run log, and full-image PPTX.
 - Added an OCR/editable handoff route: slide images to per-slide OCR JSON, then OCR JSON to native PowerPoint text boxes for editable-text PPTX reconstruction.
+- Added the verified `image-svg-editable` command to run image-to-SVG proof generation and editable PPTX reconstruction in one fixed pipeline with slide-count and editable-text checks.
 - Documented the fidelity/editability tradeoff explicitly so exact image reproduction is not confused with recovered editable PPT objects.
 
 ## 2026-04-27
