@@ -1,16 +1,19 @@
 from __future__ import annotations
 
 import base64
+import json
 import tempfile
 import unittest
 from pathlib import Path
 
 from image2ppt_exact import (
+    BlueprintRebuildConfig,
     EditableConfig,
     ExportConfig,
     ImageSvgEditableConfig,
     create_editable_text_pptx,
     export_exact_deck,
+    rebuild_from_blueprint,
     run_image_svg_editable_pipeline,
 )
 
@@ -104,6 +107,85 @@ class ExporterTests(unittest.TestCase):
             log = (out / "pipeline-execution-log.md").read_text(encoding="utf-8")
             self.assertIn("SVG output is a pixel-faithful wrapper", log)
             self.assertIn("Editable output is a separate PPTX", log)
+
+    def test_blueprint_rebuild_creates_native_objects(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            blueprint = root / "deck.json"
+            pptx = root / "blueprint.pptx"
+            blueprint.write_text(
+                json.dumps(
+                    {
+                        "canvas": {"width": 1920, "height": 1080},
+                        "theme": {
+                            "font": "Microsoft YaHei",
+                            "accent": "#01e1d9",
+                            "panel_fill": "#163f45",
+                        },
+                        "slides": [
+                            {
+                                "background": {"color": "#04191c"},
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "x": 120,
+                                        "y": 100,
+                                        "w": 900,
+                                        "h": 90,
+                                        "text": "High fidelity title",
+                                        "font_size": 28,
+                                        "bold": True,
+                                    },
+                                    {
+                                        "type": "component",
+                                        "name": "panel",
+                                        "x": 120,
+                                        "y": 260,
+                                        "w": 560,
+                                        "h": 260,
+                                        "title": "Native panel",
+                                        "body": "Text, shape, and accent bar are editable.",
+                                    },
+                                    {
+                                        "type": "component",
+                                        "name": "chip",
+                                        "x": 760,
+                                        "y": 260,
+                                        "w": 240,
+                                        "h": 64,
+                                        "text": "Editable chip",
+                                    },
+                                    {
+                                        "type": "line",
+                                        "x1": 760,
+                                        "y1": 390,
+                                        "x2": 1100,
+                                        "y2": 390,
+                                    },
+                                    {
+                                        "type": "component",
+                                        "name": "footer",
+                                        "page": "01",
+                                        "label": "Blueprint",
+                                    },
+                                ],
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            result = rebuild_from_blueprint(
+                BlueprintRebuildConfig(blueprint_path=blueprint, pptx_path=pptx)
+            )
+
+            self.assertTrue(pptx.exists())
+            self.assertTrue(result.log_path.exists())
+            self.assertEqual(result.slide_count, 1)
+            self.assertGreaterEqual(result.text_count, 5)
+            self.assertGreaterEqual(result.shape_count, 3)
+            self.assertEqual(result.line_count, 1)
 
 
 if __name__ == "__main__":

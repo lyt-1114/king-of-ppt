@@ -204,7 +204,9 @@ base64 SVG wrappers, writes an HTML preview and run log, builds a full-image
 PPTX, and can run a verified `image-svg-editable` route so the same source slide
 images produce SVG proof assets, OCR JSON, and a PPTX with editable PowerPoint
 text boxes. The exact route is for pixel-level fidelity; the editable text route
-is a reconstruction from OCR JSON.
+is a reconstruction from OCR JSON. For decks that need to resemble the earlier
+high-fidelity editable rebuild, `blueprint-rebuild` turns a JSON layout blueprint
+into native PPT text boxes, shapes, lines, pictures, panels, chips, and footers.
 
 ## Try It
 

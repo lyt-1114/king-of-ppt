@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
+from .blueprint import BlueprintRebuildConfig, rebuild_from_blueprint
 from .editable import EditableConfig, OcrConfig, create_editable_text_pptx, extract_ocr_json
 from .exporter import ExportConfig, export_exact_deck
 from .pipeline import ImageSvgEditableConfig, run_image_svg_editable_pipeline
@@ -126,6 +127,22 @@ def build_parser() -> argparse.ArgumentParser:
         help="Allow decks with zero OCR text blocks.",
     )
 
+    blueprint = subparsers.add_parser(
+        "blueprint-rebuild",
+        help=(
+            "Rebuild a high-fidelity editable PPTX from a blueprint JSON using "
+            "native text boxes, shapes, lines, pictures, and components."
+        ),
+    )
+    blueprint.add_argument("blueprint", type=Path, help="Blueprint JSON path.")
+    blueprint.add_argument("--pptx", type=Path, required=True, help="PPTX output path.")
+    blueprint.add_argument(
+        "--assets-root",
+        type=Path,
+        default=None,
+        help="Folder used to resolve relative image asset paths.",
+    )
+
     return parser
 
 
@@ -211,6 +228,23 @@ def main(argv: list[str] | None = None) -> int:
         print(f"pipeline_log={result.pipeline_log_path}")
         print(f"ocr_text_blocks={result.expected_text_blocks}")
         print(f"editable_text_boxes={result.actual_text_boxes}")
+        return 0
+
+    if args.command == "blueprint-rebuild":
+        result = rebuild_from_blueprint(
+            BlueprintRebuildConfig(
+                blueprint_path=args.blueprint,
+                pptx_path=args.pptx,
+                assets_root=args.assets_root,
+            )
+        )
+        print(f"pptx={result.pptx_path}")
+        print(f"blueprint_log={result.log_path}")
+        print(f"slides={result.slide_count}")
+        print(f"text_objects={result.text_count}")
+        print(f"shape_objects={result.shape_count}")
+        print(f"picture_objects={result.picture_count}")
+        print(f"line_objects={result.line_count}")
         return 0
 
     parser.error(f"Unknown command: {args.command}")
