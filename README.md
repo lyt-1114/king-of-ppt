@@ -28,6 +28,18 @@ npx skills add https://github.com/lyt-1114/king-of-ppt
 | `$ultimate-ppt` | Strategy-first creation, improvement, conversion, and evaluation of polished presentation decks. |
 | `$image2ppt-exact` | Exact image deck export, image -> SVG proof assets, OCR editable text PPTX, and blueprint-based high-fidelity editable rebuilds. |
 
+## Image2PPT Exact
+
+For approved image-render decks that must be reproduced exactly, the repository
+also includes `packages/image2ppt-exact`. It turns full-slide images into
+base64 SVG wrappers, builds full-image proof PPTX files, reconstructs editable
+text PPTX files from OCR JSON, and supports high-fidelity blueprint rebuilds
+with native PPT text boxes, shapes, lines, pictures, panels, chips, and footers.
+
+Start here: [packages/image2ppt-exact/README.md](packages/image2ppt-exact/README.md).
+
+Skill entry: [skills/image2ppt-exact/SKILL.md](skills/image2ppt-exact/SKILL.md).
+
 ## Why It Feels Different
 
 Ordinary PPT skills usually answer one request: "make slides."
@@ -168,6 +180,8 @@ npx skills add https://github.com/lyt-1114/king-of-ppt
 
 ```text
 skills/ultimate-ppt/SKILL.md
+skills/image2ppt-exact/SKILL.md
+skills/image2ppt-exact/agents/openai.yaml
 skills/ultimate-ppt/agents/openai.yaml
 skills/ultimate-ppt/assets/
 skills/ultimate-ppt/assets/deck_index.html
@@ -190,8 +204,6 @@ skills/ultimate-ppt/references/visual-system.md
 skills/ultimate-ppt/references/workflow.md
 skills/ultimate-ppt/references/writing-style.md
 skills/ultimate-ppt/scripts/audit_deck.py
-skills/image2ppt-exact/SKILL.md
-skills/image2ppt-exact/agents/openai.yaml
 packages/image2ppt-exact/
 packages/image2ppt-exact/src/image2ppt_exact/
 ```
@@ -205,18 +217,6 @@ python skills/ultimate-ppt/scripts/audit_deck.py path/to/output-folder
 python skills/ultimate-ppt/scripts/audit_deck.py path/to/output-folder --image2
 cd packages/image2ppt-exact && python -m unittest discover -s tests
 ```
-
-## Exact Image Deck Package
-
-For approved image-render decks that must be reproduced exactly, the repository
-also includes `packages/image2ppt-exact`. It turns full-slide images into
-base64 SVG wrappers, builds full-image proof PPTX files, reconstructs editable
-text PPTX files from OCR JSON, and supports high-fidelity blueprint rebuilds
-with native PPT text boxes, shapes, lines, pictures, panels, chips, and footers.
-
-Start here: [packages/image2ppt-exact/README.md](packages/image2ppt-exact/README.md).
-
-Skill entry: [skills/image2ppt-exact/SKILL.md](skills/image2ppt-exact/SKILL.md).
 
 ## Try It
 
