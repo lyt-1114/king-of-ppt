@@ -6,6 +6,7 @@ from pathlib import Path
 from .blueprint import BlueprintRebuildConfig, rebuild_from_blueprint
 from .editable import EditableConfig, OcrConfig, create_editable_text_pptx, extract_ocr_json
 from .exporter import ExportConfig, export_exact_deck
+from .full_rebuild import FullRebuildConfig, run_full_rebuild_pipeline
 from .pipeline import ImageSvgEditableConfig, run_image_svg_editable_pipeline
 
 
@@ -143,6 +144,68 @@ def build_parser() -> argparse.ArgumentParser:
         help="Folder used to resolve relative image asset paths.",
     )
 
+    full = subparsers.add_parser(
+        "full-rebuild",
+        help=(
+            "Run exact proof, OCR editable text, optional blueprint rebuild, "
+            "and a unified verification log."
+        ),
+    )
+    full.add_argument("src", type=Path, help="Folder containing slide images.")
+    full.add_argument("--out", type=Path, required=True, help="Output folder.")
+    full.add_argument(
+        "--blueprint",
+        type=Path,
+        default=None,
+        help="Optional blueprint JSON for high-fidelity native-object rebuild.",
+    )
+    full.add_argument(
+        "--blueprint-pptx",
+        type=Path,
+        default=None,
+        help="High-fidelity PPTX path. Defaults to OUT/high_fidelity_editable.pptx.",
+    )
+    full.add_argument(
+        "--assets-root",
+        type=Path,
+        default=None,
+        help="Folder used to resolve relative blueprint image asset paths.",
+    )
+    full.add_argument(
+        "--pptx",
+        type=Path,
+        default=None,
+        help="Editable text PPTX path. Defaults to OUT/editable_text_layer.pptx.",
+    )
+    full.add_argument(
+        "--ocr",
+        type=Path,
+        default=None,
+        help="Existing OCR JSON folder. If omitted, creates OUT/ocr_json.",
+    )
+    full.add_argument(
+        "--pattern",
+        default="slide_*.png",
+        help="Glob used to find slide images. Default: slide_*.png",
+    )
+    full.add_argument("--width", type=int, default=1920, help="Canvas width.")
+    full.add_argument("--height", type=int, default=1080, help="Canvas height.")
+    full.add_argument("--lang", default="ch", help="PaddleOCR language.")
+    full.add_argument(
+        "--background",
+        choices=["keep", "blank"],
+        default="keep",
+        help="Keep original slide image as background, or create text-only slides.",
+    )
+    full.add_argument("--font", default="Microsoft YaHei")
+    full.add_argument("--color", default="#111827")
+    full.add_argument("--force", action="store_true")
+    full.add_argument(
+        "--allow-empty-text",
+        action="store_true",
+        help="Allow decks with zero OCR text blocks.",
+    )
+
     return parser
 
 
@@ -245,6 +308,43 @@ def main(argv: list[str] | None = None) -> int:
         print(f"shape_objects={result.shape_count}")
         print(f"picture_objects={result.picture_count}")
         print(f"line_objects={result.line_count}")
+        return 0
+
+    if args.command == "full-rebuild":
+        result = run_full_rebuild_pipeline(
+            FullRebuildConfig(
+                src=args.src,
+                out=args.out,
+                blueprint_path=args.blueprint,
+                blueprint_pptx_path=args.blueprint_pptx,
+                assets_root=args.assets_root,
+                editable_pptx_path=args.pptx,
+                ocr_dir=args.ocr,
+                pattern=args.pattern,
+                width=args.width,
+                height=args.height,
+                lang=args.lang,
+                background=args.background,
+                default_font=args.font,
+                default_color=args.color,
+                force=args.force,
+                allow_empty_text=args.allow_empty_text,
+            )
+        )
+        print(f"slides={result.slide_count}")
+        print(f"svg_dir={result.svg_dir}")
+        print(f"preview={result.preview_path}")
+        print(f"exact_pptx={result.exact_pptx_path}")
+        print(f"ocr_json={result.ocr_dir}")
+        print(f"editable_pptx={result.editable_pptx_path}")
+        print(f"blueprint_pptx={result.blueprint_pptx_path}")
+        print(f"full_rebuild_log={result.full_rebuild_log_path}")
+        print(f"ocr_text_blocks={result.expected_text_blocks}")
+        print(f"editable_text_boxes={result.actual_text_boxes}")
+        print(f"blueprint_text_objects={result.blueprint_text_objects}")
+        print(f"blueprint_shape_objects={result.blueprint_shape_objects}")
+        print(f"blueprint_picture_objects={result.blueprint_picture_objects}")
+        print(f"blueprint_line_objects={result.blueprint_line_objects}")
         return 0
 
     parser.error(f"Unknown command: {args.command}")

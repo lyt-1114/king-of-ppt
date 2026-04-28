@@ -244,6 +244,10 @@ Create hidden presenter notes and an HTML preview, then export a PPTX.
 Use image2ppt-exact to turn this approved image2 slide folder into exact SVG proof assets and a separate editable PPTX rebuild.
 ```
 
+```text
+Use image2ppt-exact full-rebuild to run the exact proof, editable text layer, optional blueprint rebuild, and verification log together.
+```
+
 ## Update Log
 
 See [CHANGELOG.md](CHANGELOG.md) for the full history.

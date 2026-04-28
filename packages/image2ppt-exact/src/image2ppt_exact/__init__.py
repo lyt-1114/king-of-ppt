@@ -8,6 +8,11 @@ from .pipeline import (
     ImageSvgEditableResult,
     run_image_svg_editable_pipeline,
 )
+from .full_rebuild import (
+    FullRebuildConfig,
+    FullRebuildResult,
+    run_full_rebuild_pipeline,
+)
 
 __all__ = [
     "BlueprintRebuildConfig",
@@ -15,6 +20,8 @@ __all__ = [
     "EditableConfig",
     "ExportConfig",
     "ExportResult",
+    "FullRebuildConfig",
+    "FullRebuildResult",
     "ImageSvgEditableConfig",
     "ImageSvgEditableResult",
     "OcrConfig",
@@ -22,5 +29,6 @@ __all__ = [
     "export_exact_deck",
     "extract_ocr_json",
     "rebuild_from_blueprint",
+    "run_full_rebuild_pipeline",
     "run_image_svg_editable_pipeline",
 ]

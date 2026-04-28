@@ -10,10 +10,12 @@ from image2ppt_exact import (
     BlueprintRebuildConfig,
     EditableConfig,
     ExportConfig,
+    FullRebuildConfig,
     ImageSvgEditableConfig,
     create_editable_text_pptx,
     export_exact_deck,
     rebuild_from_blueprint,
+    run_full_rebuild_pipeline,
     run_image_svg_editable_pipeline,
 )
 
@@ -186,6 +188,69 @@ class ExporterTests(unittest.TestCase):
             self.assertGreaterEqual(result.text_count, 5)
             self.assertGreaterEqual(result.shape_count, 3)
             self.assertEqual(result.line_count, 1)
+
+    def test_full_rebuild_pipeline_combines_exact_editable_and_blueprint_routes(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            src = root / "slides"
+            ocr = root / "ocr"
+            out = root / "out"
+            src.mkdir()
+            ocr.mkdir()
+            (src / "slide_01.png").write_bytes(base64.b64decode(TINY_PNG))
+            (ocr / "slide_01.json").write_text(
+                '{"blocks":[{"text":"Hello","bbox":[0,0,100,40]}]}',
+                encoding="utf-8",
+            )
+            blueprint = root / "deck.blueprint.json"
+            blueprint.write_text(
+                json.dumps(
+                    {
+                        "canvas": {"width": 1920, "height": 1080},
+                        "slides": [
+                            {
+                                "background": {"color": "#ffffff"},
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "x": 120,
+                                        "y": 100,
+                                        "w": 900,
+                                        "h": 90,
+                                        "text": "Native rebuild",
+                                        "font_size": 28,
+                                    }
+                                ],
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            result = run_full_rebuild_pipeline(
+                FullRebuildConfig(
+                    src=src,
+                    out=out,
+                    ocr_dir=ocr,
+                    blueprint_path=blueprint,
+                    background="blank",
+                    force=True,
+                )
+            )
+
+            self.assertEqual(result.slide_count, 1)
+            self.assertTrue((out / "exact_image_deck.pptx").exists())
+            self.assertTrue((out / "editable_text_layer.pptx").exists())
+            self.assertTrue((out / "high_fidelity_editable.pptx").exists())
+            self.assertTrue((out / "full-rebuild-log.md").exists())
+            self.assertIsNotNone(result.blueprint_pptx_path)
+            self.assertEqual(result.expected_text_blocks, 1)
+            self.assertEqual(result.actual_text_boxes, 1)
+            log = (out / "full-rebuild-log.md").read_text(encoding="utf-8")
+            self.assertIn("Exact proof route", log)
+            self.assertIn("Editable text route", log)
+            self.assertIn("High-fidelity blueprint route", log)
 
 
 if __name__ == "__main__":

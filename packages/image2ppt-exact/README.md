@@ -17,6 +17,7 @@ The package is intentionally split into routes because these goals are different
 | OCR editable text | `ocr` + `editable` | Recovering editable text boxes from slide images | OCR JSON, native PPT text boxes |
 | Verified image route | `image-svg-editable` | Running the approved image -> SVG -> editable text flow in one command | Exact assets, editable PPTX, execution log |
 | High-fidelity rebuild | `blueprint-rebuild` | Rebuilding polished editable decks with native layout objects | PPT text, shapes, lines, pictures, panels, chips, footers |
+| Full rebuild | `full-rebuild` | Running exact proof, editable text, optional blueprint rebuild, and verification together | Exact PPTX, editable text PPTX, optional high-fidelity PPTX, unified log |
 
 Important boundary:
 
@@ -68,6 +69,20 @@ image2ppt-exact blueprint-rebuild examples/blueprint.sample.json \
   --assets-root examples
 ```
 
+Full rebuild route:
+
+```bash
+image2ppt-exact full-rebuild path/to/slides \
+  --out path/to/rebuild \
+  --blueprint examples/blueprint.sample.json \
+  --assets-root examples \
+  --force
+```
+
+If `--blueprint` is omitted, `full-rebuild` still creates the exact proof deck
+and editable text layer, then records that the high-fidelity native-object PPTX
+was skipped because no blueprint was provided.
+
 ## Documentation
 
 - [Exact export](docs/routes/01-exact-export.md)
@@ -87,6 +102,8 @@ Depending on the route, the package writes:
 - `ocr_json/slide_XX.json`
 - `editable_text_layer.pptx`
 - `pipeline-execution-log.md`
+- `high_fidelity_editable.pptx`
+- `full-rebuild-log.md`
 - `*.blueprint-log.md`
 
 ## Validate
@@ -94,6 +111,7 @@ Depending on the route, the package writes:
 ```bash
 python -m unittest discover -s tests
 image2ppt-exact --help
+image2ppt-exact full-rebuild --help
 image2ppt-exact blueprint-rebuild --help
 ```
 
