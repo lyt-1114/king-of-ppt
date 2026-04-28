@@ -7,6 +7,7 @@
 - Added the verified `image-svg-editable` command to run image-to-SVG proof generation and editable PPTX reconstruction in one fixed pipeline with slide-count and editable-text checks.
 - Added `blueprint-rebuild` for high-fidelity editable PPTX reconstruction from JSON using native PowerPoint text, shapes, lines, pictures, and reusable panel/chip/footer components.
 - Reorganized `packages/image2ppt-exact` documentation into a route-based README, per-route docs, blueprint schema, and sample JSON inputs.
+- Added `skills/image2ppt-exact` as a standalone skill entry for exact image export, OCR editable text, verified image-SVG-editable pipeline, and blueprint rebuild workflows.
 - Documented the fidelity/editability tradeoff explicitly so exact image reproduction is not confused with recovered editable PPT objects.
 
 ## 2026-04-27

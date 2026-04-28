@@ -21,6 +21,13 @@ Most PPT skills generate slides. Ultimate PPT builds the system behind the slide
 npx skills add https://github.com/lyt-1114/king-of-ppt
 ```
 
+## Included Skills
+
+| Skill | Use It For |
+| --- | --- |
+| `$ultimate-ppt` | Strategy-first creation, improvement, conversion, and evaluation of polished presentation decks. |
+| `$image2ppt-exact` | Exact image deck export, image -> SVG proof assets, OCR editable text PPTX, and blueprint-based high-fidelity editable rebuilds. |
+
 ## Why It Feels Different
 
 Ordinary PPT skills usually answer one request: "make slides."
@@ -183,6 +190,8 @@ skills/ultimate-ppt/references/visual-system.md
 skills/ultimate-ppt/references/workflow.md
 skills/ultimate-ppt/references/writing-style.md
 skills/ultimate-ppt/scripts/audit_deck.py
+skills/image2ppt-exact/SKILL.md
+skills/image2ppt-exact/agents/openai.yaml
 packages/image2ppt-exact/
 packages/image2ppt-exact/src/image2ppt_exact/
 ```
@@ -191,6 +200,7 @@ packages/image2ppt-exact/src/image2ppt_exact/
 
 ```bash
 python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/ultimate-ppt
+python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/image2ppt-exact
 python skills/ultimate-ppt/scripts/audit_deck.py path/to/output-folder
 python skills/ultimate-ppt/scripts/audit_deck.py path/to/output-folder --image2
 cd packages/image2ppt-exact && python -m unittest discover -s tests
@@ -205,6 +215,8 @@ text PPTX files from OCR JSON, and supports high-fidelity blueprint rebuilds
 with native PPT text boxes, shapes, lines, pictures, panels, chips, and footers.
 
 Start here: [packages/image2ppt-exact/README.md](packages/image2ppt-exact/README.md).
+
+Skill entry: [skills/image2ppt-exact/SKILL.md](skills/image2ppt-exact/SKILL.md).
 
 ## Try It
 
@@ -226,6 +238,10 @@ Preserve the facts, rebuild the visual system, add stronger case pages, and audi
 ```text
 Use ultimate-ppt to make a speaker-ready keynote from this document.
 Create hidden presenter notes and an HTML preview, then export a PPTX.
+```
+
+```text
+Use image2ppt-exact to turn this approved image2 slide folder into exact SVG proof assets and a separate editable PPTX rebuild.
 ```
 
 ## Update Log
