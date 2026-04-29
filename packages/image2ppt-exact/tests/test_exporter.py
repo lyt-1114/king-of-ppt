@@ -22,6 +22,7 @@ from image2ppt_exact import (
     run_image_svg_editable_pipeline,
 )
 from image2ppt_exact.cli import build_parser
+from image2ppt_exact.editable import rapid_result_to_blocks
 
 
 TINY_PNG = (
@@ -103,6 +104,21 @@ class ExporterTests(unittest.TestCase):
         self.assertEqual(editable_args.background, "blank")
         self.assertEqual(pipeline_args.background, "blank")
         self.assertEqual(full_args.background, "blank")
+
+    def test_rapidocr_result_to_blocks(self) -> None:
+        blocks = rapid_result_to_blocks(
+            [
+                (
+                    [[1, 2], [11, 2], [11, 8], [1, 8]],
+                    "Hello",
+                    "0.91",
+                )
+            ]
+        )
+
+        self.assertEqual(blocks[0]["text"], "Hello")
+        self.assertEqual(blocks[0]["bbox"], [1.0, 2.0, 10.0, 6.0])
+        self.assertAlmostEqual(blocks[0]["confidence"], 0.91)
 
     def test_default_editable_output_does_not_keep_text_bearing_image_background(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

@@ -100,27 +100,79 @@ def create_editable_text_pptx(config: EditableConfig) -> Path:
 
 
 def extract_ocr_json(config: OcrConfig) -> Path:
+    rapid_ocr = None
     try:
         from paddleocr import PaddleOCR
-    except ImportError as exc:
+    except ImportError:
+        PaddleOCR = None  # type: ignore[assignment]
+
+    if PaddleOCR is None:
+        rapid_ocr = create_rapid_ocr()
+        if rapid_ocr is None:
+            raise RuntimeError(
+                "No OCR engine is available. Install optional OCR dependencies "
+                "with pip install -e .[ocr], or install rapidocr-onnxruntime, "
+                "or provide OCR JSON manually."
+            )
+
+    ocr = None
+    if PaddleOCR is not None:
+        try:
+            ocr = PaddleOCR(use_angle_cls=True, lang=config.lang)
+        except Exception:
+            rapid_ocr = create_rapid_ocr()
+            if rapid_ocr is None:
+                raise
+
+    if ocr is None and rapid_ocr is None:
         raise RuntimeError(
-            "PaddleOCR is not installed. Install optional OCR dependencies with "
-            "pip install -e .[ocr], or provide OCR JSON manually."
-        ) from exc
+            "No OCR engine is available. Provide OCR JSON manually."
+        )
 
     images = collect_slide_images(config.src.resolve(), config.pattern)
     config.out.mkdir(parents=True, exist_ok=True)
-    ocr = PaddleOCR(use_angle_cls=True, lang=config.lang)
 
     for image_path in images:
-        raw_result = ocr.ocr(str(image_path), cls=True)
-        blocks = paddle_result_to_blocks(raw_result)
+        if ocr is not None:
+            try:
+                raw_result = run_paddle_ocr(ocr, image_path)
+                blocks = paddle_result_to_blocks(raw_result)
+            except Exception:
+                rapid_ocr = rapid_ocr or create_rapid_ocr()
+                if rapid_ocr is None:
+                    raise
+                ocr = None
+                raw_result = run_rapid_ocr(rapid_ocr, image_path)
+                blocks = rapid_result_to_blocks(raw_result)
+        else:
+            raw_result = run_rapid_ocr(rapid_ocr, image_path)
+            blocks = rapid_result_to_blocks(raw_result)
         (config.out / f"{image_path.stem}.json").write_text(
             json.dumps({"blocks": blocks}, ensure_ascii=False, indent=2),
             encoding="utf-8",
         )
 
     return config.out
+
+
+def create_rapid_ocr() -> Any | None:
+    try:
+        from rapidocr_onnxruntime import RapidOCR
+    except ImportError:
+        return None
+    return RapidOCR()
+
+
+def run_paddle_ocr(ocr: Any, image_path: Path) -> Any:
+    try:
+        return ocr.ocr(str(image_path), cls=True)
+    except TypeError:
+        return ocr.predict(str(image_path))
+
+
+def run_rapid_ocr(ocr: Any, image_path: Path) -> Any:
+    result, _ = ocr(str(image_path))
+    return result or []
 
 
 def paddle_result_to_blocks(raw_result: Any) -> list[dict[str, Any]]:
@@ -143,6 +195,24 @@ def paddle_result_to_blocks(raw_result: Any) -> list[dict[str, Any]]:
             continue
         text = str(payload[0])
         confidence = float(payload[1]) if len(payload) > 1 else None
+        blocks.append(
+            {
+                "text": text,
+                "bbox": polygon_to_xywh(box),
+                "confidence": confidence,
+            }
+        )
+    return blocks
+
+
+def rapid_result_to_blocks(raw_result: Any) -> list[dict[str, Any]]:
+    blocks: list[dict[str, Any]] = []
+    for line in raw_result or []:
+        if not isinstance(line, (list, tuple)) or len(line) < 2:
+            continue
+        box = line[0]
+        text = str(line[1])
+        confidence = float(line[2]) if len(line) > 2 else None
         blocks.append(
             {
                 "text": text,
