@@ -21,7 +21,7 @@ class EditableConfig:
     pattern: str = "slide_*.png"
     width: int = 1920
     height: int = 1080
-    background: str = "keep"
+    background: str = "blank"
     default_font: str = "Microsoft YaHei"
     default_color: str = "#111827"
 

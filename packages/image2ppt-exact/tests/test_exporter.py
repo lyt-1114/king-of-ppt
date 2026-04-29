@@ -6,6 +6,9 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from pptx import Presentation
+from pptx.enum.shapes import MSO_SHAPE_TYPE
+
 from image2ppt_exact import (
     BlueprintRebuildConfig,
     EditableConfig,
@@ -18,6 +21,7 @@ from image2ppt_exact import (
     run_full_rebuild_pipeline,
     run_image_svg_editable_pipeline,
 )
+from image2ppt_exact.cli import build_parser
 
 
 TINY_PNG = (
@@ -74,6 +78,65 @@ class ExporterTests(unittest.TestCase):
             )
 
             self.assertTrue(pptx.exists())
+
+    def test_editable_routes_default_to_blank_background(self) -> None:
+        parser = build_parser()
+
+        editable_args = parser.parse_args(
+            [
+                "editable",
+                "slides",
+                "--ocr",
+                "ocr",
+                "--pptx",
+                "editable.pptx",
+            ]
+        )
+        pipeline_args = parser.parse_args(
+            ["image-svg-editable", "slides", "--out", "out"]
+        )
+        full_args = parser.parse_args(["full-rebuild", "slides", "--out", "out"])
+
+        self.assertEqual(EditableConfig(Path("s"), Path("o"), Path("p")).background, "blank")
+        self.assertEqual(ImageSvgEditableConfig(Path("s"), Path("out")).background, "blank")
+        self.assertEqual(FullRebuildConfig(Path("s"), Path("out")).background, "blank")
+        self.assertEqual(editable_args.background, "blank")
+        self.assertEqual(pipeline_args.background, "blank")
+        self.assertEqual(full_args.background, "blank")
+
+    def test_default_editable_output_does_not_keep_text_bearing_image_background(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            src = root / "slides"
+            ocr = root / "ocr"
+            src.mkdir()
+            ocr.mkdir()
+            (src / "slide_01.png").write_bytes(base64.b64decode(TINY_PNG))
+            (ocr / "slide_01.json").write_text(
+                '{"blocks":[{"text":"Hello","bbox":[0,0,100,40]}]}',
+                encoding="utf-8",
+            )
+            pptx = root / "editable.pptx"
+
+            create_editable_text_pptx(
+                EditableConfig(src=src, ocr_dir=ocr, pptx_path=pptx)
+            )
+
+            prs = Presentation(str(pptx))
+            pictures = [
+                shape
+                for slide in prs.slides
+                for shape in slide.shapes
+                if shape.shape_type == MSO_SHAPE_TYPE.PICTURE
+            ]
+            text_boxes = [
+                shape
+                for slide in prs.slides
+                for shape in slide.shapes
+                if getattr(shape, "has_text_frame", False) and shape.text.strip()
+            ]
+            self.assertEqual(len(pictures), 0)
+            self.assertEqual(len(text_boxes), 1)
 
     def test_image_svg_editable_pipeline_with_existing_ocr(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

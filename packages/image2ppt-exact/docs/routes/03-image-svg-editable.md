@@ -7,7 +7,7 @@ as a single reproducible command with verification.
 image2ppt-exact image-svg-editable path/to/slides \
   --out path/to/rebuild \
   --pptx path/to/rebuild/editable_text_layer.pptx \
-  --background keep \
+  --background blank \
   --force
 ```
 
@@ -44,9 +44,10 @@ That log records the key boundary:
 - editability requires a separate native PPTX reconstruction
 - source image deck is not overwritten
 - exact pixel reproduction and full native editability are different goals
+- `--background keep` is a debug overlay and may duplicate text when source images still contain text
 
 ## Limitation
 
 This route verifies that the editable text layer exists. It does not make a
-polished high-fidelity business deck by itself. For that, use
+polished high-fidelity business deck or infer the original font system by itself. For that, use
 `blueprint-rebuild`.

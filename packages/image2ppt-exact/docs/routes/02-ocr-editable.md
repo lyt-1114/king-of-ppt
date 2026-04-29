@@ -25,11 +25,13 @@ ocr_json/slide_02.json
 image2ppt-exact editable path/to/slides \
   --ocr path/to/ocr_json \
   --pptx path/to/editable_text_layer.pptx \
-  --background keep
+  --background blank
 ```
 
-`--background keep` keeps the slide image under the editable text boxes.
-`--background blank` creates a text-only PPTX.
+`--background blank` creates a text-only PPTX and is the safe default.
+`--background keep` keeps the slide image under the editable text boxes. Use it
+only for visual debugging or when the slide images are already text-free;
+otherwise duplicate text is expected.
 
 ## OCR JSON Shape
 
@@ -54,5 +56,5 @@ recognition errors or tune positions before generating the PPTX.
 ## Limitation
 
 OCR can recover text and approximate boxes. It does not understand card layout,
-connectors, section dividers, icon logic, or visual hierarchy. For a polished
-editable deck, use the blueprint rebuild route.
+connectors, section dividers, icon logic, fonts, colors, or visual hierarchy.
+For a polished editable deck, use the blueprint rebuild route.

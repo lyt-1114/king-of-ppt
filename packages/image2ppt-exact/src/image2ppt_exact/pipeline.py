@@ -25,7 +25,7 @@ class ImageSvgEditableConfig:
     width: int = 1920
     height: int = 1080
     lang: str = "ch"
-    background: str = "keep"
+    background: str = "blank"
     default_font: str = "Microsoft YaHei"
     default_color: str = "#111827"
     force: bool = False
@@ -200,6 +200,8 @@ def build_pipeline_execution_log(
             "- Editable PPTX is provided by reconstructing native objects from OCR JSON.",
             "- A deck cannot be both 100 percent pixel-identical to a flattened bitmap and fully editable as native PPT objects at the same time.",
             "- For higher visual fidelity, enrich the editable reconstruction with native shapes, lines, diagrams, and replaceable image/SVG decorations.",
+            "- Background mode: `" + config.background + "`.",
+            "- Warning: `keep` preserves source slide images under OCR text. Use it only when the source images are text-free or when creating a visual debug layer; otherwise duplicate text is expected.",
             "",
             "## Inputs",
             "",

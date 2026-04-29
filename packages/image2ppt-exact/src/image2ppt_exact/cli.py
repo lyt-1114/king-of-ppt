@@ -78,8 +78,11 @@ def build_parser() -> argparse.ArgumentParser:
     editable.add_argument(
         "--background",
         choices=["keep", "blank"],
-        default="keep",
-        help="Keep original slide image as background, or create text-only slides.",
+        default="blank",
+        help=(
+            "Create text-only slides by default. Use keep only when the source "
+            "images are text-free or when making a debug overlay."
+        ),
     )
     editable.add_argument("--font", default="Microsoft YaHei")
     editable.add_argument("--color", default="#111827")
@@ -116,8 +119,11 @@ def build_parser() -> argparse.ArgumentParser:
     pipeline.add_argument(
         "--background",
         choices=["keep", "blank"],
-        default="keep",
-        help="Keep original slide image as background, or create text-only slides.",
+        default="blank",
+        help=(
+            "Create text-only slides by default. Use keep only when the source "
+            "images are text-free or when making a debug overlay."
+        ),
     )
     pipeline.add_argument("--font", default="Microsoft YaHei")
     pipeline.add_argument("--color", default="#111827")
@@ -194,8 +200,11 @@ def build_parser() -> argparse.ArgumentParser:
     full.add_argument(
         "--background",
         choices=["keep", "blank"],
-        default="keep",
-        help="Keep original slide image as background, or create text-only slides.",
+        default="blank",
+        help=(
+            "Create text-only slides by default. Use keep only when the source "
+            "images are text-free or when making a debug overlay."
+        ),
     )
     full.add_argument("--font", default="Microsoft YaHei")
     full.add_argument("--color", default="#111827")

@@ -24,7 +24,7 @@ class FullRebuildConfig:
     width: int = 1920
     height: int = 1080
     lang: str = "ch"
-    background: str = "keep"
+    background: str = "blank"
     default_font: str = "Microsoft YaHei"
     default_color: str = "#111827"
     force: bool = False
@@ -161,6 +161,7 @@ def build_full_rebuild_log(
         f"- Source slide images: `{config.src.resolve()}`",
         f"- Pattern: `{config.pattern}`",
         f"- Canvas: `{config.width} x {config.height}`",
+        f"- Editable text background mode: `{config.background}`",
         f"- OCR JSON: `{image_result.ocr_dir}`",
         f"- Blueprint JSON: `{config.blueprint_path.resolve() if config.blueprint_path else 'not provided'}`",
         "",

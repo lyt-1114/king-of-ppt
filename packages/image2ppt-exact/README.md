@@ -29,6 +29,12 @@ It is pixel-faithful, but it is not editable as native PowerPoint text/shapes.
 For a deck like the earlier high-fidelity editable Cargill version, use
 `blueprint-rebuild`, not OCR alone.
 
+Do not use text-bearing source images as editable backgrounds. If an original
+slide image still contains text, `--background keep` will preserve that text and
+the OCR layer will draw a second editable copy on top. The editable routes
+therefore default to `--background blank`; use `keep` only for debug overlays or
+for text-free backgrounds.
+
 ## Install
 
 From this package folder:
@@ -57,7 +63,7 @@ Verified image -> SVG -> editable text route:
 image2ppt-exact image-svg-editable path/to/slides \
   --out path/to/rebuild \
   --pptx path/to/rebuild/editable_text_layer.pptx \
-  --background keep \
+  --background blank \
   --force
 ```
 

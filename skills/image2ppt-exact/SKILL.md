@@ -20,6 +20,7 @@ approved slide images
 - SVG files produced by this route are usually PNG wrappers. They are pixel-faithful, but not editable as native PPT text or shapes.
 - Editable PPTX output must be rebuilt as native PowerPoint objects.
 - OCR-only output gives editable text boxes, not a polished high-fidelity deck.
+- Do not keep source images as editable backgrounds unless they are already text-free. Keeping text-bearing slide images under OCR text creates duplicate text.
 - For decks similar to a successful high-fidelity editable rebuild, use `full-rebuild` with `--blueprint` so the exact proof, editable text layer, high-fidelity rebuild, and verification log are produced together.
 
 ## Package Setup
@@ -62,7 +63,7 @@ image2ppt-exact full-rebuild path/to/slides \
   --out path/to/rebuild \
   --blueprint path/to/deck.blueprint.json \
   --assets-root path/to/assets \
-  --background keep \
+  --background blank \
   --force
 ```
 
@@ -96,10 +97,10 @@ image2ppt-exact ocr path/to/slides \
 image2ppt-exact editable path/to/slides \
   --ocr path/to/ocr_json \
   --pptx path/to/editable_text_layer.pptx \
-  --background keep
+  --background blank
 ```
 
-Use `--background blank` when the deck should contain only reconstructed editable text.
+Use `--background keep` only for visual debugging or when the source images have already had text removed.
 
 ## Route 3: Verified Image SVG Editable Pipeline
 
@@ -107,7 +108,7 @@ Use `--background blank` when the deck should contain only reconstructed editabl
 image2ppt-exact image-svg-editable path/to/slides \
   --out path/to/rebuild \
   --pptx path/to/rebuild/editable_text_layer.pptx \
-  --background keep \
+  --background blank \
   --force
 ```
 
