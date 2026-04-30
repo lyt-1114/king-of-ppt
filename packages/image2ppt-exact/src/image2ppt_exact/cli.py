@@ -78,11 +78,12 @@ def build_parser() -> argparse.ArgumentParser:
     editable.add_argument("--height", type=int, default=1080, help="Canvas height.")
     editable.add_argument(
         "--background",
-        choices=["keep", "blank"],
+        choices=["keep", "blank", "redact"],
         default="blank",
         help=(
-            "Create text-only slides by default. Use keep only when the source "
-            "images are text-free or when making a debug overlay."
+            "Create text-only slides by default. Use redact to clear OCR text "
+            "regions from the source image before overlaying editable text. "
+            "Use keep only for debug overlays or text-free images."
         ),
     )
     editable.add_argument("--font", default="Microsoft YaHei")
@@ -119,11 +120,12 @@ def build_parser() -> argparse.ArgumentParser:
     pipeline.add_argument("--lang", default="ch", help="PaddleOCR language.")
     pipeline.add_argument(
         "--background",
-        choices=["keep", "blank"],
+        choices=["keep", "blank", "redact"],
         default="blank",
         help=(
-            "Create text-only slides by default. Use keep only when the source "
-            "images are text-free or when making a debug overlay."
+            "Create text-only slides by default. Use redact to clear OCR text "
+            "regions from the source image before overlaying editable text. "
+            "Use keep only for debug overlays or text-free images."
         ),
     )
     pipeline.add_argument("--font", default="Microsoft YaHei")
@@ -219,11 +221,12 @@ def build_parser() -> argparse.ArgumentParser:
     full.add_argument("--lang", default="ch", help="PaddleOCR language.")
     full.add_argument(
         "--background",
-        choices=["keep", "blank"],
+        choices=["keep", "blank", "redact"],
         default="blank",
         help=(
-            "Create text-only slides by default. Use keep only when the source "
-            "images are text-free or when making a debug overlay."
+            "Create text-only slides by default. Use redact to clear OCR text "
+            "regions from the source image before overlaying editable text. "
+            "Use keep only for debug overlays or text-free images."
         ),
     )
     full.add_argument("--font", default="Microsoft YaHei")

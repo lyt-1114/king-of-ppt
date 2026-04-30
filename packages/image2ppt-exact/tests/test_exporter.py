@@ -6,6 +6,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from PIL import Image, ImageDraw
 from pptx import Presentation
 from pptx.enum.shapes import MSO_SHAPE_TYPE
 
@@ -155,6 +156,57 @@ class ExporterTests(unittest.TestCase):
             ]
             self.assertEqual(len(pictures), 0)
             self.assertEqual(len(text_boxes), 1)
+
+    def test_redacted_background_removes_ocr_text_regions_before_overlay(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            src = root / "slides"
+            ocr = root / "ocr"
+            src.mkdir()
+            ocr.mkdir()
+            img = Image.new("RGB", (1920, 1080), "white")
+            draw = ImageDraw.Draw(img)
+            draw.rectangle((10, 10, 70, 34), fill="black")
+            img.save(src / "slide_01.png")
+            (ocr / "slide_01.json").write_text(
+                '{"blocks":[{"text":"Hello","bbox":[10,10,60,24]}]}',
+                encoding="utf-8",
+            )
+            pptx = root / "editable-redacted.pptx"
+
+            create_editable_text_pptx(
+                EditableConfig(
+                    src=src,
+                    ocr_dir=ocr,
+                    pptx_path=pptx,
+                    width=1920,
+                    height=1080,
+                    background="redact",
+                )
+            )
+
+            prs = Presentation(str(pptx))
+            pictures = [
+                shape
+                for slide in prs.slides
+                for shape in slide.shapes
+                if shape.shape_type == MSO_SHAPE_TYPE.PICTURE
+            ]
+            text_boxes = [
+                shape
+                for slide in prs.slides
+                for shape in slide.shapes
+                if getattr(shape, "has_text_frame", False) and shape.text.strip()
+            ]
+            self.assertEqual(len(pictures), 1)
+            self.assertEqual(len(text_boxes), 1)
+
+            redacted_bg = root / "editable-redacted_assets" / "slide_01_redacted.png"
+            self.assertTrue(redacted_bg.exists())
+            with Image.open(redacted_bg) as redacted:
+                # Center of the original black text block should be cleared to the
+                # surrounding white background before editable text is overlaid.
+                self.assertEqual(redacted.getpixel((20, 20)), (255, 255, 255))
 
     def test_image_svg_editable_pipeline_with_existing_ocr(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

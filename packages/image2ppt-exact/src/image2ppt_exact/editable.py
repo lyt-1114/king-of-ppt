@@ -51,6 +51,7 @@ def create_editable_text_pptx(config: EditableConfig) -> Path:
 
     for image_path in images:
         slide = prs.slides.add_slide(blank_layout)
+        blocks = load_slide_blocks(ocr_dir, image_path.stem)
         if config.background == "keep":
             slide.shapes.add_picture(
                 str(image_path),
@@ -59,10 +60,25 @@ def create_editable_text_pptx(config: EditableConfig) -> Path:
                 width=prs.slide_width,
                 height=prs.slide_height,
             )
+        elif config.background == "redact":
+            redacted_path = create_redacted_background(
+                image_path=image_path,
+                blocks=blocks,
+                output_dir=config.pptx_path.with_suffix("").parent
+                / f"{config.pptx_path.stem}_assets",
+                width=config.width,
+                height=config.height,
+            )
+            slide.shapes.add_picture(
+                str(redacted_path),
+                0,
+                0,
+                width=prs.slide_width,
+                height=prs.slide_height,
+            )
         elif config.background != "blank":
-            raise ValueError("background must be either 'keep' or 'blank'")
+            raise ValueError("background must be 'blank', 'keep', or 'redact'")
 
-        blocks = load_slide_blocks(ocr_dir, image_path.stem)
         for block in blocks:
             x, y, w, h = normalize_bbox(block["bbox"], config.width, config.height)
             shape = slide.shapes.add_textbox(
@@ -97,6 +113,75 @@ def create_editable_text_pptx(config: EditableConfig) -> Path:
     config.pptx_path.parent.mkdir(parents=True, exist_ok=True)
     prs.save(config.pptx_path)
     return config.pptx_path
+
+
+def create_redacted_background(
+    *,
+    image_path: Path,
+    blocks: list[dict[str, Any]],
+    output_dir: Path,
+    width: int,
+    height: int,
+    padding: int = 2,
+) -> Path:
+    try:
+        from PIL import Image, ImageDraw
+    except ImportError as exc:
+        raise RuntimeError(
+            "Pillow is required for background='redact'. Install Pillow or use "
+            "background='blank'."
+        ) from exc
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+    output_path = output_dir / f"{image_path.stem}_redacted.png"
+    with Image.open(image_path) as source:
+        image = source.convert("RGB")
+    draw = ImageDraw.Draw(image)
+
+    scale_x = image.width / width
+    scale_y = image.height / height
+    for block in blocks:
+        x, y, w, h = normalize_bbox(block["bbox"], width, height)
+        left = max(0, int(round((x - padding) * scale_x)))
+        top = max(0, int(round((y - padding) * scale_y)))
+        right = min(image.width, int(round((x + w + padding) * scale_x)))
+        bottom = min(image.height, int(round((y + h + padding) * scale_y)))
+        fill = sample_background_color(image, left, top, right, bottom)
+        draw.rectangle((left, top, right, bottom), fill=fill)
+
+    image.save(output_path)
+    return output_path
+
+
+def sample_background_color(
+    image: Any,
+    left: int,
+    top: int,
+    right: int,
+    bottom: int,
+) -> tuple[int, int, int]:
+    samples: list[tuple[int, int, int]] = []
+    candidates = [
+        (left - 2, top - 2),
+        (right + 2, top - 2),
+        (left - 2, bottom + 2),
+        (right + 2, bottom + 2),
+        ((left + right) // 2, top - 2),
+        ((left + right) // 2, bottom + 2),
+        (left - 2, (top + bottom) // 2),
+        (right + 2, (top + bottom) // 2),
+    ]
+    for x, y in candidates:
+        if 0 <= x < image.width and 0 <= y < image.height:
+            pixel = image.getpixel((x, y))
+            if isinstance(pixel, int):
+                samples.append((pixel, pixel, pixel))
+            else:
+                samples.append(tuple(pixel[:3]))
+    if not samples:
+        return (255, 255, 255)
+    samples.sort()
+    return samples[len(samples) // 2]
 
 
 def extract_ocr_json(config: OcrConfig) -> Path:

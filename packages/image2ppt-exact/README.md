@@ -17,6 +17,15 @@
 image2ppt-exact full-rebuild path/to/slides --out path/to/rebuild --force
 ```
 
+如果你要保留原页面视觉，但不能让原图里的文字和 OCR 文字重复，使用清字背景：
+
+```bash
+image2ppt-exact full-rebuild path/to/slides \
+  --out path/to/rebuild \
+  --background redact \
+  --force
+```
+
 如果你已经有高保真重建用的 blueprint，再加上：
 
 ```bash
@@ -41,8 +50,9 @@ image2ppt-exact full-rebuild path/to/slides \
 
 1. 先生成像素级保底 PPT，确保视觉不丢。
 2. 再跑 OCR，把图片里的文字恢复成 PowerPoint 文本框。
-3. 如果有结构化 SVG 或 blueprint，就把形状、线条、图片和组件恢复成原生 PowerPoint 对象。
-4. 最后写日志，记录每一层生成了多少页、多少文本框、多少对象。
+3. 如果需要带背景的可编辑版本，用 `--background redact` 清除原图文字区域，再叠加原生文本框，避免重复文字。
+4. 如果有结构化 SVG 或 blueprint，就把形状、线条、图片和组件恢复成原生 PowerPoint 对象。
+5. 最后写日志，记录每一层生成了多少页、多少文本框、多少对象。
 
 ## 为什么只暴露一条终极路线
 
@@ -103,6 +113,12 @@ slides/
 image2ppt-exact full-rebuild slides --out rebuild --force
 ```
 
+推荐的可编辑交付版本：
+
+```bash
+image2ppt-exact full-rebuild slides --out rebuild --background redact --force
+```
+
 默认输出：
 
 ```text
@@ -112,6 +128,7 @@ rebuild/
   exact_image_deck.pptx
   ocr_json/
   editable_text_layer.pptx
+  editable_text_layer_assets/
   pipeline-execution-log.md
   full-rebuild-log.md
 ```
@@ -197,4 +214,3 @@ cd packages/image2ppt-exact
 python -m unittest discover -s tests
 image2ppt-exact full-rebuild --help
 ```
-

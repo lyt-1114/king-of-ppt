@@ -22,6 +22,7 @@ approved slide images
 - Structured SVG files can be rebuilt as native editable PPT objects with `svg-native-rebuild`.
 - Editable PPTX output must be rebuilt as native PowerPoint objects.
 - OCR-only output gives editable text boxes, not a polished high-fidelity deck.
+- Use `--background redact` when keeping the visual background while overlaying OCR text. It clears OCR text regions from the background image before adding editable text boxes, preventing duplicate text.
 - Do not keep source images as editable backgrounds unless they are already text-free. Keeping text-bearing slide images under OCR text creates duplicate text.
 - For decks similar to a successful high-fidelity editable rebuild, use `full-rebuild` with `--blueprint` so the exact proof, editable text layer, high-fidelity rebuild, and verification log are produced together.
 
@@ -66,7 +67,7 @@ image2ppt-exact full-rebuild path/to/slides \
   --out path/to/rebuild \
   --blueprint path/to/deck.blueprint.json \
   --assets-root path/to/assets \
-  --background blank \
+  --background redact \
   --force
 ```
 
