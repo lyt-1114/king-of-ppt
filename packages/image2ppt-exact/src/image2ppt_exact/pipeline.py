@@ -8,7 +8,7 @@ from pptx import Presentation
 from .editable import (
     EditableConfig,
     OcrConfig,
-    create_editable_text_pptx,
+    create_editable_text_pptx_with_stats,
     extract_ocr_json,
     load_slide_blocks,
 )
@@ -28,6 +28,9 @@ class ImageSvgEditableConfig:
     background: str = "blank"
     default_font: str = "Microsoft YaHei"
     default_color: str = "#111827"
+    min_text_height: float | None = None
+    min_text_area: float | None = None
+    lock_file: Path | None = None
     force: bool = False
     allow_empty_text: bool = False
 
@@ -43,6 +46,9 @@ class ImageSvgEditableResult:
     pipeline_log_path: Path
     expected_text_blocks: int
     actual_text_boxes: int
+    skipped_by_height: int = 0
+    skipped_by_area: int = 0
+    skipped_by_lock: int = 0
 
 
 def run_image_svg_editable_pipeline(
@@ -90,7 +96,7 @@ def run_image_svg_editable_pipeline(
             "--allow-empty-text for image-only decks."
         )
 
-    create_editable_text_pptx(
+    editable_result = create_editable_text_pptx_with_stats(
         EditableConfig(
             src=config.src,
             ocr_dir=ocr_dir,
@@ -101,6 +107,9 @@ def run_image_svg_editable_pipeline(
             background=config.background,
             default_font=config.default_font,
             default_color=config.default_color,
+            min_text_height=config.min_text_height,
+            min_text_area=config.min_text_area,
+            lock_file=config.lock_file,
         )
     )
 
@@ -127,6 +136,9 @@ def run_image_svg_editable_pipeline(
             editable_pptx_path=editable_pptx_path,
             expected_text_blocks=expected_blocks,
             actual_text_boxes=actual_text_boxes,
+            skipped_by_height=editable_result.skipped_by_height,
+            skipped_by_area=editable_result.skipped_by_area,
+            skipped_by_lock=editable_result.skipped_by_lock,
         ),
         encoding="utf-8",
     )
@@ -141,6 +153,9 @@ def run_image_svg_editable_pipeline(
         pipeline_log_path=pipeline_log_path,
         expected_text_blocks=expected_blocks,
         actual_text_boxes=actual_text_boxes,
+        skipped_by_height=editable_result.skipped_by_height,
+        skipped_by_area=editable_result.skipped_by_area,
+        skipped_by_lock=editable_result.skipped_by_lock,
     )
 
 
@@ -181,6 +196,9 @@ def build_pipeline_execution_log(
     editable_pptx_path: Path,
     expected_text_blocks: int,
     actual_text_boxes: int,
+    skipped_by_height: int,
+    skipped_by_area: int,
+    skipped_by_lock: int,
 ) -> str:
     return "\n".join(
         [
@@ -209,6 +227,9 @@ def build_pipeline_execution_log(
             f"- Pattern: `{config.pattern}`",
             f"- Canvas: `{config.width} x {config.height}`",
             f"- OCR JSON: `{ocr_dir}`",
+            f"- Minimum editable text height: `{config.min_text_height if config.min_text_height is not None else 'disabled'}`",
+            f"- Minimum editable text area: `{config.min_text_area if config.min_text_area is not None else 'disabled'}`",
+            f"- OCR lock file: `{config.lock_file.resolve() if config.lock_file else 'not provided'}`",
             "",
             "## Outputs",
             "",
@@ -222,6 +243,9 @@ def build_pipeline_execution_log(
             "",
             f"- OCR text blocks found: `{expected_text_blocks}`",
             f"- Editable PPT text boxes found: `{actual_text_boxes}`",
+            f"- OCR blocks skipped by height: `{skipped_by_height}`",
+            f"- OCR blocks skipped by area: `{skipped_by_area}`",
+            f"- OCR blocks skipped by lock regions: `{skipped_by_lock}`",
             "- Status: editable text layer exists and passed slide-count/text-box checks.",
             "",
         ]

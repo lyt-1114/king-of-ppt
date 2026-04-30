@@ -24,6 +24,28 @@ class EditableConfig:
     background: str = "blank"
     default_font: str = "Microsoft YaHei"
     default_color: str = "#111827"
+    min_text_height: float | None = None
+    min_text_area: float | None = None
+    lock_file: Path | None = None
+
+
+@dataclass(frozen=True)
+class EditableFilterStats:
+    total_blocks: int = 0
+    editable_blocks: int = 0
+    skipped_by_height: int = 0
+    skipped_by_area: int = 0
+    skipped_by_lock: int = 0
+
+
+@dataclass(frozen=True)
+class EditableBuildResult:
+    pptx_path: Path
+    total_blocks: int
+    editable_blocks: int
+    skipped_by_height: int
+    skipped_by_area: int
+    skipped_by_lock: int
 
 
 @dataclass(frozen=True)
@@ -35,6 +57,10 @@ class OcrConfig:
 
 
 def create_editable_text_pptx(config: EditableConfig) -> Path:
+    return create_editable_text_pptx_with_stats(config).pptx_path
+
+
+def create_editable_text_pptx_with_stats(config: EditableConfig) -> EditableBuildResult:
     from pptx import Presentation
     from pptx.util import Inches
 
@@ -48,10 +74,22 @@ def create_editable_text_pptx(config: EditableConfig) -> Path:
     prs.slide_height = Inches(config.height / 144)
     blank_layout = prs.slide_layouts[6]
     default_color = parse_hex_color(config.default_color)
+    locks = load_ocr_locks(config.lock_file)
+    total_stats = EditableFilterStats()
 
     for image_path in images:
         slide = prs.slides.add_slide(blank_layout)
         blocks = load_slide_blocks(ocr_dir, image_path.stem)
+        editable_blocks, stats = collect_editable_blocks(
+            blocks,
+            slide_stem=image_path.stem,
+            width=config.width,
+            height=config.height,
+            min_text_height=config.min_text_height,
+            min_text_area=config.min_text_area,
+            locks=locks,
+        )
+        total_stats = combine_filter_stats(total_stats, stats)
         if config.background == "keep":
             slide.shapes.add_picture(
                 str(image_path),
@@ -63,7 +101,7 @@ def create_editable_text_pptx(config: EditableConfig) -> Path:
         elif config.background == "redact":
             redacted_path = create_redacted_background(
                 image_path=image_path,
-                blocks=blocks,
+                blocks=editable_blocks,
                 output_dir=config.pptx_path.with_suffix("").parent
                 / f"{config.pptx_path.stem}_assets",
                 width=config.width,
@@ -79,7 +117,7 @@ def create_editable_text_pptx(config: EditableConfig) -> Path:
         elif config.background != "blank":
             raise ValueError("background must be 'blank', 'keep', or 'redact'")
 
-        for block in blocks:
+        for block in editable_blocks:
             x, y, w, h = normalize_bbox(block["bbox"], config.width, config.height)
             shape = slide.shapes.add_textbox(
                 px_to_emu(x, config.width, prs.slide_width),
@@ -112,7 +150,121 @@ def create_editable_text_pptx(config: EditableConfig) -> Path:
 
     config.pptx_path.parent.mkdir(parents=True, exist_ok=True)
     prs.save(config.pptx_path)
-    return config.pptx_path
+    return EditableBuildResult(
+        pptx_path=config.pptx_path,
+        total_blocks=total_stats.total_blocks,
+        editable_blocks=total_stats.editable_blocks,
+        skipped_by_height=total_stats.skipped_by_height,
+        skipped_by_area=total_stats.skipped_by_area,
+        skipped_by_lock=total_stats.skipped_by_lock,
+    )
+
+
+def collect_editable_blocks(
+    blocks: list[dict[str, Any]],
+    *,
+    slide_stem: str,
+    width: int,
+    height: int,
+    min_text_height: float | None = None,
+    min_text_area: float | None = None,
+    locks: dict[str, list[dict[str, float]]] | None = None,
+) -> tuple[list[dict[str, Any]], EditableFilterStats]:
+    editable: list[dict[str, Any]] = []
+    skipped_by_height = 0
+    skipped_by_area = 0
+    skipped_by_lock = 0
+    slide_locks = (locks or {}).get("*", []) + (locks or {}).get(slide_stem, [])
+
+    for block in blocks:
+        x, y, w, h = normalize_bbox(block["bbox"], width, height)
+        if min_text_height is not None and h < min_text_height:
+            skipped_by_height += 1
+            continue
+        if min_text_area is not None and w * h < min_text_area:
+            skipped_by_area += 1
+            continue
+        if any(boxes_intersect((x, y, w, h), lock) for lock in slide_locks):
+            skipped_by_lock += 1
+            continue
+        editable.append(block)
+
+    return editable, EditableFilterStats(
+        total_blocks=len(blocks),
+        editable_blocks=len(editable),
+        skipped_by_height=skipped_by_height,
+        skipped_by_area=skipped_by_area,
+        skipped_by_lock=skipped_by_lock,
+    )
+
+
+def combine_filter_stats(
+    left: EditableFilterStats,
+    right: EditableFilterStats,
+) -> EditableFilterStats:
+    return EditableFilterStats(
+        total_blocks=left.total_blocks + right.total_blocks,
+        editable_blocks=left.editable_blocks + right.editable_blocks,
+        skipped_by_height=left.skipped_by_height + right.skipped_by_height,
+        skipped_by_area=left.skipped_by_area + right.skipped_by_area,
+        skipped_by_lock=left.skipped_by_lock + right.skipped_by_lock,
+    )
+
+
+def boxes_intersect(
+    bbox: tuple[float, float, float, float],
+    lock: dict[str, float],
+) -> bool:
+    x, y, w, h = bbox
+    ax1, ay1, ax2, ay2 = x, y, x + w, y + h
+    bx1 = lock["x"]
+    by1 = lock["y"]
+    bx2 = bx1 + lock["w"]
+    by2 = by1 + lock["h"]
+    return min(ax2, bx2) > max(ax1, bx1) and min(ay2, by2) > max(ay1, by1)
+
+
+def load_ocr_locks(lock_file: Path | None) -> dict[str, list[dict[str, float]]]:
+    if lock_file is None:
+        return {}
+    data = json.loads(lock_file.read_text(encoding="utf-8-sig"))
+    locks: dict[str, list[dict[str, float]]] = {}
+    if isinstance(data, list):
+        locks["*"] = [normalize_lock_region(region) for region in data]
+        return locks
+    if not isinstance(data, dict):
+        raise ValueError("OCR lock file must contain a list or object.")
+
+    global_regions = data.get("regions", [])
+    if global_regions:
+        if not isinstance(global_regions, list):
+            raise ValueError("OCR lock file 'regions' must be a list.")
+        locks["*"] = [normalize_lock_region(region) for region in global_regions]
+
+    slide_regions = data.get("slides", {})
+    if slide_regions:
+        if not isinstance(slide_regions, dict):
+            raise ValueError("OCR lock file 'slides' must be an object.")
+        for slide_name, regions in slide_regions.items():
+            if not isinstance(regions, list):
+                raise ValueError(f"OCR lock regions for {slide_name!r} must be a list.")
+            locks[str(slide_name)] = [normalize_lock_region(region) for region in regions]
+    return locks
+
+
+def normalize_lock_region(region: Any) -> dict[str, float]:
+    if isinstance(region, dict):
+        x = float(region.get("x", region.get("left", 0)))
+        y = float(region.get("y", region.get("top", 0)))
+        w = float(region.get("w", region.get("width", 0)))
+        h = float(region.get("h", region.get("height", 0)))
+    elif isinstance(region, list) and len(region) == 4:
+        x, y, w, h = [float(value) for value in region]
+    else:
+        raise ValueError(f"Unsupported OCR lock region: {region!r}")
+    if w <= 0 or h <= 0:
+        raise ValueError(f"OCR lock region must have positive width and height: {region!r}")
+    return {"x": x, "y": y, "w": w, "h": h}
 
 
 def create_redacted_background(

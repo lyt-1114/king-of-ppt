@@ -25,7 +25,11 @@ from image2ppt_exact import (
     rebuild_from_svg_native,
 )
 from image2ppt_exact.cli import build_parser
-from image2ppt_exact.editable import rapid_result_to_blocks
+from image2ppt_exact.editable import (
+    collect_editable_blocks,
+    load_ocr_locks,
+    rapid_result_to_blocks,
+)
 
 
 TINY_PNG = (
@@ -207,6 +211,171 @@ class ExporterTests(unittest.TestCase):
                 # Center of the original black text block should be cleared to the
                 # surrounding white background before editable text is overlaid.
                 self.assertEqual(redacted.getpixel((20, 20)), (255, 255, 255))
+
+    def test_filters_small_ocr_blocks_before_textbox_and_redaction(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            src = root / "slides"
+            ocr = root / "ocr"
+            src.mkdir()
+            ocr.mkdir()
+            img = Image.new("RGB", (400, 200), "white")
+            draw = ImageDraw.Draw(img)
+            draw.rectangle((10, 10, 40, 18), fill="black")
+            draw.rectangle((70, 20, 170, 60), fill="black")
+            img.save(src / "slide_01.png")
+            (ocr / "slide_01.json").write_text(
+                json.dumps(
+                    {
+                        "blocks": [
+                            {"text": "Tiny", "bbox": [10, 10, 30, 8]},
+                            {"text": "Main", "bbox": [70, 20, 100, 40]},
+                        ]
+                    }
+                ),
+                encoding="utf-8",
+            )
+            pptx = root / "editable-redacted.pptx"
+
+            create_editable_text_pptx(
+                EditableConfig(
+                    src=src,
+                    ocr_dir=ocr,
+                    pptx_path=pptx,
+                    width=400,
+                    height=200,
+                    background="redact",
+                    min_text_height=12,
+                    min_text_area=500,
+                )
+            )
+
+            prs = Presentation(str(pptx))
+            texts = [
+                shape.text
+                for slide in prs.slides
+                for shape in slide.shapes
+                if getattr(shape, "has_text_frame", False) and shape.text.strip()
+            ]
+            self.assertEqual(texts, ["Main"])
+
+            redacted_bg = root / "editable-redacted_assets" / "slide_01_redacted.png"
+            with Image.open(redacted_bg) as redacted:
+                self.assertEqual(redacted.getpixel((20, 14)), (0, 0, 0))
+                self.assertEqual(redacted.getpixel((90, 40)), (255, 255, 255))
+
+    def test_lock_file_skips_conversion_and_redaction_inside_locked_regions(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            src = root / "slides"
+            ocr = root / "ocr"
+            src.mkdir()
+            ocr.mkdir()
+            img = Image.new("RGB", (400, 200), "white")
+            draw = ImageDraw.Draw(img)
+            draw.rectangle((20, 20, 80, 50), fill="black")
+            draw.rectangle((120, 20, 180, 50), fill="black")
+            img.save(src / "slide_01.png")
+            (ocr / "slide_01.json").write_text(
+                json.dumps(
+                    {
+                        "blocks": [
+                            {"text": "Locked", "bbox": [20, 20, 60, 30]},
+                            {"text": "Editable", "bbox": [120, 20, 60, 30]},
+                        ]
+                    }
+                ),
+                encoding="utf-8",
+            )
+            lock_file = root / "ocr-locks.json"
+            lock_file.write_text(
+                json.dumps(
+                    {
+                        "slides": {
+                            "slide_01": [
+                                {"x": 0, "y": 0, "w": 100, "h": 100}
+                            ]
+                        }
+                    }
+                ),
+                encoding="utf-8",
+            )
+            pptx = root / "editable-redacted.pptx"
+
+            create_editable_text_pptx(
+                EditableConfig(
+                    src=src,
+                    ocr_dir=ocr,
+                    pptx_path=pptx,
+                    width=400,
+                    height=200,
+                    background="redact",
+                    lock_file=lock_file,
+                )
+            )
+
+            prs = Presentation(str(pptx))
+            texts = [
+                shape.text
+                for slide in prs.slides
+                for shape in slide.shapes
+                if getattr(shape, "has_text_frame", False) and shape.text.strip()
+            ]
+            self.assertEqual(texts, ["Editable"])
+
+            redacted_bg = root / "editable-redacted_assets" / "slide_01_redacted.png"
+            with Image.open(redacted_bg) as redacted:
+                self.assertEqual(redacted.getpixel((40, 35)), (0, 0, 0))
+                self.assertEqual(redacted.getpixel((140, 35)), (255, 255, 255))
+
+    def test_collect_editable_blocks_reports_skip_reasons(self) -> None:
+        blocks = [
+            {"text": "Tiny", "bbox": [0, 0, 20, 8]},
+            {"text": "SmallArea", "bbox": [30, 0, 20, 20]},
+            {"text": "Locked", "bbox": [70, 0, 40, 20]},
+            {"text": "Main", "bbox": [120, 0, 80, 30]},
+        ]
+        locks = {"slide_01": [{"x": 60, "y": 0, "w": 60, "h": 60}]}
+
+        editable, stats = collect_editable_blocks(
+            blocks,
+            slide_stem="slide_01",
+            width=240,
+            height=120,
+            min_text_height=10,
+            min_text_area=500,
+            locks=locks,
+        )
+
+        self.assertEqual([block["text"] for block in editable], ["Main"])
+        self.assertEqual(stats.total_blocks, 4)
+        self.assertEqual(stats.editable_blocks, 1)
+        self.assertEqual(stats.skipped_by_height, 1)
+        self.assertEqual(stats.skipped_by_area, 1)
+        self.assertEqual(stats.skipped_by_lock, 1)
+
+    def test_load_ocr_locks_accepts_slide_map_and_global_regions(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            lock_file = Path(tmp) / "ocr-locks.json"
+            lock_file.write_text(
+                json.dumps(
+                    {
+                        "regions": [{"x": 1, "y": 2, "w": 3, "h": 4}],
+                        "slides": {
+                            "slide_02": [{"left": 5, "top": 6, "width": 7, "height": 8}]
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            locks = load_ocr_locks(lock_file)
+
+            self.assertEqual(locks["*"], [{"x": 1.0, "y": 2.0, "w": 3.0, "h": 4.0}])
+            self.assertEqual(
+                locks["slide_02"],
+                [{"x": 5.0, "y": 6.0, "w": 7.0, "h": 8.0}],
+            )
 
     def test_image_svg_editable_pipeline_with_existing_ocr(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -477,6 +646,64 @@ class ExporterTests(unittest.TestCase):
 
         self.assertEqual(args.command, "svg-native-rebuild")
         self.assertEqual(args.pattern, "slide_*.svg")
+
+    def test_cli_exposes_ocr_filtering_arguments(self) -> None:
+        parser = build_parser()
+
+        editable_args = parser.parse_args(
+            [
+                "editable",
+                "slides",
+                "--ocr",
+                "ocr",
+                "--pptx",
+                "editable.pptx",
+                "--min-text-height",
+                "30",
+                "--min-text-area",
+                "900",
+                "--lock-file",
+                "ocr-locks.json",
+            ]
+        )
+        pipeline_args = parser.parse_args(
+            [
+                "image-svg-editable",
+                "slides",
+                "--out",
+                "out",
+                "--min-text-height",
+                "30",
+                "--min-text-area",
+                "900",
+                "--lock-file",
+                "ocr-locks.json",
+            ]
+        )
+        full_args = parser.parse_args(
+            [
+                "full-rebuild",
+                "slides",
+                "--out",
+                "out",
+                "--min-text-height",
+                "30",
+                "--min-text-area",
+                "900",
+                "--lock-file",
+                "ocr-locks.json",
+            ]
+        )
+
+        self.assertEqual(editable_args.min_text_height, 30)
+        self.assertEqual(editable_args.min_text_area, 900)
+        self.assertEqual(editable_args.lock_file, Path("ocr-locks.json"))
+        self.assertEqual(pipeline_args.min_text_height, 30)
+        self.assertEqual(pipeline_args.min_text_area, 900)
+        self.assertEqual(pipeline_args.lock_file, Path("ocr-locks.json"))
+        self.assertEqual(full_args.min_text_height, 30)
+        self.assertEqual(full_args.min_text_area, 900)
+        self.assertEqual(full_args.lock_file, Path("ocr-locks.json"))
 
 
 if __name__ == "__main__":

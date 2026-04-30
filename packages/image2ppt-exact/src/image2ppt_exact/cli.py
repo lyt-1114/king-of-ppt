@@ -88,6 +88,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     editable.add_argument("--font", default="Microsoft YaHei")
     editable.add_argument("--color", default="#111827")
+    add_ocr_filter_arguments(editable)
 
     pipeline = subparsers.add_parser(
         "image-svg-editable",
@@ -130,6 +131,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     pipeline.add_argument("--font", default="Microsoft YaHei")
     pipeline.add_argument("--color", default="#111827")
+    add_ocr_filter_arguments(pipeline)
     pipeline.add_argument("--force", action="store_true")
     pipeline.add_argument(
         "--allow-empty-text",
@@ -231,6 +233,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     full.add_argument("--font", default="Microsoft YaHei")
     full.add_argument("--color", default="#111827")
+    add_ocr_filter_arguments(full)
     full.add_argument("--force", action="store_true")
     full.add_argument(
         "--allow-empty-text",
@@ -239,6 +242,37 @@ def build_parser() -> argparse.ArgumentParser:
     )
 
     return parser
+
+
+def add_ocr_filter_arguments(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        "--min-text-height",
+        type=float,
+        default=None,
+        help=(
+            "Skip OCR blocks shorter than this many source-image pixels. "
+            "Skipped blocks are not converted to editable text and are not "
+            "redacted from the background."
+        ),
+    )
+    parser.add_argument(
+        "--min-text-area",
+        type=float,
+        default=None,
+        help=(
+            "Skip OCR blocks whose bounding-box area is smaller than this many "
+            "source-image square pixels."
+        ),
+    )
+    parser.add_argument(
+        "--lock-file",
+        type=Path,
+        default=None,
+        help=(
+            "JSON file with OCR lock regions. Blocks intersecting a locked "
+            "region are kept in the image background and not converted."
+        ),
+    )
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -291,6 +325,9 @@ def main(argv: list[str] | None = None) -> int:
                 background=args.background,
                 default_font=args.font,
                 default_color=args.color,
+                min_text_height=args.min_text_height,
+                min_text_area=args.min_text_area,
+                lock_file=args.lock_file,
             )
         )
         print(f"editable_pptx={pptx_path}")
@@ -310,6 +347,9 @@ def main(argv: list[str] | None = None) -> int:
                 background=args.background,
                 default_font=args.font,
                 default_color=args.color,
+                min_text_height=args.min_text_height,
+                min_text_area=args.min_text_area,
+                lock_file=args.lock_file,
                 force=args.force,
                 allow_empty_text=args.allow_empty_text,
             )
@@ -382,6 +422,9 @@ def main(argv: list[str] | None = None) -> int:
                 background=args.background,
                 default_font=args.font,
                 default_color=args.color,
+                min_text_height=args.min_text_height,
+                min_text_area=args.min_text_area,
+                lock_file=args.lock_file,
                 force=args.force,
                 allow_empty_text=args.allow_empty_text,
             )

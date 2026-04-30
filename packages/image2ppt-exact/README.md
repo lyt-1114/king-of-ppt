@@ -214,3 +214,47 @@ cd packages/image2ppt-exact
 python -m unittest discover -s tests
 image2ppt-exact full-rebuild --help
 ```
+
+## OCR filtering and locked regions
+
+Use OCR filtering when source slide images contain screenshots, dashboards,
+charts, tables, UI panels, or tiny labels that should remain part of the bitmap
+background instead of becoming editable PowerPoint text boxes.
+
+```bash
+image2ppt-exact full-rebuild slides \
+  --out rebuild \
+  --background redact \
+  --min-text-height 30 \
+  --min-text-area 900 \
+  --lock-file ocr-locks.json \
+  --force
+```
+
+- `--min-text-height 30`: skip OCR blocks shorter than 30 source-image pixels.
+- `--min-text-area 900`: skip OCR blocks whose bounding-box area is smaller than
+  900 source-image square pixels.
+- `--lock-file ocr-locks.json`: skip OCR blocks intersecting locked regions.
+
+Skipped OCR blocks are not converted into editable text boxes and are not
+redacted from the background image. This keeps small screenshot text and chart
+labels visually intact while converting larger presentation text.
+
+Lock file example:
+
+```json
+{
+  "regions": [
+    { "x": 40, "y": 820, "w": 1840, "h": 120 }
+  ],
+  "slides": {
+    "slide_003": [
+      { "x": 900, "y": 120, "w": 760, "h": 520 }
+    ]
+  }
+}
+```
+
+`regions` applies to every slide. `slides` keys match image stems such as
+`slide_003` for `slide_003.png`. Coordinates are in the source image pixel
+space used by OCR JSON.

@@ -27,6 +27,9 @@ class FullRebuildConfig:
     background: str = "blank"
     default_font: str = "Microsoft YaHei"
     default_color: str = "#111827"
+    min_text_height: float | None = None
+    min_text_area: float | None = None
+    lock_file: Path | None = None
     force: bool = False
     allow_empty_text: bool = False
 
@@ -43,6 +46,9 @@ class FullRebuildResult:
     full_rebuild_log_path: Path
     expected_text_blocks: int
     actual_text_boxes: int
+    skipped_by_height: int = 0
+    skipped_by_area: int = 0
+    skipped_by_lock: int = 0
     blueprint_pptx_path: Path | None = None
     blueprint_log_path: Path | None = None
     blueprint_text_objects: int = 0
@@ -68,6 +74,9 @@ def run_full_rebuild_pipeline(config: FullRebuildConfig) -> FullRebuildResult:
             background=config.background,
             default_font=config.default_font,
             default_color=config.default_color,
+            min_text_height=config.min_text_height,
+            min_text_area=config.min_text_area,
+            lock_file=config.lock_file,
             force=config.force,
             allow_empty_text=config.allow_empty_text,
         )
@@ -125,6 +134,9 @@ def run_full_rebuild_pipeline(config: FullRebuildConfig) -> FullRebuildResult:
         full_rebuild_log_path=full_log_path,
         expected_text_blocks=image_result.expected_text_blocks,
         actual_text_boxes=image_result.actual_text_boxes,
+        skipped_by_height=image_result.skipped_by_height,
+        skipped_by_area=image_result.skipped_by_area,
+        skipped_by_lock=image_result.skipped_by_lock,
         blueprint_pptx_path=blueprint_pptx_path,
         blueprint_log_path=blueprint_log_path,
         blueprint_text_objects=blueprint_text_objects,
@@ -163,6 +175,9 @@ def build_full_rebuild_log(
         f"- Canvas: `{config.width} x {config.height}`",
         f"- Editable text background mode: `{config.background}`",
         f"- OCR JSON: `{image_result.ocr_dir}`",
+        f"- Minimum editable text height: `{config.min_text_height if config.min_text_height is not None else 'disabled'}`",
+        f"- Minimum editable text area: `{config.min_text_area if config.min_text_area is not None else 'disabled'}`",
+        f"- OCR lock file: `{config.lock_file.resolve() if config.lock_file else 'not provided'}`",
         f"- Blueprint JSON: `{config.blueprint_path.resolve() if config.blueprint_path else 'not provided'}`",
         "",
         "## Outputs",
@@ -193,6 +208,9 @@ def build_full_rebuild_log(
             f"- Slides: `{image_result.slide_count}`",
             f"- OCR text blocks: `{image_result.expected_text_blocks}`",
             f"- Editable PPT text boxes: `{image_result.actual_text_boxes}`",
+            f"- OCR blocks skipped by height: `{image_result.skipped_by_height}`",
+            f"- OCR blocks skipped by area: `{image_result.skipped_by_area}`",
+            f"- OCR blocks skipped by lock regions: `{image_result.skipped_by_lock}`",
             f"- Blueprint text objects: `{blueprint_text_objects}`",
             f"- Blueprint shape objects: `{blueprint_shape_objects}`",
             f"- Blueprint picture objects: `{blueprint_picture_objects}`",
