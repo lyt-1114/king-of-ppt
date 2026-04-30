@@ -15,11 +15,13 @@ from image2ppt_exact import (
     ExportConfig,
     FullRebuildConfig,
     ImageSvgEditableConfig,
+    SvgNativeRebuildConfig,
     create_editable_text_pptx,
     export_exact_deck,
     rebuild_from_blueprint,
     run_full_rebuild_pipeline,
     run_image_svg_editable_pipeline,
+    rebuild_from_svg_native,
 )
 from image2ppt_exact.cli import build_parser
 from image2ppt_exact.editable import rapid_result_to_blocks
@@ -330,6 +332,99 @@ class ExporterTests(unittest.TestCase):
             self.assertIn("Exact proof route", log)
             self.assertIn("Editable text route", log)
             self.assertIn("High-fidelity blueprint route", log)
+
+    def test_svg_native_rebuild_creates_editable_objects_from_structured_svg(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            src = root / "svg"
+            src.mkdir()
+            (src / "slide_01.svg").write_text(
+                """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <rect x="100" y="120" width="520" height="240" fill="#163f45" stroke="#01e1d9" stroke-width="4"/>
+  <text x="140" y="210" font-size="44" font-family="Microsoft YaHei" fill="#f4f8f7" font-weight="700">Native SVG title</text>
+  <line x1="140" y1="260" x2="560" y2="260" stroke="#99efe9" stroke-width="3"/>
+</svg>""",
+                encoding="utf-8",
+            )
+            pptx = root / "native.pptx"
+
+            result = rebuild_from_svg_native(
+                SvgNativeRebuildConfig(src=src, pptx_path=pptx)
+            )
+
+            self.assertTrue(pptx.exists())
+            self.assertTrue(result.log_path.exists())
+            self.assertEqual(result.slide_count, 1)
+            self.assertEqual(result.text_count, 1)
+            self.assertGreaterEqual(result.shape_count, 1)
+            self.assertEqual(result.line_count, 1)
+
+            prs = Presentation(str(pptx))
+            texts = [
+                shape.text
+                for slide in prs.slides
+                for shape in slide.shapes
+                if getattr(shape, "has_text_frame", False) and shape.text.strip()
+            ]
+            self.assertIn("Native SVG title", texts)
+
+    def test_svg_native_rebuild_inserts_data_uri_images(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            src = root / "svg"
+            src.mkdir()
+            (src / "slide_01.svg").write_text(
+                f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <image x="10" y="20" width="100" height="80" href="data:image/png;base64,{TINY_PNG}"/>
+</svg>""",
+                encoding="utf-8",
+            )
+            pptx = root / "native.pptx"
+
+            result = rebuild_from_svg_native(
+                SvgNativeRebuildConfig(src=src, pptx_path=pptx)
+            )
+
+            self.assertEqual(result.picture_count, 1)
+            prs = Presentation(str(pptx))
+            pictures = [
+                shape
+                for slide in prs.slides
+                for shape in slide.shapes
+                if shape.shape_type == MSO_SHAPE_TYPE.PICTURE
+            ]
+            self.assertEqual(len(pictures), 1)
+
+    def test_svg_native_rebuild_converts_polygon_and_simple_path(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            src = root / "svg"
+            src.mkdir()
+            (src / "slide_01.svg").write_text(
+                """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <polygon points="120,120 240,120 200,220" fill="#01e1d9"/>
+  <path d="M 320 120 L 460 120 L 460 220 Z" fill="#163f45" stroke="#99efe9"/>
+</svg>""",
+                encoding="utf-8",
+            )
+            pptx = root / "native.pptx"
+
+            result = rebuild_from_svg_native(
+                SvgNativeRebuildConfig(src=src, pptx_path=pptx)
+            )
+
+            self.assertEqual(result.shape_count, 2)
+            self.assertEqual(result.skipped_count, 0)
+
+    def test_cli_exposes_svg_native_rebuild_route(self) -> None:
+        parser = build_parser()
+
+        args = parser.parse_args(
+            ["svg-native-rebuild", "svg", "--pptx", "native.pptx"]
+        )
+
+        self.assertEqual(args.command, "svg-native-rebuild")
+        self.assertEqual(args.pattern, "slide_*.svg")
 
 
 if __name__ == "__main__":

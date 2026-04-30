@@ -7,6 +7,7 @@ from .blueprint import BlueprintRebuildConfig, rebuild_from_blueprint
 from .editable import EditableConfig, OcrConfig, create_editable_text_pptx, extract_ocr_json
 from .exporter import ExportConfig, export_exact_deck
 from .full_rebuild import FullRebuildConfig, run_full_rebuild_pipeline
+from .native_svg import SvgNativeRebuildConfig, rebuild_from_svg_native
 from .pipeline import ImageSvgEditableConfig, run_image_svg_editable_pipeline
 
 
@@ -149,6 +150,25 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         help="Folder used to resolve relative image asset paths.",
     )
+
+    svg_native = subparsers.add_parser(
+        "svg-native-rebuild",
+        help=(
+            "Convert structured SVG slides into native editable PowerPoint "
+            "objects."
+        ),
+    )
+    svg_native.add_argument("src", type=Path, help="Folder containing SVG slides.")
+    svg_native.add_argument("--pptx", type=Path, required=True, help="PPTX output path.")
+    svg_native.add_argument(
+        "--pattern",
+        default="slide_*.svg",
+        help="Glob used to find SVG slides. Default: slide_*.svg",
+    )
+    svg_native.add_argument("--width", type=int, default=None, help="Canvas width override.")
+    svg_native.add_argument("--height", type=int, default=None, help="Canvas height override.")
+    svg_native.add_argument("--font", default="Microsoft YaHei")
+    svg_native.add_argument("--color", default="#111827")
 
     full = subparsers.add_parser(
         "full-rebuild",
@@ -317,6 +337,29 @@ def main(argv: list[str] | None = None) -> int:
         print(f"shape_objects={result.shape_count}")
         print(f"picture_objects={result.picture_count}")
         print(f"line_objects={result.line_count}")
+        return 0
+
+    if args.command == "svg-native-rebuild":
+        result = rebuild_from_svg_native(
+            SvgNativeRebuildConfig(
+                src=args.src,
+                pptx_path=args.pptx,
+                pattern=args.pattern,
+                width=args.width,
+                height=args.height,
+                default_font=args.font,
+                default_color=args.color,
+            )
+        )
+        print(f"pptx={result.pptx_path}")
+        print(f"svg_native_log={result.log_path}")
+        print(f"slides={result.slide_count}")
+        print(f"text_objects={result.text_count}")
+        print(f"shape_objects={result.shape_count}")
+        print(f"picture_objects={result.picture_count}")
+        print(f"line_objects={result.line_count}")
+        print(f"group_objects={result.group_count}")
+        print(f"skipped_objects={result.skipped_count}")
         return 0
 
     if args.command == "full-rebuild":

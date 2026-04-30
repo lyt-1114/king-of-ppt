@@ -16,6 +16,7 @@ The package is intentionally split into routes because these goals are different
 | Exact export | `export` | Pixel-faithful proof of an approved image deck | SVG wrappers, HTML preview, exact image PPTX |
 | OCR editable text | `ocr` + `editable` | Recovering editable text boxes from slide images | OCR JSON, native PPT text boxes |
 | Verified image route | `image-svg-editable` | Running the approved image -> SVG -> editable text flow in one command | Exact assets, editable PPTX, execution log |
+| SVG native rebuild | `svg-native-rebuild` | Converting structured SVG slides into native editable PowerPoint objects | Native PPT text, shapes, lines, pictures, log |
 | High-fidelity rebuild | `blueprint-rebuild` | Rebuilding polished editable decks with native layout objects | PPT text, shapes, lines, pictures, panels, chips, footers |
 | Full rebuild | `full-rebuild` | Running exact proof, editable text, optional blueprint rebuild, and verification together | Exact PPTX, editable text PPTX, optional high-fidelity PPTX, unified log |
 
@@ -25,6 +26,11 @@ Important boundary:
 SVG containing one embedded PNG is still an image.
 It is pixel-faithful, but it is not editable as native PowerPoint text/shapes.
 ```
+
+The `svg-native-rebuild` route is for structured SVG: text, rects, circles,
+lines, paths, polygons, and image elements. It converts those SVG primitives into
+editable PowerPoint objects. It does not perform vision extraction from a flat
+slide screenshot by itself.
 
 For a deck like the earlier high-fidelity editable Cargill version, use
 `blueprint-rebuild`, not OCR alone.
@@ -75,6 +81,13 @@ image2ppt-exact blueprint-rebuild examples/blueprint.sample.json \
   --assets-root examples
 ```
 
+Structured SVG native route:
+
+```bash
+image2ppt-exact svg-native-rebuild path/to/svg_slides \
+  --pptx path/to/native_editable.pptx
+```
+
 Full rebuild route:
 
 ```bash
@@ -107,6 +120,8 @@ Depending on the route, the package writes:
 - `exact_image_deck.pptx`
 - `ocr_json/slide_XX.json`
 - `editable_text_layer.pptx`
+- `native_editable.pptx`
+- `*.svg-native-log.md`
 - `pipeline-execution-log.md`
 - `high_fidelity_editable.pptx`
 - `full-rebuild-log.md`
@@ -119,6 +134,7 @@ python -m unittest discover -s tests
 image2ppt-exact --help
 image2ppt-exact full-rebuild --help
 image2ppt-exact blueprint-rebuild --help
+image2ppt-exact svg-native-rebuild --help
 ```
 
 ## Source Layout
@@ -127,6 +143,7 @@ image2ppt-exact blueprint-rebuild --help
 src/image2ppt_exact/exporter.py    # exact image/SVG/PPTX export
 src/image2ppt_exact/editable.py    # OCR JSON and editable text PPTX
 src/image2ppt_exact/pipeline.py    # verified image-svg-editable route
+src/image2ppt_exact/native_svg.py  # structured SVG -> native editable PPTX route
 src/image2ppt_exact/blueprint.py   # high-fidelity native object rebuild
 src/image2ppt_exact/cli.py         # command-line entry point
 tests/                             # route smoke tests

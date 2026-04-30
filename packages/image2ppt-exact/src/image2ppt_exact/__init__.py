@@ -13,6 +13,11 @@ from .full_rebuild import (
     FullRebuildResult,
     run_full_rebuild_pipeline,
 )
+from .native_svg import (
+    SvgNativeRebuildConfig,
+    SvgNativeRebuildResult,
+    rebuild_from_svg_native,
+)
 
 __all__ = [
     "BlueprintRebuildConfig",
@@ -25,10 +30,13 @@ __all__ = [
     "ImageSvgEditableConfig",
     "ImageSvgEditableResult",
     "OcrConfig",
+    "SvgNativeRebuildConfig",
+    "SvgNativeRebuildResult",
     "create_editable_text_pptx",
     "export_exact_deck",
     "extract_ocr_json",
     "rebuild_from_blueprint",
+    "rebuild_from_svg_native",
     "run_full_rebuild_pipeline",
     "run_image_svg_editable_pipeline",
 ]

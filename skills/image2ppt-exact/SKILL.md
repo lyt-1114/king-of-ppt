@@ -11,6 +11,7 @@ Use this skill for the reproducible handoff route. Prefer the full rebuild route
 approved slide images
 -> exact SVG wrappers / exact image PPTX
 -> OCR JSON / editable text PPTX
+-> optional structured SVG / native editable PPTX
 -> optional blueprint JSON / high-fidelity editable PPTX
 -> unified full-rebuild log
 ```
@@ -18,6 +19,7 @@ approved slide images
 ## Core Boundary
 
 - SVG files produced by this route are usually PNG wrappers. They are pixel-faithful, but not editable as native PPT text or shapes.
+- Structured SVG files can be rebuilt as native editable PPT objects with `svg-native-rebuild`.
 - Editable PPTX output must be rebuilt as native PowerPoint objects.
 - OCR-only output gives editable text boxes, not a polished high-fidelity deck.
 - Do not keep source images as editable backgrounds unless they are already text-free. Keeping text-bearing slide images under OCR text creates duplicate text.
@@ -54,6 +56,7 @@ Use `full-rebuild` as the default route when the user asks for a complete conver
 | Pixel-faithful proof of approved image deck | Exact export | `image2ppt-exact export` |
 | Editable text boxes from slide images | OCR editable text | `image2ppt-exact ocr` then `image2ppt-exact editable` |
 | One-command verified image -> SVG -> editable text flow | Verified pipeline | `image2ppt-exact image-svg-editable` |
+| Structured SVG slides into editable objects | SVG native rebuild | `image2ppt-exact svg-native-rebuild` |
 | Polished high-fidelity editable deck | Blueprint rebuild | `image2ppt-exact blueprint-rebuild` |
 
 ## Recommended Route: Full Rebuild
@@ -114,7 +117,27 @@ image2ppt-exact image-svg-editable path/to/slides \
 
 This writes `pipeline-execution-log.md` and refuses success when OCR JSON is missing, has zero text blocks, slide count mismatches, or the generated PPTX has no editable text boxes.
 
-## Route 4: High-Fidelity Blueprint Rebuild
+## Route 4: SVG Native Rebuild
+
+```bash
+image2ppt-exact svg-native-rebuild path/to/svg_slides \
+  --pptx path/to/native_editable.pptx
+```
+
+Use this route when the input is structured SVG, not a one-image SVG wrapper.
+It rebuilds supported SVG primitives as native PowerPoint objects:
+
+- text
+- rectangles, circles, ellipses
+- lines, polylines, polygons, simple paths
+- image elements
+- recursive groups
+
+The route writes `*.svg-native-log.md` with slide count and native object
+counts. It is the closest package route to `ppt-master`'s SVG-to-DrawingML
+idea, while staying inside this package's `python-pptx` architecture.
+
+## Route 5: High-Fidelity Blueprint Rebuild
 
 ```bash
 image2ppt-exact blueprint-rebuild path/to/deck.blueprint.json \
@@ -139,6 +162,7 @@ Before reporting success, run at least one relevant check:
 ```bash
 python -m unittest discover -s packages/image2ppt-exact/tests
 image2ppt-exact --help
+image2ppt-exact svg-native-rebuild --help
 ```
 
 For a real output, inspect the generated log:
@@ -146,6 +170,7 @@ For a real output, inspect the generated log:
 - `full-rebuild-log.md` for the recommended full rebuild route
 - `run-log.md` for exact export
 - `pipeline-execution-log.md` for image-svg-editable
+- `*.svg-native-log.md` for SVG native rebuild
 - `*.blueprint-log.md` for blueprint rebuild
 
 Report the slide count and editable object counts when available.
