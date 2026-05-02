@@ -379,17 +379,17 @@ def extract_ocr_json(config: OcrConfig) -> Path:
         if ocr is not None:
             try:
                 raw_result = run_paddle_ocr(ocr, image_path)
-                blocks = paddle_result_to_blocks(raw_result)
+                blocks = paddle_result_to_blocks(raw_result, image_path=image_path)
             except Exception:
                 rapid_ocr = rapid_ocr or create_rapid_ocr()
                 if rapid_ocr is None:
                     raise
                 ocr = None
                 raw_result = run_rapid_ocr(rapid_ocr, image_path)
-                blocks = rapid_result_to_blocks(raw_result)
+                blocks = rapid_result_to_blocks(raw_result, image_path=image_path)
         else:
             raw_result = run_rapid_ocr(rapid_ocr, image_path)
-            blocks = rapid_result_to_blocks(raw_result)
+            blocks = rapid_result_to_blocks(raw_result, image_path=image_path)
         (config.out / f"{image_path.stem}.json").write_text(
             json.dumps({"blocks": blocks}, ensure_ascii=False, indent=2),
             encoding="utf-8",
@@ -418,7 +418,11 @@ def run_rapid_ocr(ocr: Any, image_path: Path) -> Any:
     return result or []
 
 
-def paddle_result_to_blocks(raw_result: Any) -> list[dict[str, Any]]:
+def paddle_result_to_blocks(
+    raw_result: Any,
+    *,
+    image_path: Path | None = None,
+) -> list[dict[str, Any]]:
     blocks: list[dict[str, Any]] = []
     pages = raw_result if isinstance(raw_result, list) else [raw_result]
     if len(pages) == 1 and isinstance(pages[0], list):
@@ -438,17 +442,24 @@ def paddle_result_to_blocks(raw_result: Any) -> list[dict[str, Any]]:
             continue
         text = str(payload[0])
         confidence = float(payload[1]) if len(payload) > 1 else None
+        bbox = polygon_to_xywh(box)
         blocks.append(
             {
                 "text": text,
-                "bbox": polygon_to_xywh(box),
+                "bbox": bbox,
                 "confidence": confidence,
+                "font_size": estimate_font_size_from_bbox(bbox[3]),
+                "color": sample_text_color(image_path, bbox),
             }
         )
     return blocks
 
 
-def rapid_result_to_blocks(raw_result: Any) -> list[dict[str, Any]]:
+def rapid_result_to_blocks(
+    raw_result: Any,
+    *,
+    image_path: Path | None = None,
+) -> list[dict[str, Any]]:
     blocks: list[dict[str, Any]] = []
     for line in raw_result or []:
         if not isinstance(line, (list, tuple)) or len(line) < 2:
@@ -456,13 +467,14 @@ def rapid_result_to_blocks(raw_result: Any) -> list[dict[str, Any]]:
         box = line[0]
         text = str(line[1])
         confidence = float(line[2]) if len(line) > 2 else None
+        bbox = polygon_to_xywh(box)
         blocks.append(
             {
                 "text": text,
-                "bbox": polygon_to_xywh(box),
+                "bbox": bbox,
                 "confidence": confidence,
-                "font_size": estimate_font_size_from_bbox(polygon_to_xywh(box)[3]),
-                "color": "#111827",
+                "font_size": estimate_font_size_from_bbox(bbox[3]),
+                "color": sample_text_color(image_path, bbox),
             }
         )
     return blocks
@@ -470,6 +482,52 @@ def rapid_result_to_blocks(raw_result: Any) -> list[dict[str, Any]]:
 
 def estimate_font_size_from_bbox(box_height_px: float) -> float:
     return max(6.0, box_height_px * 0.75)
+
+
+def sample_text_color(image_path: Path | None, bbox: list[float]) -> str:
+    if image_path is None:
+        return "#111827"
+
+    try:
+        from PIL import Image
+    except ImportError:
+        return "#111827"
+
+    x, y, w, h = [int(round(value)) for value in bbox]
+    if w <= 0 or h <= 0:
+        return "#111827"
+
+    with Image.open(image_path) as source:
+        image = source.convert("RGB")
+
+    left = max(0, x)
+    top = max(0, y)
+    right = min(image.width, x + w)
+    bottom = min(image.height, y + h)
+    if right <= left or bottom <= top:
+        return "#111827"
+
+    crop = image.crop((left, top, right, bottom))
+    pixels = list(crop.get_flattened_data()) if hasattr(crop, "get_flattened_data") else list(crop.convert("RGB").getdata())
+    if not pixels:
+        return "#111827"
+
+    mean = tuple(sum(channel) / len(pixels) for channel in zip(*pixels))
+    luminance = 0.299 * mean[0] + 0.587 * mean[1] + 0.114 * mean[2]
+
+    def pixel_lum(rgb: tuple[int, int, int]) -> float:
+        return 0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2]
+
+    if luminance < 128:
+        selected = [rgb for rgb in pixels if pixel_lum(rgb) >= luminance]
+    else:
+        selected = [rgb for rgb in pixels if pixel_lum(rgb) <= luminance]
+
+    if not selected:
+        selected = pixels
+
+    avg = [int(round(sum(values) / len(selected))) for values in zip(*selected)]
+    return f"#{avg[0]:02X}{avg[1]:02X}{avg[2]:02X}"
 
 
 def load_spec_lines(spec_file: Path | None) -> list[str]:

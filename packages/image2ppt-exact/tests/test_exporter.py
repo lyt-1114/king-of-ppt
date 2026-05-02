@@ -30,6 +30,7 @@ from image2ppt_exact.editable import (
     load_ocr_locks,
     rapid_result_to_blocks,
     apply_spec_corrections,
+    sample_text_color,
 )
 
 
@@ -129,6 +130,21 @@ class ExporterTests(unittest.TestCase):
         self.assertAlmostEqual(blocks[0]["confidence"], 0.91)
         self.assertIn("color", blocks[0])
         self.assertIn("font_size", blocks[0])
+
+    def test_sample_text_color_reads_light_text_from_dark_background(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            image_path = root / "slide_01.png"
+            img = Image.new("RGB", (100, 60), "black")
+            draw = ImageDraw.Draw(img)
+            draw.rectangle((10, 10, 40, 30), fill="white")
+            img.save(image_path)
+
+            color = sample_text_color(image_path, [10, 10, 30, 20])
+
+            self.assertGreater(int(color[1:3], 16), 200)
+            self.assertGreater(int(color[3:5], 16), 200)
+            self.assertGreater(int(color[5:7], 16), 200)
 
     def test_apply_spec_corrections_replaces_close_ocr_text(self) -> None:
         blocks = [

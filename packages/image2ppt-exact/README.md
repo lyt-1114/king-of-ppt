@@ -268,9 +268,9 @@ overlay-style editable workflow:
   Use an optional spec text file to correct OCR text before the editable PPTX
   is built. This is helpful when OCR is close but not fully reliable.
 - OCR color/font-size recovery
-  OCR JSON now preserves basic style hints such as `color` and `font_size`, so
-  rebuilt text looks closer to the source image instead of using only global
-  defaults.
+  OCR JSON now preserves basic style hints such as `color` and `font_size`.
+  Color is sampled from the source image region when available, so rebuilt text
+  stays closer to the source image instead of using only global defaults.
 - hand-editable OCR JSON rerun flow
   OCR JSON is still an intermediate artifact on purpose. You can manually fix
   text, boxes, colors, or font sizes and rerun the editable/full-rebuild steps
