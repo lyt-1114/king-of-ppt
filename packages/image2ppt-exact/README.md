@@ -45,5 +45,5 @@ pip install -e .[ocr]
 
 ## 需要细看时
 
-- OCR 可编辑路线: [docs/routes/02-ocr-editable.md](docs/routes/02-ocr-editable.md)
+- 总说明: [docs/overview.md](docs/overview.md)
 - Blueprint schema: [docs/blueprint-schema.md](docs/blueprint-schema.md)
