@@ -1,23 +1,31 @@
 # image2ppt-exact
 
-`image2ppt-exact` 现在只推荐一条路线：
+`image2ppt-exact` 是一个把整页幻灯片图片转换成可交付 PPTX 的工具包。
 
-```text
-一组 PPT 页面图片
-  -> 像素级保底复刻
-  -> OCR 提取可编辑文字
-  -> 结构化 SVG / Blueprint 原生对象重建
-  -> 统一校验日志
-  -> 交付一套可追溯的 editable PPT 结果
-```
+它的目标很简单：
 
-也就是说，用户不需要在 5 条路线里纠结。真正的入口只有一个：
+- 先保留像素级外观
+- 再恢复可编辑文本
+- 需要时再做更高保真的原生对象重建
+
+## 它能做什么
+
+- `exact export`：导出像素一致的 proof 资产
+- `ocr editable`：把图片里的文字恢复成可编辑文本框
+- `image-svg-editable`：一条命令跑完 exact + OCR + editable 校验
+- `svg-native-rebuild`：把结构化 SVG 重建为原生 PPT 对象
+- `blueprint-rebuild`：按 blueprint 生成高保真可编辑 PPTX
+- `full-rebuild`：推荐主路径，串起整条可追溯流程
+
+## 推荐怎么用
+
+如果你只是想把一套批准后的页面图片转成可编辑 PPT，默认直接用：
 
 ```bash
 image2ppt-exact full-rebuild path/to/slides --out path/to/rebuild --force
 ```
 
-如果你要保留原页面视觉，但不能让原图里的文字和 OCR 文字重复，使用清字背景：
+如果你想保留背景但去掉 OCR 文本区域：
 
 ```bash
 image2ppt-exact full-rebuild path/to/slides \
@@ -26,7 +34,7 @@ image2ppt-exact full-rebuild path/to/slides \
   --force
 ```
 
-如果你已经有高保真重建用的 blueprint，再加上：
+如果你已经有 blueprint，还可以继续做高保真重建：
 
 ```bash
 image2ppt-exact full-rebuild path/to/slides \
@@ -36,90 +44,50 @@ image2ppt-exact full-rebuild path/to/slides \
   --force
 ```
 
-## 核心逻辑
+## 输出层次
 
-图片版 PPT 转可编辑 PPT 不能靠一句“转成 PPTX”解决，因为目标其实分成三层：
+这个包把结果分成三层：
 
-| 层级 | 解决的问题 | 产物 |
+| 层次 | 作用 | 产物 |
 | --- | --- | --- |
-| 像素保底层 | 原图必须能 100% 看起来一致 | `exact_image_deck.pptx` |
-| 文字恢复层 | 页面里的文字要能复制、编辑、改字体 | `editable_text_layer.pptx` |
-| 原生重建层 | 形状、线条、图片、面板、标签等尽量恢复成 PPT 对象 | `high_fidelity_editable.pptx` / `native_editable.pptx` |
+| exact | 保证画面不走样 | `exact_image_deck.pptx` |
+| editable | 恢复可编辑文字 | `editable_text_layer.pptx` |
+| blueprint | 重建原生 PPT 对象 | `high_fidelity_editable.pptx` |
 
-所以这不是“把一张图塞进 PPT”，而是一个有证据链的重建流程：
+## 文档入口
 
-1. 先生成像素级保底 PPT，确保视觉不丢。
-2. 再跑 OCR，把图片里的文字恢复成 PowerPoint 文本框。
-3. 如果需要带背景的可编辑版本，用 `--background redact` 清除原图文字区域，再叠加原生文本框，避免重复文字。
-4. 如果有结构化 SVG 或 blueprint，就把形状、线条、图片和组件恢复成原生 PowerPoint 对象。
-5. 最后写日志，记录每一层生成了多少页、多少文本框、多少对象。
-
-## 为什么只暴露一条终极路线
-
-包里仍然保留底层命令：
-
-- `export`
-- `ocr`
-- `editable`
-- `image-svg-editable`
-- `svg-native-rebuild`
-- `blueprint-rebuild`
-
-但这些现在都应该理解为 **内部层 / 调试入口**，不是普通用户要选择的路线。
-
-普通用户只跑：
-
-```bash
-image2ppt-exact full-rebuild ...
-```
-
-底层命令只在排查问题时使用，比如：
-
-- 只想看像素级复刻是否正确，用 `export`
-- 只想检查 OCR 结果，用 `ocr`
-- 只想验证文字层，用 `editable`
-- 已经有结构化 SVG，想单独测试 SVG 到原生 PPT 对象，用 `svg-native-rebuild`
-- 已经有 blueprint，想单独测试高保真对象重建，用 `blueprint-rebuild`
+- OCR 可编辑路线: [docs/routes/02-ocr-editable.md](docs/routes/02-ocr-editable.md)
+- 图片到 SVG 再到可编辑路线: [docs/routes/03-image-svg-editable.md](docs/routes/03-image-svg-editable.md)
+- Blueprint 重建路线: [docs/routes/04-blueprint-rebuild.md](docs/routes/04-blueprint-rebuild.md)
+- Exact 导出路线: [docs/routes/01-exact-export.md](docs/routes/01-exact-export.md)
+- Blueprint schema: [docs/blueprint-schema.md](docs/blueprint-schema.md)
 
 ## 安装
-
-在本包目录下安装：
 
 ```bash
 cd packages/image2ppt-exact
 pip install -e .
 ```
 
-如果需要自动 OCR：
+OCR 额外依赖：
 
 ```bash
 pip install -e .[ocr]
 ```
 
-## 最小使用方式
-
-准备一组页面图片：
+## 最小示例
 
 ```text
 slides/
   slide_01.png
   slide_02.png
-  slide_03.png
 ```
-
-运行终极路线：
 
 ```bash
 image2ppt-exact full-rebuild slides --out rebuild --force
 ```
 
-推荐的可编辑交付版本：
-
-```bash
-image2ppt-exact full-rebuild slides --out rebuild --background redact --force
-```
-
-默认输出：
+默认会生成：
 
 ```text
 rebuild/
@@ -128,178 +96,19 @@ rebuild/
   exact_image_deck.pptx
   ocr_json/
   editable_text_layer.pptx
-  editable_text_layer_assets/
-  pipeline-execution-log.md
   full-rebuild-log.md
 ```
 
-如果提供 blueprint：
-
-```bash
-image2ppt-exact full-rebuild slides \
-  --out rebuild \
-  --blueprint deck.blueprint.json \
-  --assets-root assets \
-  --force
-```
-
-会额外输出：
+## 代码结构
 
 ```text
-rebuild/
-  high_fidelity_editable.pptx
-  high_fidelity_editable.blueprint-log.md
+src/image2ppt_exact/exporter.py
+src/image2ppt_exact/editable.py
+src/image2ppt_exact/pipeline.py
+src/image2ppt_exact/native_svg.py
+src/image2ppt_exact/blueprint.py
+src/image2ppt_exact/full_rebuild.py
+src/image2ppt_exact/cli.py
+tests/
 ```
 
-## 新增的 SVG 原生重建逻辑
-
-`svg-native-rebuild` 是为了吸收 `ppt-master` 的核心思想：  
-**只要 SVG 是结构化的，就不要把它当图片贴进去，而要把 SVG 元素翻译成 PowerPoint 原生对象。**
-
-支持的第一批 SVG 元素：
-
-- `<text>` -> PPT 文本框
-- `<rect>` -> PPT 矩形 / 圆角矩形
-- `<circle>` / `<ellipse>` -> PPT 椭圆
-- `<line>` -> PPT 线条
-- `<polyline>` / `<polygon>` -> PPT 自由形状
-- 简单 `<path>` -> PPT 自由形状
-- `<image>` -> PPT 图片对象
-- `<g>` -> 递归处理子元素
-
-单独调试命令：
-
-```bash
-image2ppt-exact svg-native-rebuild path/to/svg_slides \
-  --pptx path/to/native_editable.pptx
-```
-
-重要边界：
-
-```text
-如果 SVG 里面只是嵌了一张整页 PNG，
-那它仍然只是图片，不会自动变成可编辑文字和形状。
-```
-
-要真正可编辑，输入必须是结构化 SVG，或者由 AI / 视觉分析先把截图拆成结构化 SVG / blueprint。
-
-## 产物怎么判断
-
-交付时优先看 `full-rebuild-log.md`：
-
-- `Slides`：页数是否一致
-- `OCR text blocks`：OCR 识别到多少文字块
-- `Editable PPT text boxes`：PPT 里实际生成了多少可编辑文本框
-- `Blueprint text/shape/picture/line objects`：高保真重建生成了多少原生对象
-
-如果没有 blueprint，`full-rebuild` 仍然是有效产物，只是高保真对象层会被日志标记为 skipped。
-
-## 源码结构
-
-```text
-src/image2ppt_exact/exporter.py     # 像素级图片 / SVG wrapper / PPTX 保底
-src/image2ppt_exact/editable.py     # OCR JSON 与可编辑文字层
-src/image2ppt_exact/pipeline.py     # 图片 -> SVG proof -> OCR -> editable PPTX
-src/image2ppt_exact/native_svg.py   # 结构化 SVG -> 原生可编辑 PPT 对象
-src/image2ppt_exact/blueprint.py    # blueprint -> 高保真 PPT 原生对象
-src/image2ppt_exact/full_rebuild.py # 终极路线编排
-src/image2ppt_exact/cli.py          # 命令行入口
-tests/                              # 路线测试
-```
-
-## 验证
-
-```bash
-cd packages/image2ppt-exact
-python -m unittest discover -s tests
-image2ppt-exact full-rebuild --help
-```
-
-## OCR filtering and locked regions
-
-Use OCR filtering when source slide images contain screenshots, dashboards,
-charts, tables, UI panels, or tiny labels that should remain part of the bitmap
-background instead of becoming editable PowerPoint text boxes.
-
-```bash
-image2ppt-exact full-rebuild slides \
-  --out rebuild \
-  --background redact \
-  --min-text-height 30 \
-  --min-text-area 900 \
-  --lock-file ocr-locks.json \
-  --force
-```
-
-- `--min-text-height 30`: skip OCR blocks shorter than 30 source-image pixels.
-- `--min-text-area 900`: skip OCR blocks whose bounding-box area is smaller than
-  900 source-image square pixels.
-- `--lock-file ocr-locks.json`: skip OCR blocks intersecting locked regions.
-
-Skipped OCR blocks are not converted into editable text boxes and are not
-redacted from the background image. This keeps small screenshot text and chart
-labels visually intact while converting larger presentation text.
-
-Lock file example:
-
-```json
-{
-  "regions": [
-    { "x": 40, "y": 820, "w": 1840, "h": 120 }
-  ],
-  "slides": {
-    "slide_003": [
-      { "x": 900, "y": 120, "w": 760, "h": 520 }
-    ]
-  }
-}
-```
-
-`regions` applies to every slide. `slides` keys match image stems such as
-`slide_003` for `slide_003.png`. Coordinates are in the source image pixel
-space used by OCR JSON.
-
-## Absorbed OCR-editable enhancements
-
-The OCR/editable route now absorbs three practical capabilities from the
-overlay-style editable workflow:
-
-- `spec-correction`
-  Use an optional spec text file to correct OCR text before the editable PPTX
-  is built. This is helpful when OCR is close but not fully reliable.
-- OCR color/font-size recovery
-  OCR JSON now preserves basic style hints such as `color` and `font_size`.
-  Color is sampled from the source image region when available, so rebuilt text
-  stays closer to the source image instead of using only global defaults.
-- hand-editable OCR JSON rerun flow
-  OCR JSON is still an intermediate artifact on purpose. You can manually fix
-  text, boxes, colors, or font sizes and rerun the editable/full-rebuild steps
-  without paying the OCR cost again.
-
-Example:
-
-```bash
-image2ppt-exact full-rebuild slides \
-  --out rebuild \
-  --background redact \
-  --spec-file expected_text.txt \
-  --force
-```
-
-## Manual correction rerun workflow
-
-Recommended loop:
-
-1. Run `full-rebuild` or `ocr` once to generate `ocr_json/slide_XX.json`
-2. Open the JSON and correct:
-   - `text` when OCR misread a word
-   - `bbox` when a text box is misplaced
-   - `color` or `font_size` when the rebuilt layer looks off
-3. Rerun `editable` or `full-rebuild` with the same OCR JSON folder
-
-If you only changed `text`, `color`, or `font_size`, rerunning the editable
-rebuild is usually enough.
-
-If you changed `bbox` and you are using `--background redact`, rerun the
-editable/full-rebuild step as well so the cleaned background is regenerated with
-the updated text regions.
