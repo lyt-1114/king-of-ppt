@@ -53,6 +53,47 @@ otherwise duplicate text is expected.
 OCR JSON is intentionally editable by hand. This makes it possible to correct
 recognition errors or tune positions before generating the PPTX.
 
+## Optional spec correction
+
+If you already know what the slide text should be, provide a spec file with one
+expected line per row:
+
+```text
+Metals
+Revenue Growth
+Middle Office
+```
+
+Then run:
+
+```bash
+image2ppt-exact editable path/to/slides \
+  --ocr path/to/ocr_json \
+  --pptx path/to/editable_text_layer.pptx \
+  --spec-file path/to/expected_text.txt
+```
+
+This performs `spec-correction` before text boxes are generated. It is useful
+when OCR is close but still introduces wrong letters or token breaks.
+
+## Manual correction and rerun
+
+OCR JSON is a deliberate intermediate artifact, not just a hidden cache.
+
+Typical loop:
+
+1. Generate OCR JSON once
+2. Open `slide_XX.json`
+3. Fix `text`, `bbox`, `color`, or `font_size`
+4. Rerun `editable` using the same OCR folder
+
+If you are using a background-clearing mode such as `redact`, and you changed
+`bbox`, rerun the editable step so the cleared background matches the corrected
+boxes.
+
+If you only changed `text`, `color`, or `font_size`, you can reuse the same OCR
+JSON and rebuild directly without repeating OCR extraction.
+
 ## Limitation
 
 OCR can recover text and approximate boxes. It does not understand card layout,

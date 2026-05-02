@@ -29,6 +29,7 @@ from image2ppt_exact.editable import (
     collect_editable_blocks,
     load_ocr_locks,
     rapid_result_to_blocks,
+    apply_spec_corrections,
 )
 
 
@@ -126,6 +127,62 @@ class ExporterTests(unittest.TestCase):
         self.assertEqual(blocks[0]["text"], "Hello")
         self.assertEqual(blocks[0]["bbox"], [1.0, 2.0, 10.0, 6.0])
         self.assertAlmostEqual(blocks[0]["confidence"], 0.91)
+        self.assertIn("color", blocks[0])
+        self.assertIn("font_size", blocks[0])
+
+    def test_apply_spec_corrections_replaces_close_ocr_text(self) -> None:
+        blocks = [
+            {"text": "MetaIs", "bbox": [0, 0, 80, 20], "confidence": 0.8},
+            {"text": "Revenue Growth", "bbox": [0, 30, 160, 20], "confidence": 0.9},
+        ]
+
+        corrected = apply_spec_corrections(
+            blocks,
+            ["Metals", "Revenue Growth"],
+        )
+
+        self.assertEqual(corrected[0]["text"], "Metals")
+        self.assertEqual(corrected[0]["source"], "spec-corrected")
+        self.assertEqual(corrected[1]["text"], "Revenue Growth")
+
+    def test_creates_editable_text_pptx_with_spec_correction(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            src = root / "slides"
+            ocr = root / "ocr"
+            spec = root / "spec.txt"
+            src.mkdir()
+            ocr.mkdir()
+            (src / "slide_01.png").write_bytes(base64.b64decode(TINY_PNG))
+            (ocr / "slide_01.json").write_text(
+                json.dumps(
+                    {"blocks": [{"text": "MetaIs", "bbox": [0, 0, 100, 40]}]}
+                ),
+                encoding="utf-8",
+            )
+            spec.write_text("Metals\n", encoding="utf-8")
+            pptx = root / "editable.pptx"
+
+            create_editable_text_pptx(
+                EditableConfig(
+                    src=src,
+                    ocr_dir=ocr,
+                    pptx_path=pptx,
+                    width=1920,
+                    height=1080,
+                    background="blank",
+                    spec_file=spec,
+                )
+            )
+
+            prs = Presentation(str(pptx))
+            texts = [
+                shape.text
+                for slide in prs.slides
+                for shape in slide.shapes
+                if getattr(shape, "has_text_frame", False) and shape.text.strip()
+            ]
+            self.assertEqual(texts, ["Metals"])
 
     def test_default_editable_output_does_not_keep_text_bearing_image_background(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -411,6 +468,7 @@ class ExporterTests(unittest.TestCase):
             log = (out / "pipeline-execution-log.md").read_text(encoding="utf-8")
             self.assertIn("SVG output is a pixel-faithful wrapper", log)
             self.assertIn("Editable output is a separate PPTX", log)
+            self.assertIn("manually correct the OCR JSON", log)
 
     def test_blueprint_rebuild_creates_native_objects(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

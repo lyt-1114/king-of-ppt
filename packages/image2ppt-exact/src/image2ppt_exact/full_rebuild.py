@@ -30,6 +30,7 @@ class FullRebuildConfig:
     min_text_height: float | None = None
     min_text_area: float | None = None
     lock_file: Path | None = None
+    spec_file: Path | None = None
     force: bool = False
     allow_empty_text: bool = False
 
@@ -77,6 +78,7 @@ def run_full_rebuild_pipeline(config: FullRebuildConfig) -> FullRebuildResult:
             min_text_height=config.min_text_height,
             min_text_area=config.min_text_area,
             lock_file=config.lock_file,
+            spec_file=config.spec_file,
             force=config.force,
             allow_empty_text=config.allow_empty_text,
         )
@@ -178,6 +180,7 @@ def build_full_rebuild_log(
         f"- Minimum editable text height: `{config.min_text_height if config.min_text_height is not None else 'disabled'}`",
         f"- Minimum editable text area: `{config.min_text_area if config.min_text_area is not None else 'disabled'}`",
         f"- OCR lock file: `{config.lock_file.resolve() if config.lock_file else 'not provided'}`",
+        f"- Spec correction file: `{config.spec_file.resolve() if config.spec_file else 'not provided'}`",
         f"- Blueprint JSON: `{config.blueprint_path.resolve() if config.blueprint_path else 'not provided'}`",
         "",
         "## Outputs",

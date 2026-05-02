@@ -3,6 +3,7 @@
 from .blueprint import BlueprintRebuildConfig, BlueprintRebuildResult, rebuild_from_blueprint
 from .exporter import ExportConfig, ExportResult, export_exact_deck
 from .editable import (
+    apply_spec_corrections,
     EditableBuildResult,
     EditableConfig,
     EditableFilterStats,
@@ -44,6 +45,7 @@ __all__ = [
     "OcrConfig",
     "SvgNativeRebuildConfig",
     "SvgNativeRebuildResult",
+    "apply_spec_corrections",
     "collect_editable_blocks",
     "create_editable_text_pptx",
     "create_editable_text_pptx_with_stats",

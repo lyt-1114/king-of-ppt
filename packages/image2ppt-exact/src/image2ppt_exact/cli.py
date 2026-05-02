@@ -88,6 +88,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     editable.add_argument("--font", default="Microsoft YaHei")
     editable.add_argument("--color", default="#111827")
+    editable.add_argument("--spec-file", type=Path, default=None, help="Optional text spec file used to correct OCR text before PPT rebuild.")
     add_ocr_filter_arguments(editable)
 
     pipeline = subparsers.add_parser(
@@ -131,6 +132,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     pipeline.add_argument("--font", default="Microsoft YaHei")
     pipeline.add_argument("--color", default="#111827")
+    pipeline.add_argument("--spec-file", type=Path, default=None, help="Optional text spec file used to correct OCR text before PPT rebuild.")
     add_ocr_filter_arguments(pipeline)
     pipeline.add_argument("--force", action="store_true")
     pipeline.add_argument(
@@ -233,6 +235,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     full.add_argument("--font", default="Microsoft YaHei")
     full.add_argument("--color", default="#111827")
+    full.add_argument("--spec-file", type=Path, default=None, help="Optional text spec file used to correct OCR text before PPT rebuild.")
     add_ocr_filter_arguments(full)
     full.add_argument("--force", action="store_true")
     full.add_argument(
@@ -328,6 +331,7 @@ def main(argv: list[str] | None = None) -> int:
                 min_text_height=args.min_text_height,
                 min_text_area=args.min_text_area,
                 lock_file=args.lock_file,
+                spec_file=args.spec_file,
             )
         )
         print(f"editable_pptx={pptx_path}")
@@ -350,6 +354,7 @@ def main(argv: list[str] | None = None) -> int:
                 min_text_height=args.min_text_height,
                 min_text_area=args.min_text_area,
                 lock_file=args.lock_file,
+                spec_file=args.spec_file,
                 force=args.force,
                 allow_empty_text=args.allow_empty_text,
             )
@@ -425,6 +430,7 @@ def main(argv: list[str] | None = None) -> int:
                 min_text_height=args.min_text_height,
                 min_text_area=args.min_text_area,
                 lock_file=args.lock_file,
+                spec_file=args.spec_file,
                 force=args.force,
                 allow_empty_text=args.allow_empty_text,
             )

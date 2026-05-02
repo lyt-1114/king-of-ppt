@@ -31,6 +31,7 @@ class ImageSvgEditableConfig:
     min_text_height: float | None = None
     min_text_area: float | None = None
     lock_file: Path | None = None
+    spec_file: Path | None = None
     force: bool = False
     allow_empty_text: bool = False
 
@@ -110,6 +111,7 @@ def run_image_svg_editable_pipeline(
             min_text_height=config.min_text_height,
             min_text_area=config.min_text_area,
             lock_file=config.lock_file,
+            spec_file=config.spec_file,
         )
     )
 
@@ -230,6 +232,7 @@ def build_pipeline_execution_log(
             f"- Minimum editable text height: `{config.min_text_height if config.min_text_height is not None else 'disabled'}`",
             f"- Minimum editable text area: `{config.min_text_area if config.min_text_area is not None else 'disabled'}`",
             f"- OCR lock file: `{config.lock_file.resolve() if config.lock_file else 'not provided'}`",
+            f"- Spec correction file: `{config.spec_file.resolve() if config.spec_file else 'not provided'}`",
             "",
             "## Outputs",
             "",
@@ -246,6 +249,7 @@ def build_pipeline_execution_log(
             f"- OCR blocks skipped by height: `{skipped_by_height}`",
             f"- OCR blocks skipped by area: `{skipped_by_area}`",
             f"- OCR blocks skipped by lock regions: `{skipped_by_lock}`",
+            "- You can manually correct the OCR JSON and rerun the editable/full-rebuild steps without repeating OCR.",
             "- Status: editable text layer exists and passed slide-count/text-box checks.",
             "",
         ]

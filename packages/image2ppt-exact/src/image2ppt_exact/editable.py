@@ -5,6 +5,7 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
+from difflib import SequenceMatcher
 
 from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_ALIGN
@@ -27,6 +28,7 @@ class EditableConfig:
     min_text_height: float | None = None
     min_text_area: float | None = None
     lock_file: Path | None = None
+    spec_file: Path | None = None
 
 
 @dataclass(frozen=True)
@@ -80,6 +82,10 @@ def create_editable_text_pptx_with_stats(config: EditableConfig) -> EditableBuil
     for image_path in images:
         slide = prs.slides.add_slide(blank_layout)
         blocks = load_slide_blocks(ocr_dir, image_path.stem)
+        blocks = apply_spec_corrections(
+            blocks,
+            load_spec_lines(config.spec_file) if config.spec_file else [],
+        )
         editable_blocks, stats = collect_editable_blocks(
             blocks,
             slide_stem=image_path.stem,
@@ -455,9 +461,61 @@ def rapid_result_to_blocks(raw_result: Any) -> list[dict[str, Any]]:
                 "text": text,
                 "bbox": polygon_to_xywh(box),
                 "confidence": confidence,
+                "font_size": estimate_font_size_from_bbox(polygon_to_xywh(box)[3]),
+                "color": "#111827",
             }
         )
     return blocks
+
+
+def estimate_font_size_from_bbox(box_height_px: float) -> float:
+    return max(6.0, box_height_px * 0.75)
+
+
+def load_spec_lines(spec_file: Path | None) -> list[str]:
+    if spec_file is None:
+        return []
+    lines = []
+    for raw in spec_file.read_text(encoding="utf-8").splitlines():
+        text = raw.strip()
+        if text:
+            lines.append(text)
+    return lines
+
+
+def apply_spec_corrections(
+    blocks: list[dict[str, Any]],
+    spec_lines: list[str],
+    threshold: float = 0.72,
+) -> list[dict[str, Any]]:
+    if not blocks or not spec_lines:
+        return blocks
+
+    corrected: list[dict[str, Any]] = []
+    remaining = list(spec_lines)
+    for block in blocks:
+        text = str(block.get("text", "")).strip()
+        if not text:
+            corrected.append(block)
+            continue
+
+        best_match = None
+        best_score = 0.0
+        for candidate in remaining:
+            score = SequenceMatcher(None, text.lower(), candidate.lower()).ratio()
+            if score > best_score:
+                best_score = score
+                best_match = candidate
+
+        if best_match is not None and best_score >= threshold:
+            new_block = dict(block)
+            new_block["text"] = best_match
+            new_block["source"] = "spec-corrected"
+            corrected.append(new_block)
+            remaining.remove(best_match)
+        else:
+            corrected.append(block)
+    return corrected
 
 
 def polygon_to_xywh(points: Any) -> list[float]:

@@ -258,3 +258,48 @@ Lock file example:
 `regions` applies to every slide. `slides` keys match image stems such as
 `slide_003` for `slide_003.png`. Coordinates are in the source image pixel
 space used by OCR JSON.
+
+## Absorbed OCR-editable enhancements
+
+The OCR/editable route now absorbs three practical capabilities from the
+overlay-style editable workflow:
+
+- `spec-correction`
+  Use an optional spec text file to correct OCR text before the editable PPTX
+  is built. This is helpful when OCR is close but not fully reliable.
+- OCR color/font-size recovery
+  OCR JSON now preserves basic style hints such as `color` and `font_size`, so
+  rebuilt text looks closer to the source image instead of using only global
+  defaults.
+- hand-editable OCR JSON rerun flow
+  OCR JSON is still an intermediate artifact on purpose. You can manually fix
+  text, boxes, colors, or font sizes and rerun the editable/full-rebuild steps
+  without paying the OCR cost again.
+
+Example:
+
+```bash
+image2ppt-exact full-rebuild slides \
+  --out rebuild \
+  --background redact \
+  --spec-file expected_text.txt \
+  --force
+```
+
+## Manual correction rerun workflow
+
+Recommended loop:
+
+1. Run `full-rebuild` or `ocr` once to generate `ocr_json/slide_XX.json`
+2. Open the JSON and correct:
+   - `text` when OCR misread a word
+   - `bbox` when a text box is misplaced
+   - `color` or `font_size` when the rebuilt layer looks off
+3. Rerun `editable` or `full-rebuild` with the same OCR JSON folder
+
+If you only changed `text`, `color`, or `font_size`, rerunning the editable
+rebuild is usually enough.
+
+If you changed `bbox` and you are using `--background redact`, rerun the
+editable/full-rebuild step as well so the cleaned background is regenerated with
+the updated text regions.
