@@ -111,6 +111,13 @@ Typical PPT tools are weaker because they often:
 - editable business content where it matters
 - audit discipline before claiming success
 
+Copyable prompt:
+
+```text
+Use ultimate-ppt to turn this reference image and product notes into a premium sales deck.
+Keep the final PPTX editable, but match the image's visual mood.
+```
+
 ## Skill 2: Image2PPT Exact
 
 `image2ppt-exact` is the reproducible handoff and rebuild skill.
@@ -130,11 +137,11 @@ Implementation package:
 
 Most image-to-PPT tools stop at visual wrapping.
 
-`image2ppt-exact` treats reconstruction as a layered system:
+`image2ppt-exact` is built around one practical main route:
 
 1. exact proof output
 2. OCR-backed editable text recovery
-3. optional structured native-object rebuild
+3. optional blueprint-based high-fidelity rebuild
 4. unified verification logs
 
 That means it can preserve an approved visual baseline while still moving toward real editability.
@@ -150,6 +157,12 @@ In practice, this skill is stronger than most similar tools because it does not 
 - high-fidelity native PPT reconstruction
 
 Those are separate layers, and this skill gives each one a defined route instead of collapsing everything into one vague "editable export" claim.
+
+Copyable prompt:
+
+```text
+Use image2ppt-exact full-rebuild to turn this approved slide-image folder into an exact proof deck, an editable text PPTX, and a blueprint-based high-fidelity rebuild when a blueprint JSON is available.
+```
 
 ## The Core Thesis
 
