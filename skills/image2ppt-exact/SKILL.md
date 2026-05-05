@@ -5,6 +5,10 @@ description: Use when converting approved full-slide images into exact SVG/PPTX 
 
 # Image2PPT Exact
 
+This directory is the skill entry point.
+
+The runnable Python implementation lives in `packages/image2ppt-exact`.
+
 Use this skill for the reproducible handoff route. Prefer the full rebuild route when the user wants the strongest end-to-end conversion:
 
 ```text

@@ -45,5 +45,14 @@ pip install -e .[ocr]
 
 ## 需要细看时
 
-- 总说明: [docs/overview.md](docs/overview.md)
 - Blueprint schema: [docs/blueprint-schema.md](docs/blueprint-schema.md)
+
+## 在整个仓库里的位置
+
+这个目录是 `image2ppt-exact` 的实现包。
+
+如果你是从仓库主页进来的，优先看：
+
+- [../../skills/image2ppt-exact/SKILL.md](../../skills/image2ppt-exact/SKILL.md)
+
+只有在你要看 Python 实现、CLI、测试或打包配置时，再继续看这个 `packages/` 目录。

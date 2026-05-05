@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-05-05
+
+- Simplified the repository layout so the root README now acts as a direct navigation page to the two skills.
+- Removed the old README-only visual assets under `docs/readme/`.
+- Renamed `docs/superpowers/` to `docs/internal/` for clearer internal documentation placement.
+- Removed the duplicated package overview file `packages/image2ppt-exact/docs/overview.md`.
+- Clarified that `skills/image2ppt-exact` is the usage entry point and `packages/image2ppt-exact` is the implementation package.
+
 ## 2026-04-29
 
 - Added `packages/image2ppt-exact`, a reproducible CLI package for the historical Image2PPT exact export flow: full-slide images to base64 SVG wrappers, HTML preview, run log, and full-image PPTX.
