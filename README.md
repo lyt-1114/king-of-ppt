@@ -104,7 +104,7 @@ Typical PPT tools are weaker because they often:
 Copyable entry:
 
 ```text
-Use ultimate-ppt for strategy-first deck creation, image-driven presentation design, and premium PPTX/HTML/PDF delivery workflows.
+Use $ultimate-ppt for strategy-first deck creation, image-driven presentation design, and premium PPTX/HTML/PDF delivery workflows.
 ```
 
 ## Skill 2: Image2PPT Exact
@@ -141,7 +141,7 @@ Those are separate layers, and this skill gives each one a defined route instead
 Copyable entry:
 
 ```text
-Use image2ppt-exact for exact image-deck proof output, OCR-based editable text recovery, and blueprint-based high-fidelity PPT rebuilds.
+Use $image2ppt-exact for exact image-deck proof output, OCR-based editable text recovery, and blueprint-based high-fidelity PPT rebuilds.
 ```
 
 ## The Core Thesis
