@@ -158,10 +158,10 @@ In practice, this skill is stronger than most similar tools because it does not 
 
 Those are separate layers, and this skill gives each one a defined route instead of collapsing everything into one vague "editable export" claim.
 
-Copyable prompt:
+Copyable skill:
 
 ```text
-Use image2ppt-exact full-rebuild to turn this approved slide-image folder into an exact proof deck, an editable text PPTX, and a blueprint-based high-fidelity rebuild when a blueprint JSON is available.
+Use image2ppt-exact for exact image-deck proof output, OCR-based editable text recovery, and blueprint-based high-fidelity PPT rebuilds.
 ```
 
 ## The Core Thesis
