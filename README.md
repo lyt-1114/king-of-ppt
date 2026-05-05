@@ -28,10 +28,10 @@ npx skills add https://github.com/lyt-1114/king-of-ppt
 
 ## Two Skills, Two Different Advantages
 
-| Skill | What It Does | Start Here |
-| --- | --- | --- |
-| `$ultimate-ppt` | Strategy-first deck creation, deck rebuilding, image-driven presentation design, keynote/sales/report workflows, and PPTX/HTML/PDF delivery planning. | [skills/ultimate-ppt/SKILL.md](skills/ultimate-ppt/SKILL.md) |
-| `$image2ppt-exact` | Exact image-deck proof export, OCR editable text recovery, verified image-to-editable pipelines, and blueprint-based high-fidelity PPT rebuilds. | [skills/image2ppt-exact/SKILL.md](skills/image2ppt-exact/SKILL.md) |
+| Skill | What It Does |
+| --- | --- |
+| `$ultimate-ppt` | Strategy-first deck creation, deck rebuilding, image-driven presentation design, keynote/sales/report workflows, and PPTX/HTML/PDF delivery planning. |
+| `$image2ppt-exact` | Exact image-deck proof export, OCR editable text recovery, verified image-to-editable pipelines, and blueprint-based high-fidelity PPT rebuilds. |
 
 ## Why This Feels Stronger Than Typical PPT Tools
 
@@ -69,16 +69,6 @@ It is built for:
 - reference-image style transfer
 - HTML-first or hybrid PPT delivery
 
-Start here:
-
-- [skills/ultimate-ppt/SKILL.md](skills/ultimate-ppt/SKILL.md)
-
-Supporting files:
-
-- `skills/ultimate-ppt/references/`
-- `skills/ultimate-ppt/assets/`
-- `skills/ultimate-ppt/scripts/audit_deck.py`
-
 ### What Makes `ultimate-ppt` Different
 
 It does not begin by decorating slides.
@@ -111,11 +101,10 @@ Typical PPT tools are weaker because they often:
 - editable business content where it matters
 - audit discipline before claiming success
 
-Copyable prompt:
+Copyable entry:
 
 ```text
-Use ultimate-ppt to turn this reference image and product notes into a premium sales deck.
-Keep the final PPTX editable, but match the image's visual mood.
+Use ultimate-ppt for strategy-first deck creation, image-driven presentation design, and premium PPTX/HTML/PDF delivery workflows.
 ```
 
 ## Skill 2: Image2PPT Exact
@@ -123,15 +112,6 @@ Keep the final PPTX editable, but match the image's visual mood.
 `image2ppt-exact` is the reproducible handoff and rebuild skill.
 
 It exists for the cases where the user already has an approved image-render deck, screenshot deck, or slide-image sequence and needs something stronger than "put the image on a slide."
-
-Start here:
-
-- [skills/image2ppt-exact/SKILL.md](skills/image2ppt-exact/SKILL.md)
-
-Implementation package:
-
-- [packages/image2ppt-exact/README.md](packages/image2ppt-exact/README.md)
-- `packages/image2ppt-exact/src/image2ppt_exact/`
 
 ### What Makes `image2ppt-exact` Different
 
@@ -158,7 +138,7 @@ In practice, this skill is stronger than most similar tools because it does not 
 
 Those are separate layers, and this skill gives each one a defined route instead of collapsing everything into one vague "editable export" claim.
 
-Copyable skill:
+Copyable entry:
 
 ```text
 Use image2ppt-exact for exact image-deck proof output, OCR-based editable text recovery, and blueprint-based high-fidelity PPT rebuilds.
@@ -198,22 +178,6 @@ That is why these skills can outperform many same-category tools:
 - **Editable recovery**: rebuild OCR text as native PPT text boxes where editability matters.
 - **High-fidelity rebuild path**: use blueprint or structured SVG routes to move toward native objects.
 - **Verification discipline**: keep logs, counts, and audit signals instead of vague success claims.
-
-## Which One Should You Open First
-
-Open `ultimate-ppt` if you need:
-
-- a better deck
-- a stronger story
-- a stronger visual system
-- a more persuasive final presentation
-
-Open `image2ppt-exact` if you need:
-
-- exact image-deck proof output
-- OCR text recovery
-- editable PPT reconstruction from image slides
-- blueprint-based high-fidelity rebuilds
 
 ## Install
 
