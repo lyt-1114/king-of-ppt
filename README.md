@@ -49,22 +49,38 @@ This comparison image is the positioning in one glance: most alternatives stop a
 ## How The Full System Works
 
 ```mermaid
-flowchart TD
-    A[Raw inputs<br/>notes, PDFs, screenshots, old decks, reference images] --> B[ultimate-ppt<br/>read source and choose deck route]
-    B --> C[Visual grammar extraction<br/>palette, typography, spacing, composition]
-    C --> D[Presentation image generation<br/>covers, sections, dense business pages]
-    D --> E[Delivery decision<br/>premium visual output plus editable PPT plan]
-    E --> F[Approved slide images or image-render deck]
-    F --> G[image2ppt-exact full-rebuild]
-    G --> H[Exact proof assets<br/>SVG wrappers, exact image deck]
-    G --> I[Editable recovery<br/>OCR text layer and editable PPTX]
-    G --> J[Optional high-fidelity rebuild<br/>blueprint/native-object reconstruction]
-    H --> K[Serious handoff package]
-    I --> K
-    J --> K
+flowchart LR
+    A[Raw sources<br/>notes, PDFs, screenshots, reference images, old decks]
+    B[ultimate-ppt<br/>premium deck creation]
+    C[Bridge layer<br/>approved slide images<br/>or image-render deck]
+    D[image2ppt-exact<br/>editable reconstruction]
+
+    A --> B
+    B --> C
+    C --> D
+
+    B1[Read source and choose deck route]
+    B2[Extract visual grammar]
+    B3[Generate stronger presentation images]
+    B4[Plan editable delivery]
+
+    D1[Preserve exact visual proof]
+    D2[Recover editable text layer]
+    D3[Build editable PPTX]
+    D4[Optional high-fidelity rebuild]
+
+    B --- B1
+    B --- B2
+    B --- B3
+    B --- B4
+
+    D --- D1
+    D --- D2
+    D --- D3
+    D --- D4
 ```
 
-This diagram is the core thesis of the repo. Most products can help with one isolated step, but `king-of-ppt` covers the whole path: generate stronger presentation imagery first, then carry that quality forward into exact proof output and editable PowerPoint reconstruction.
+This architecture view is the core thesis of the repo. The left side solves the hard problem of making better presentation images and deck systems. The right side solves the equally hard problem of turning approved image-render slides into exact proof output and usable editable PowerPoint results. Most products only cover one side; `king-of-ppt` is built to connect both.
 
 ## 2. Convert to Editable PPT with `image2ppt-exact`
 
@@ -76,7 +92,11 @@ This workflow image explains the back half of the system: once a slide image set
 
 `image2ppt-exact` is the route that makes this repository unusually powerful.
 
-Most tools that claim image-to-PPT conversion stop at screenshots on slides, rough OCR overlays, or vague promises of editability. This package goes much further: it can preserve approved slide images as exact proof output, recover editable text layers, and drive toward high-fidelity editable rebuilds. That means it is not just "image import" and not just "OCR extraction" either. It is a serious bridge from approved presentation imagery to usable editable PowerPoint output, which is exactly where most competing skills fail.
+Most tools that claim image-to-PPT conversion stop at one of three weak endpoints: screenshots placed onto slides, rough OCR text overlays, or a vague "editable" export that falls apart the moment someone actually needs to revise the deck. `image2ppt-exact` is built for a much more serious standard.
+
+It can preserve approved slide images as exact proof output, recover editable text layers from those slides, and push further toward high-fidelity editable rebuilds when the deck needs more than basic text recovery. In other words, it treats exact appearance, editable content, and rebuild fidelity as three separate responsibilities instead of pretending one shallow conversion step can solve all of them.
+
+That separation is exactly why this route is stronger than most competing skills. It does not confuse "looks the same" with "is editable," and it does not confuse "OCR found some text" with "the deck is truly reconstructed." The package is designed for teams that need visual proof, editable recovery, and a believable handoff path to real PowerPoint work, which is the practical gap that most image-to-PPT tools still leave open.
 
 If you want to call the skill, copy this command into Codex first:
 
