@@ -36,6 +36,20 @@ base64 SVG wrappers, builds full-image proof PPTX files, reconstructs editable
 text PPTX files from OCR JSON, and supports high-fidelity blueprint rebuilds
 with native PPT text boxes, shapes, lines, pictures, panels, chips, and footers.
 
+If you came here only for the exact editable-conversion route, copy this
+installed-skill entry into Codex:
+
+```text
+Use $image2ppt-exact to turn this approved image2 slide folder into exact SVG proof assets and a separate editable PPTX rebuild.
+```
+
+If you want the `$image2ppt-exact` shortcut to work as a real installed skill,
+run this once first:
+
+```bash
+npx skills add https://github.com/lyt-1114/king-of-ppt
+```
+
 Start here: [packages/image2ppt-exact/README.md](packages/image2ppt-exact/README.md).
 
 Skill entry: [skills/image2ppt-exact/SKILL.md](skills/image2ppt-exact/SKILL.md).
@@ -241,11 +255,11 @@ Create hidden presenter notes and an HTML preview, then export a PPTX.
 ```
 
 ```text
-Use image2ppt-exact to turn this approved image2 slide folder into exact SVG proof assets and a separate editable PPTX rebuild.
+Use $image2ppt-exact to turn this approved image2 slide folder into exact SVG proof assets and a separate editable PPTX rebuild.
 ```
 
 ```text
-Use image2ppt-exact full-rebuild to run the exact proof, editable text layer, optional blueprint rebuild, and verification log together.
+Use $image2ppt-exact full-rebuild to run the exact proof, editable text layer, optional blueprint rebuild, and verification log together.
 ```
 
 ## Update Log

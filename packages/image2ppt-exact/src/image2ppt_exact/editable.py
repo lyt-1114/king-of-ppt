@@ -86,6 +86,8 @@ def create_editable_text_pptx_with_stats(config: EditableConfig) -> EditableBuil
             blocks,
             load_spec_lines(config.spec_file) if config.spec_file else [],
         )
+        slide_locks = get_slide_locks(locks, image_path.stem)
+        picture_locks = [lock for lock in slide_locks if lock.get("as_picture")]
         editable_blocks, stats = collect_editable_blocks(
             blocks,
             slide_stem=image_path.stem,
@@ -112,6 +114,7 @@ def create_editable_text_pptx_with_stats(config: EditableConfig) -> EditableBuil
                 / f"{config.pptx_path.stem}_assets",
                 width=config.width,
                 height=config.height,
+                extra_redact_regions=picture_locks,
             )
             slide.shapes.add_picture(
                 str(redacted_path),
@@ -122,6 +125,19 @@ def create_editable_text_pptx_with_stats(config: EditableConfig) -> EditableBuil
             )
         elif config.background != "blank":
             raise ValueError("background must be 'blank', 'keep', or 'redact'")
+
+        if picture_locks:
+            add_locked_region_pictures(
+                slide=slide,
+                image_path=image_path,
+                locks=picture_locks,
+                output_dir=config.pptx_path.with_suffix("").parent
+                / f"{config.pptx_path.stem}_assets",
+                width=config.width,
+                height=config.height,
+                slide_width=prs.slide_width,
+                slide_height=prs.slide_height,
+            )
 
         for block in editable_blocks:
             x, y, w, h = normalize_bbox(block["bbox"], config.width, config.height)
@@ -230,6 +246,13 @@ def boxes_intersect(
     return min(ax2, bx2) > max(ax1, bx1) and min(ay2, by2) > max(ay1, by1)
 
 
+def get_slide_locks(
+    locks: dict[str, list[dict[str, float]]],
+    slide_stem: str,
+) -> list[dict[str, float]]:
+    return list((locks or {}).get("*", [])) + list((locks or {}).get(slide_stem, []))
+
+
 def load_ocr_locks(lock_file: Path | None) -> dict[str, list[dict[str, float]]]:
     if lock_file is None:
         return {}
@@ -264,13 +287,18 @@ def normalize_lock_region(region: Any) -> dict[str, float]:
         y = float(region.get("y", region.get("top", 0)))
         w = float(region.get("w", region.get("width", 0)))
         h = float(region.get("h", region.get("height", 0)))
+        as_picture = bool(region.get("as_picture", False))
     elif isinstance(region, list) and len(region) == 4:
         x, y, w, h = [float(value) for value in region]
+        as_picture = False
     else:
         raise ValueError(f"Unsupported OCR lock region: {region!r}")
     if w <= 0 or h <= 0:
         raise ValueError(f"OCR lock region must have positive width and height: {region!r}")
-    return {"x": x, "y": y, "w": w, "h": h}
+    normalized = {"x": x, "y": y, "w": w, "h": h}
+    if as_picture:
+        normalized["as_picture"] = True
+    return normalized
 
 
 def create_redacted_background(
@@ -280,6 +308,7 @@ def create_redacted_background(
     output_dir: Path,
     width: int,
     height: int,
+    extra_redact_regions: list[dict[str, float]] | None = None,
     padding: int = 2,
 ) -> Path:
     try:
@@ -307,8 +336,67 @@ def create_redacted_background(
         fill = sample_background_color(image, left, top, right, bottom)
         draw.rectangle((left, top, right, bottom), fill=fill)
 
+    for region in extra_redact_regions or []:
+        x, y, w, h = normalize_bbox(
+            [region["x"], region["y"], region["w"], region["h"]],
+            width,
+            height,
+        )
+        left = max(0, int(round((x - padding) * scale_x)))
+        top = max(0, int(round((y - padding) * scale_y)))
+        right = min(image.width, int(round((x + w + padding) * scale_x)))
+        bottom = min(image.height, int(round((y + h + padding) * scale_y)))
+        fill = sample_background_color(image, left, top, right, bottom)
+        draw.rectangle((left, top, right, bottom), fill=fill)
+
     image.save(output_path)
     return output_path
+
+
+def add_locked_region_pictures(
+    *,
+    slide: Any,
+    image_path: Path,
+    locks: list[dict[str, float]],
+    output_dir: Path,
+    width: int,
+    height: int,
+    slide_width: int,
+    slide_height: int,
+) -> None:
+    try:
+        from PIL import Image
+    except ImportError as exc:
+        raise RuntimeError(
+            "Pillow is required for locked picture regions. Install Pillow."
+        ) from exc
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+    with Image.open(image_path) as source:
+        image = source.convert("RGB")
+        scale_x = image.width / width
+        scale_y = image.height / height
+        for index, region in enumerate(locks, start=1):
+            x, y, w, h = normalize_bbox(
+                [region["x"], region["y"], region["w"], region["h"]],
+                width,
+                height,
+            )
+            left = max(0, int(round(x * scale_x)))
+            top = max(0, int(round(y * scale_y)))
+            right = min(image.width, int(round((x + w) * scale_x)))
+            bottom = min(image.height, int(round((y + h) * scale_y)))
+            if right <= left or bottom <= top:
+                continue
+            crop_path = output_dir / f"{image_path.stem}_lock_{index:02d}.png"
+            image.crop((left, top, right, bottom)).save(crop_path)
+            slide.shapes.add_picture(
+                str(crop_path),
+                px_to_emu(x, width, slide_width),
+                px_to_emu(y, height, slide_height),
+                width=px_to_emu(w, width, slide_width),
+                height=px_to_emu(h, height, slide_height),
+            )
 
 
 def sample_background_color(

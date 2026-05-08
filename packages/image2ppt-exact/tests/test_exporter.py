@@ -401,6 +401,78 @@ class ExporterTests(unittest.TestCase):
                 self.assertEqual(redacted.getpixel((40, 35)), (0, 0, 0))
                 self.assertEqual(redacted.getpixel((140, 35)), (255, 255, 255))
 
+    def test_lock_region_marked_as_picture_is_inserted_as_picture_object(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            src = root / "slides"
+            ocr = root / "ocr"
+            src.mkdir()
+            ocr.mkdir()
+            img = Image.new("RGB", (400, 200), "white")
+            draw = ImageDraw.Draw(img)
+            draw.rectangle((20, 20, 80, 50), fill="black")
+            draw.rectangle((120, 20, 180, 50), fill="black")
+            img.save(src / "slide_01.png")
+            (ocr / "slide_01.json").write_text(
+                json.dumps(
+                    {
+                        "blocks": [
+                            {"text": "Locked", "bbox": [20, 20, 60, 30]},
+                            {"text": "Editable", "bbox": [120, 20, 60, 30]},
+                        ]
+                    }
+                ),
+                encoding="utf-8",
+            )
+            lock_file = root / "ocr-locks.json"
+            lock_file.write_text(
+                json.dumps(
+                    {
+                        "slides": {
+                            "slide_01": [
+                                {"x": 0, "y": 0, "w": 100, "h": 100, "as_picture": True}
+                            ]
+                        }
+                    }
+                ),
+                encoding="utf-8",
+            )
+            pptx = root / "editable-redacted.pptx"
+
+            create_editable_text_pptx(
+                EditableConfig(
+                    src=src,
+                    ocr_dir=ocr,
+                    pptx_path=pptx,
+                    width=400,
+                    height=200,
+                    background="redact",
+                    lock_file=lock_file,
+                )
+            )
+
+            prs = Presentation(str(pptx))
+            pictures = [
+                shape
+                for slide in prs.slides
+                for shape in slide.shapes
+                if shape.shape_type == MSO_SHAPE_TYPE.PICTURE
+            ]
+            text_boxes = [
+                shape.text
+                for slide in prs.slides
+                for shape in slide.shapes
+                if getattr(shape, "has_text_frame", False) and shape.text.strip()
+            ]
+
+            # One picture is the redacted background, one picture is the locked region crop.
+            self.assertEqual(len(pictures), 2)
+            self.assertEqual(text_boxes, ["Editable"])
+
+            redacted_bg = root / "editable-redacted_assets" / "slide_01_redacted.png"
+            with Image.open(redacted_bg) as redacted:
+                self.assertEqual(redacted.getpixel((40, 35)), (255, 255, 255))
+
     def test_collect_editable_blocks_reports_skip_reasons(self) -> None:
         blocks = [
             {"text": "Tiny", "bbox": [0, 0, 20, 8]},
