@@ -1,9 +1,14 @@
 # king-of-ppt
 
-This repository has two skill routes:
+This repository is not a thin PPT prompt wrapper.
 
-- `ultimate-ppt`: create or rebuild presentation decks
-- `image2ppt-exact`: turn approved slide images into exact proof output and editable PPT rebuilds
+It is a two-route presentation system that can do what most PPT skills still cannot do well:
+
+- create premium presentation images and deck systems with real visual judgment
+- carry that image-driven quality into editable PowerPoint delivery
+- rebuild approved slide images into exact proof output and separate editable PPT results
+
+In practice, this means the repo covers the whole serious workflow from presentation image generation to editable PPT reconstruction. That is the gap most market alternatives never truly close.
 
 ## 1. Make PPT with `ultimate-ppt`
 
@@ -11,7 +16,9 @@ This repository has two skill routes:
   <img src="docs/readme/hero.svg" alt="Ultimate PPT: Image2PPT-first presentation system" width="94%">
 </p>
 
-Use this when you want Codex to make a PPT from notes, screenshots, PDFs, websites, old decks, or reference images.
+`ultimate-ppt` is built for users who need decks that look designed, not merely generated.
+
+It does not just fill a template or decorate bullets. It can read references, understand visual grammar, build stronger covers and dense business pages, route the deck toward editable delivery, and keep the output usable for real review, revision, and handoff. Compared with typical PPT skills on the market, this is a much stronger production path: image-driven, strategy-aware, and built for decks that actually need to win.
 
 If you want to call the skill, copy this command into Codex first:
 
@@ -19,14 +26,10 @@ If you want to call the skill, copy this command into Codex first:
 npx skills add https://github.com/lyt-1114/king-of-ppt
 ```
 
-Then copy one of these commands into Codex:
+Then copy this command into Codex:
 
 ```text
-Use $ultimate-ppt to turn this reference image and product notes into a premium sales deck. Keep the final PPTX editable, but match the image's visual mood.
-```
-
-```text
-Use $ultimate-ppt to improve this ugly PPT. Preserve the facts, rebuild the visual system, add stronger case pages, and audit the final PPTX.
+Use $ultimate-ppt to create or improve a premium PPT from my notes, screenshots, reference images, or old deck, and keep the final PPTX editable when possible.
 ```
 
 <p align="center">
@@ -47,7 +50,9 @@ Use $ultimate-ppt to improve this ugly PPT. Preserve the facts, rebuild the visu
   <img src="docs/readme/workflow.svg" alt="Image2PPT workflow" width="92%">
 </p>
 
-Use this when you already have approved slide images and want exact proof output plus an editable PPT rebuild.
+`image2ppt-exact` is the route that makes this repository unusually powerful.
+
+Most tools that claim image-to-PPT conversion stop at screenshots on slides, rough OCR overlays, or vague promises of editability. This package goes much further: it can preserve approved slide images as exact proof output, recover editable text layers, and drive toward high-fidelity editable rebuilds. That means it is not just "image import" and not just "OCR extraction" either. It is a serious bridge from approved presentation imagery to usable editable PowerPoint output, which is exactly where most competing skills fail.
 
 If you want to call the skill, copy this command into Codex first:
 
@@ -55,14 +60,10 @@ If you want to call the skill, copy this command into Codex first:
 npx skills add https://github.com/lyt-1114/king-of-ppt
 ```
 
-Then copy one of these commands into Codex:
+Then copy this command into Codex:
 
 ```text
-Use $image2ppt-exact to turn this approved image2 slide folder into exact SVG proof assets and a separate editable PPTX rebuild.
-```
-
-```text
-Use $image2ppt-exact full-rebuild to run the exact proof, editable text layer, optional blueprint rebuild, and verification log together.
+Use $image2ppt-exact full-rebuild to turn my approved slide-image folder into exact proof assets and an editable PPTX rebuild.
 ```
 
 <p align="center">
